@@ -182,8 +182,8 @@
       const cta=ds.ctaText||'Book a design brainstorm';
       const story=()=>{const h=+no,needs=st.feats.map(f=>f.ex||pick(f.t,NEED)).filter(Boolean),v=(vibe.split(': ')[1]||vibe).replace(/\.$/,'');
         const lead=['So here\'s where I\'d start: ','For you, I\'d bring together ','What I\'d build around that: '][h%3];
-        const wrap=['all wrapped in '+v.charAt(0).toLowerCase()+v.slice(1),'and because you\'re drawn to <em>'+esc(st.sty.t.toLowerCase())+'</em>, I\'d style it with '+v.charAt(0).toLowerCase()+v.slice(1)][h%2];
-        return esc(who)+' '+(needs.length?lead+andList(needs)+'; '+wrap+'.':'');};
+        const lv=v.charAt(0).toLowerCase()+v.slice(1),wrap=['All of it wrapped in '+lv,'And because you\'re drawn to <em>'+esc(st.sty.t.toLowerCase())+'</em>, I\'d style it with '+lv][h%2],list=needs.length>1?needs.slice(0,-1).join('; ')+'; and '+needs[needs.length-1]:needs[0];
+        return esc(who)+' '+(needs.length?lead+list+'. '+wrap+'.':'');};
       P.innerHTML='<div class="sbx"><div class="sbx-glow"></div><div class="sbx-tick"><div>'+picks.repeat(6)+'</div></div><div class="sbx-in">'+
         '<div class="sbx-top sbx-r"><small>'+(ds.profileCardKicker||'Your business profile')+' · No. '+no+'</small><small>'+(ds.profileKicker||'Prepared by Kill Vanilla Studio')+'</small></div>'+
         '<h3 class="sbx-title">'+title+'</h3>'+

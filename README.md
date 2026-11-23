@@ -30,8 +30,8 @@ Result title = **The [style word] [industry word]**.
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.3.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.3.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v3.0.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v3.0.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
