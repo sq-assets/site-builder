@@ -30,8 +30,8 @@ Result title = **The [style word] [industry word]**.
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.1.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.1.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.2.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.2.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
@@ -58,6 +58,8 @@ Add a **Newsletter Block** (or a **Form Block**) to the **same section** as the 
 To save each visitor's result with their email, use a Form Block with an extra text field labelled **Your site**: it's filled in automatically and hidden. In the editor the block stays where you put it.
 
 ### Mailing list per industry (Squarespace Email Campaigns)
+The signup blocks can sit in the builder's section **or in their own section straight after it** (a section containing only signup blocks is hidden on the live page, so it never clutters the layout).
+
 Make one mailing list per industry, then add one **Newsletter Block** per industry to the site builder's section, each connected to its list and with its **title set to the industry name** (e.g. *Photographer*). On the live page they're all hidden, and the visitor's industry block appears under their result (its title is replaced by `data-signup-title`). A block whose title isn't an industry is used as the fallback.
 
 ## Settings

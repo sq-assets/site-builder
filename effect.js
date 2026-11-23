@@ -143,7 +143,12 @@
     /* signup: one Newsletter/Form Block per industry in the same section, titled with the industry name.
        On the live page they're all hidden; the visitor's industry block moves into the result. */
     const live=!document.body.classList.contains('sqs-edit-mode-active');
-    const sigs=live?[...(el.closest('section')||document).querySelectorAll('.sqs-block-newsletter,.sqs-block-form')].filter(b=>!el.contains(b)):[];
+    /* signup blocks: in the builder's section, or in the section straight after it (a "signups" section that stays hidden) */
+    const mySec=el.closest('section'),nextSec=mySec&&mySec.nextElementSibling;
+    const sigIn=sec=>sec?[...sec.querySelectorAll('.sqs-block-newsletter,.sqs-block-form')].filter(b=>!el.contains(b)):[];
+    const nextSigs=sigIn(nextSec),nextOnly=nextSec&&nextSigs.length&&[...nextSec.querySelectorAll('.fe-block')].every(f=>f.querySelector('.sqs-block-newsletter,.sqs-block-form'));
+    const sigs=live?sigIn(mySec||document).concat(nextOnly?nextSigs:[]):[];
+    if(live&&nextOnly)nextSec.style.display='none';
     const home=new Map(sigs.map(b=>[b,b.parentNode]));
     sigs.forEach(b=>{const fe=b.closest('.fe-block');if(fe)fe.style.display='none';else b.style.display='none'});
     const titleOf=b=>((b.querySelector('.newsletter-form-header-title,h1,h2,h3,h4,legend')||{}).textContent||'').trim();
