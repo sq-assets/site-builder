@@ -57,6 +57,7 @@ To save each visitor's result with their email, use a Form Block with an extra t
 | `data-cta-text`, `data-cta-url` | The result button |
 | `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |
 | `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
+| `data-hover-color` | Hover / picked colour for options and buttons (`#E8A6D6`) |
 | `data-color`, `data-background` | Your ink and paper colours (buttons, pills) |
 | `data-fonts` | `off` = don't load the style fonts (Playfair Display, DM Sans, Shrikhand, Space Mono) |
 | `data-show-result-field` | `on` = show the filled-in "Your site" form field |
