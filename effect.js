@@ -76,6 +76,7 @@
       '<button class="sb-again" type="button">Start again</button></div>'+
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>';
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back');
+    if(ds.laptop!=='build')site.classList.add('sb-show','sb-has-hero');
     const st={step:0,ind:null,feats:[],sty:null};
     const lists=[I,F,S];
     const render=()=>{
