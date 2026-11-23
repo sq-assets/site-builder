@@ -27,6 +27,7 @@
 
   const fonts=()=>{if(document.getElementById('sb-fonts'))return;const l=document.createElement('link');l.id='sb-fonts';l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;800&family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Shrikhand&family=Space+Mono:wght@400;700&display=swap';document.head.append(l)};
 
+  const loadFx=u=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>(j.items||[]).filter(x=>x.assetUrl).map(x=>({t:dec(x.title),img:fmt(x.assetUrl),url:x.fullUrl,tags:(x.tags||[]).concat(x.categories||[]).map(t=>t.toLowerCase())}))).catch(()=>[]);
   const load=(u,order)=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>{const it=(j.items||[]).map(x=>({t:dec(x.title),w:firstP(x.body),img:x.assetUrl?fmt(x.assetUrl):'',imgs:bodyImgs(x.body)}));return order==='newest'?it:it.reverse()}).catch(()=>[]);
 
   const init=async el=>{
@@ -35,7 +36,7 @@
     const css=(k,v)=>v&&el.style.setProperty(k,v);css('--sb-ink',ds.color);css('--sb-paper',ds.background);css('--sb-accent',ds.accent);css('--sb-font',ds.font);css('--sb-hover',ds.hoverColor);css('--sb-glow',ds.glowColor);if(ds.glow!=='off')el.classList.add('sb-glow');css('--sb-size',ds.optionSize);css('--sb-size-m',ds.optionSizeMobile||ds.optionSize);
     if(ds.fonts!=='off')fonts();if(ds.uppercase!=='off')el.classList.add('sb-caps');
     el.innerHTML='<p class="sb-loading">Loading…</p>';
-    const [I,F,S]=await Promise.all([load(ds.industries||'/site-builder-industries',order),load(ds.features||'/site-builder-features',order),load(ds.styles||'/site-builder-styles',order)]);
+    const [I,F,S,FX]=await Promise.all([load(ds.industries||'/site-builder-industries',order),load(ds.features||'/site-builder-features',order),load(ds.styles||'/site-builder-styles',order),ds.effects==='off'?[]:loadFx(ds.effects||'/effects')]);
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||'What do you do?',ds.question2||'What does your site need?',ds.question3||'Pick your vibe'];
     const touch=matchMedia('(pointer:coarse)').matches;
@@ -43,7 +44,7 @@
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
     el.innerHTML='<div class="sb-head"><div><h3 class="sb-q"></h3><p class="sb-hint"></p></div><div class="sb-steps">'+N.map((n,i)=>'<span>'+(i+1)+' '+n+'</span>').join('')+'</div></div>'+
-      '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your website is')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><div class="sb-form"></div><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Let\'s build it')+'</a><br><button class="sb-again" type="button">Start again</button></div>'+
+      '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your website is')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><p class="sb-fx"></p><div class="sb-form"></div><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Let\'s build it')+'</a><br><button class="sb-again" type="button">Start again</button></div>'+
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>';
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back');
     const st={step:0,ind:null,feats:[],sty:null};
@@ -62,15 +63,21 @@
     const imgFor=o=>{const k=styKey();const m=k&&o.imgs.find(x=>x.key.includes(k));return m?m.src:(o.img||(o.imgs[0]&&!k?o.imgs[0].src:''))};
     const swapImgs=()=>st.feats.forEach(o=>{const s=secs.querySelector('[data-f="'+CSS.escape(o.t)+'"] img');const u=imgFor(o);if(s&&u&&s.getAttribute('src')!==u)s.src=u});
     /* a style post's thumbnail = the top of a real homepage in that style */
-    const heroImg=src=>{let h=site.querySelector('.sb-real-hero');if(!src){h&&h.remove();site.classList.remove('sb-has-hero');return}
-      if(!h){h=document.createElement('div');h.className='sb-real-hero';site.prepend(h)}h.innerHTML='<img src="'+src+'" alt="">';};
+    let heroT=null;
+    const heroImg=srcs=>{srcs=[].concat(srcs||[]).filter(Boolean);clearInterval(heroT);let h=site.querySelector('.sb-real-hero');
+      if(!srcs.length){h&&h.remove();site.classList.remove('sb-has-hero');return}
+      if(!h){h=document.createElement('div');h.className='sb-real-hero';site.prepend(h)}
+      h.innerHTML=srcs.map((u,i)=>'<img src="'+u+'" alt=""'+(i?'':' class="on"')+'>').join('');
+      if(srcs.length>1){let i=0;heroT=setInterval(()=>{const im=h.querySelectorAll('img');if(!im.length)return clearInterval(heroT);im[i].classList.remove('on');i=(i+1)%im.length;im[i].classList.add('on')},+(ds.effectSpeed||3200))}};
+    /* your effects tagged with the picked style */
+    const fxFor=o=>{const k=(o.t.toLowerCase().match(/[a-z]+/)||[''])[0];return k?FX.filter(e=>e.tags.some(t=>t.includes(k))):[]};
     const bump=()=>{lap.classList.remove('sb-pulse');void lap.offsetWidth;lap.classList.add('sb-pulse')};
     const choose=o=>{
       if(st.step===0){st.ind=o;$('.sb-kicker').textContent=o.t;$('.sb-h').textContent=pick(o.t,HEAD)||o.t}
       else if(st.step===1){const i=st.feats.indexOf(o);
         if(i>-1){st.feats.splice(i,1);const s=secs.querySelector('[data-f="'+CSS.escape(o.t)+'"]');s&&s.remove()}
         else{st.feats.push(o);const s=document.createElement('div');const u=imgFor(o);s.className='sb-sec'+(u?' sb-real':'');s.dataset.f=o.t;s.innerHTML=u?'<img src="'+u+'" alt="">':'<h5>'+o.t+'</h5>'+mock(o.t);secs.append(s);site.scrollTop=s.offsetTop-site.clientHeight*.25}}
-      else{st.sty=o;heroImg(o.img);swapImgs();site.className='sb-site'+(o.img?' sb-has-hero':'')+(pick(o.t,STY)?' th-'+pick(o.t,STY):' th-'+['lux','min','edi','qui','max','col'][S.indexOf(o)%6]);site.scrollTop=0}
+      else{st.sty=o;const fx=fxFor(o),hs=o.img?[o.img]:fx.map(e=>e.img);heroImg(hs);swapImgs();site.className='sb-site'+(hs.length?' sb-has-hero':'')+(pick(o.t,STY)?' th-'+pick(o.t,STY):' th-'+['lux','min','edi','qui','max','col'][S.indexOf(o)%6]);site.scrollTop=0}
       bump();render();const c=[...tray.children].find(b=>b.o===o);c&&c.classList.contains('sel')&&c.classList.add('sb-flash');
     };
     /* drag (mouse/pen) or tap */
@@ -104,13 +111,14 @@
       const step=()=>{if(!el.classList.contains('sb-done'))return;const max=site.scrollHeight-site.clientHeight;if(max<=0)return;y+=dir*.6;if(y>=max){y=max;dir=-1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}if(y<=0){y=0;dir=1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}site.scrollTop=y;requestAnimationFrame(step)};
       tourT=setTimeout(()=>requestAnimationFrame(step),800)};
     const finish=()=>{const r=summary();$('.sb-title').textContent=r.t;$('.sb-sum').textContent=r.s;
+      const fx=fxFor(st.sty);$('.sb-fx').innerHTML=fx.length?(ds.effectsText||'Effects for your site')+': '+fx.map(e=>'<a href="'+e.url+'">'+e.t+'</a>').join(', '):'';
       if(!fb)fb=grabForm();if(fb)fill(fb,r.t+' | '+r.s);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
       $('.sb-q').textContent=ds.resultHeading||'Here it is';$('.sb-hint').textContent=ds.resultHint||'Your site, built in three clicks';
       el.classList.add('sb-done');tour();el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
     next.addEventListener('click',()=>{if(st.step<2){st.step++;render()}else finish()});
     back.addEventListener('click',()=>{if(st.step>0){st.step--;render()}});
-    $('.sb-again').addEventListener('click',()=>{st.step=0;st.ind=st.sty=null;st.feats=[];secs.innerHTML='';heroImg('');site.className='sb-site';$('.sb-kicker').textContent='Your website';$('.sb-h').textContent=ds.placeholder||'Starts here';el.classList.remove('sb-done');site.style.scrollBehavior='';clearTimeout(tourT);render()});
+    $('.sb-again').addEventListener('click',()=>{st.step=0;st.ind=st.sty=null;st.feats=[];secs.innerHTML='';heroImg([]);site.className='sb-site';$('.sb-kicker').textContent='Your website';$('.sb-h').textContent=ds.placeholder||'Starts here';el.classList.remove('sb-done');site.style.scrollBehavior='';clearTimeout(tourT);render()});
     render();
   };
   const run=()=>document.querySelectorAll('.site-builder').forEach(init);

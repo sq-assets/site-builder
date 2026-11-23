@@ -16,14 +16,16 @@ Result title = **The [style word] [industry word]**.
 
 **Use your own designs:** give a feature post a **thumbnail image** (a screenshot of a real section you've designed, or an animated WebP) and the laptop shows that instead of the drawn version. Give a style post a thumbnail (the top of a real homepage in that style: nav + hero) and it replaces the laptop's top when that style is picked. Posts without a thumbnail keep the drawn version.
 
+**Your effects per style:** tag posts in your effects blog (`data-effects`, default `/effects`) with style names (`luxury`, `minimal`, `editorial`, `quirky`, `maximalist`, `colourful`). When a visitor picks a style, the top of the laptop becomes a slideshow of the matching effects' thumbnails (animated WebPs play), and the result lists them as links. `data-effects="off"` to turn off, `data-effect-speed` = ms per slide (3200).
+
 **A version per style:** in a feature post's body, add one image per style and put the style's name in the file name, alt text or caption (e.g. `portfolio-luxury.png`, `portfolio-colourful.png`). When a visitor picks that style, the section swaps to it. Styles without their own image keep the thumbnail. Matching uses the first word of the style post's title (luxury, minimal, editorial, quirky, maximalist, colourful). Options show in the order you published them (`data-order="newest"` to flip).
 
 ## 2. Footer code injection
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.3.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.3.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.4.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.4.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
