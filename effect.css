@@ -149,6 +149,7 @@
 .sbx{--x-ink:var(--sb-deep,#1d1c1c);--x-paper:var(--sb-paper,#f8f7f6);position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--x-ink);color:var(--x-paper);overflow:hidden;padding-bottom:clamp(60px,8vw,120px)}
 .sbx em{font-style:italic;text-transform:none;color:var(--sb-hover);letter-spacing:-.02em}
 .sbx a{color:inherit}
+.sbx h3,.sbx h4,.sbx p,.sbx small,.sbx li{color:var(--x-paper)}
 .sbx-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(40vw 40vw at 85% 12%,color-mix(in srgb,var(--sb-hover) 38%,transparent),transparent 70%),radial-gradient(45vw 45vw at 5% 70%,color-mix(in srgb,var(--sb-glow) 30%,transparent),transparent 70%);animation:sbxDrift 14s ease-in-out infinite alternate}
 @keyframes sbxDrift{to{transform:translate3d(-4%,5%,0) scale(1.08)}}
 .sbx-tick{position:relative;border-bottom:1px solid color-mix(in srgb,var(--x-paper) 25%,transparent);padding:1.1em 0;overflow:hidden;white-space:nowrap}
