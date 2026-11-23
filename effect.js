@@ -174,19 +174,27 @@
       const who=st.ind.ex||((pick(st.ind.t,WHO)||'')+' '+(pick(st.ind.t,HELP)||'')).trim();
       const vibe=st.sty.ex||pick(st.sty.t,VIBE)||'';
       const fx=fxFor(st.sty).slice(0,+(ds.effectsMax||4));
-      const sec=(h,t)=>t?'<div class="sbp-sec"><h5>'+esc(h)+'</h5><p>'+t+'</p></div>':'';
-      P.innerHTML='<div class="sbp-head"><small>'+(ds.profileKicker||'Your profile')+'</small><h3>'+(ds.profileHeading||'Your profile is <em>ready</em>')+'</h3><p>'+(ds.profileIntro||'Here\'s where I\'d start.')+'</p>'+
-        '<div class="sbp-pills"><span>'+N[0]+'</span><span>'+N[1]+'</span><span>'+N[2]+'</span><span class="on">'+(ds.profilePill||'Your profile')+'</span></div></div>'+
-        '<div class="sbp-grid"><div class="sbp-card sbp-main"><small>'+(ds.profileCardKicker||'Your business profile')+'</small><h3 class="sb-title">'+esc(r.t).replace(/^(The )(\S+)/,'$1<em>$2</em>')+'</h3>'+
-        '<div class="sbp-chips">'+[st.ind,...st.feats,st.sty].map(o=>'<span>'+esc(o.t)+'</span>').join('')+'</div>'+
-        sec(st.ind.t,who)+st.feats.map(f=>sec(f.t,f.ex||((pick(f.t,NEED)?'I\'d build '+pick(f.t,NEED)+'.':'')))).join('')+sec(st.sty.t,vibe)+
-        (fx.length?'<div class="sbp-sec"><h5>'+(ds.effectsText||'Effects that would suit you')+'</h5><div class="sbp-fx">'+fx.map(e=>'<a href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+'</span></a>').join('')+'</div></div>':'')+
-        '</div><div class="sbp-side"><div class="sbp-card"><h4>'+(ds.brainstormTitle||'Book a design <em>brainstorm</em>')+'</h4><p>'+(ds.brainstormText||'Every site I design is completely bespoke. No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
-        '<a class="sbp-btn" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Book a design brainstorm')+'</a></div>'+
-        (ds.ideas==='off'?'':'<div class="sbp-card sbp-email"><h4>'+(ds.ideasTitle||'Email me some <em>design ideas</em>')+'</h4><p>'+(ds.ideasText||'Not ready yet? Get design ideas and effects matched to your profile, straight to your inbox.')+'</p><form class="sbp-mail" novalidate><label>Email address<input type="email" required placeholder="you@yourbusiness.com"></label><button type="submit">'+(ds.ideasButton||'Send me ideas')+'</button><p class="sbp-ok" hidden>'+(ds.ideasThanks||'Lovely, ideas are on their way.')+'</p></form><div class="sb-form" hidden></div></div>')+
-        '<div class="sbp-more">'+(ds.opinion==='off'?'':'<a class="sbp-link" href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+
-        ((ds.pinterest||ds.instagram)?'<div class="sb-social"><span>'+(ds.socialText||'Follow for new releases and offers')+'</span>'+(ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+'</div>':'')+
-        '<button class="sb-again" type="button">Start again</button></div></div></div>';
+      let n=0;const row=(h,t)=>t?'<li class="sbx-row sbx-r"><span class="sbx-n">0'+(++n)+'</span><h5>'+esc(h)+'</h5><p>'+t+'</p></li>':'';
+      const chars=w=>[...w].map(c=>'<span class="sbx-c" style="--i:'+(k++)+'">'+esc(c)+'</span>').join('');let k=0;
+      const title=r.t.split(' ').map((w,i)=>'<span class="sbx-w">'+(i===1?'<em>'+chars(w)+'</em>':chars(w))+'</span>').join(' ');
+      const no=String([...r.s].reduce((h,c)=>(h*31+c.charCodeAt(0))%997,7)).padStart(3,'0');
+      const picks=[st.ind,...st.feats,st.sty].map(o=>esc(o.t)).join(' <i>✦</i> ')+' <i>✦</i> ';
+      const cta=ds.ctaText||'Book a design brainstorm';
+      P.innerHTML='<div class="sbx"><div class="sbx-glow"></div><div class="sbx-tick"><div>'+picks.repeat(6)+'</div></div><div class="sbx-in">'+
+        '<div class="sbx-top sbx-r"><small>'+(ds.profileCardKicker||'Your business profile')+' · No. '+no+'</small><small>'+(ds.profileKicker||'Prepared by Kill Vanilla Studio')+'</small></div>'+
+        '<h3 class="sbx-title">'+title+'</h3>'+
+        '<p class="sbx-lede sbx-r">'+(ds.profileIntro||'A one-off read on where you are now, and where a <em>bespoke</em> site could take you.')+'</p>'+
+        '<ol class="sbx-rows">'+row(st.ind.t,who)+st.feats.map(f=>row(f.t,f.ex||((pick(f.t,NEED)?'I\'d build '+pick(f.t,NEED)+'.':'')))).join('')+row(st.sty.t,vibe)+'</ol>'+
+        (fx.length?'<div class="sbx-fxh sbx-r"><span class="sbx-n">0'+(++n)+'</span><h5>'+(ds.effectsText||'effects made for you')+'</h5></div><div class="sbx-fx">'+fx.map((e,i)=>'<a class="sbx-r" style="--d:'+i+'" href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+' <b>→</b></span></a>').join('')+'</div>':'')+
+        '<div class="sbx-cta sbx-r"><div><h4>'+(ds.brainstormTitle||'Every site I design is <em>completely bespoke.</em>')+'</h4><p>'+(ds.brainstormText||'No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
+        '<a class="sbx-btn" href="'+(ds.ctaUrl||'/contact')+'">'+cta+' <b>→</b></a></div>'+
+        '<a class="sbx-badge" href="'+(ds.ctaUrl||'/contact')+'" aria-label="'+esc(cta)+'"><svg viewBox="0 0 200 200"><defs><path id="sbxc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sbxc" textLength="496">'+esc(cta).toUpperCase()+' ✦ '+esc(cta).toUpperCase()+' ✦</textPath></text></svg><span>→</span></a></div>'+
+        (ds.ideas==='off'?'':'<div class="sbx-mailbox sbx-r"><h4>'+(ds.ideasTitle||'Not ready yet? <em>Get design ideas</em> in your inbox.')+'</h4><form class="sbp-mail" novalidate><label><input type="email" required placeholder="you@yourbusiness.com" aria-label="Email address"></label><button type="submit" aria-label="'+(ds.ideasButton||'Send me ideas')+'">'+(ds.ideasButton||'Send me ideas')+' <b>→</b></button><p class="sbp-ok" hidden>'+(ds.ideasThanks||'Lovely, ideas are on their way.')+'</p></form><div class="sb-form" hidden></div></div>')+
+        '<div class="sbx-foot sbx-r">'+(ds.opinion==='off'?'':'<a href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+
+        (ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+
+        '<button class="sb-again" type="button">Start again ↺</button></div></div></div>';
+      const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+      P.querySelectorAll('.sbx-r').forEach(x=>io.observe(x));setTimeout(()=>P.querySelector('.sbx').classList.add('go'),350);
       form=P.querySelector('.sb-form');fb=form?grabForm(st.ind):null;if(fb)fill(fb,r.t+' | '+r.s);
       const mf=P.querySelector('.sbp-mail');if(mf)mf.addEventListener('submit',e=>{e.preventDefault();const em=mf.querySelector('input');if(!em.checkValidity()){em.reportValidity();return}
         if(fb){const i=fb.querySelector('input[type=email],input[name=email]');if(i){const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;set.call(i,em.value);i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}))}
