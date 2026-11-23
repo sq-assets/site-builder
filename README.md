@@ -18,8 +18,8 @@ Result title = **The [style word] [industry word]**. Options show in the order y
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.1.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.1.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.2.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.2.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
@@ -54,6 +54,7 @@ To save each visitor's result with their email, use a Form Block with an extra t
 | `data-logo`, `data-placeholder`, `data-hero-button` | Text on the laptop's mini site |
 | `data-result-intro`, `data-result-heading`, `data-result-hint`, `data-finish-text` | Result wording |
 | `data-cta-text`, `data-cta-url` | The result button |
+| `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
 | `data-color`, `data-background` | Your ink and paper colours (buttons, pills) |
 | `data-fonts` | `off` = don't load the style fonts (Playfair Display, DM Sans, Shrikhand, Space Mono) |
 | `data-show-result-field` | `on` = show the filled-in "Your site" form field |
