@@ -3,14 +3,32 @@
 (()=>{
   const dec=s=>{const t=document.createElement('textarea');t.innerHTML=s||'';return t.value.trim()};
   const firstP=h=>{const d=document.createElement('div');d.innerHTML=h||'';const p=[...d.querySelectorAll('p,h1,h2,h3,h4')].map(x=>x.textContent.trim()).find(Boolean);return p||''};
+  const real=u=>!!u&&!/\/$/.test(u.split('?')[0]);
   const fmt=u=>/\.(gif|webp)(\?|$)/i.test(u)?u.split('?')[0]:u.split('?')[0]+'?format=1500w';
   /* images inside a post: one per style, matched by file name, alt text or caption */
-  const bodyImgs=h=>{const d=document.createElement('div');d.innerHTML=h||'';return [...d.querySelectorAll('img')].map(i=>{const src=i.getAttribute('data-src')||i.getAttribute('data-image')||i.getAttribute('src')||'';const f=i.closest('figure');
+  const bodyImgs=h=>bodyImgs0(h).filter(x=>real(x.src));
+  const bodyImgs0=h=>{const d=document.createElement('div');d.innerHTML=h||'';return [...d.querySelectorAll('img')].map(i=>{const src=i.getAttribute('data-src')||i.getAttribute('data-image')||i.getAttribute('src')||'';const f=i.closest('figure');
     return {src:fmt(src),key:((i.alt||'')+' '+decodeURIComponent(src.split('?')[0].split('/').pop())+' '+(f&&f.querySelector('figcaption')?f.querySelector('figcaption').textContent:'')).toLowerCase()}}).filter(x=>x.src&&!/^data:/.test(x.src))};
   /* default title words if a post has no text */
   const IND=[[/photo/,'Lens'],[/creative/,'Creative'],[/agency|marketing/,'Agency'],[/product|brand/,'Brand'],[/salon|stylist|beauty|hair/,'Salon'],[/interior|architect/,'Interior'],[/coach|educat|course/,'Mentor'],[/event|hospitality|venue/,'Host']];
   const STY=[[/lux/,'lux','Gilded'],[/minimal/,'min','Quiet'],[/editorial/,'edi','Headline'],[/quirk/,'qui','Offbeat'],[/maximal/,'max','Showstopping'],[/colour|color|bold/,'col','Technicolour']];
   const HEAD=[[/photo/,'Stories, beautifully captured'],[/creative/,'Ideas with a point of view'],[/agency|marketing/,'Brands people remember'],[/product|brand/,'Made to be noticed'],[/salon|stylist|beauty/,'Your best look, booked'],[/interior|architect/,'Spaces with character'],[/coach|educat/,'Learn it, live it'],[/event|hospitality/,'Pull up a chair']];
+  /* the tailored write-up: industry line + style line + features. Override with each post's excerpt. */
+  const WHO=[[/photo/,"Your work does the talking, so your site should get out of its way: big images, quick pages and a clear path from \u201cwow\u201d to \u201care you free in June?\u201d"],
+    [/creative/,"You sell taste, which means your own site gets judged harder than anyone's. It needs to show how you think, not just what you've made."],
+    [/agency|marketing/,"You make other brands look good all day. Your own site should prove you can do it for yourself, and make the next client feel like the obvious fit."],
+    [/product|brand/,"People can't pick your products up online, so your site has to do the touching, the trying-on and the falling in love for them."],
+    [/salon|stylist|beauty|hair/,"People book you because they trust your eye. Your site should feel like walking into your space, and make booking the easiest part of their day."],
+    [/interior|architect/,"You think in space, light and detail. Your site should give your projects room to breathe, the way a good room does."],
+    [/coach|educat|course/,"People buy into you before they buy your course. Your site needs to sound like you on a good day and make the next step feel easy."],
+    [/event|hospitality|venue/,"You sell a feeling before anyone walks through the door. Your site should set the mood and get them booking."]];
+  const VIBE=[[/lux/,"I'd give it a quiet, expensive kind of confidence: generous space, refined type and nothing shouting."],
+    [/minimal/,"I'd pare it right back, so every word and every image earns its place."],
+    [/editorial/,"I'd build it like a magazine spread, with big headlines, strong crops and a layout that rewards the scroll."],
+    [/quirk/,"I'd hide enough unexpected moments in it that people remember you, and screenshot you."],
+    [/maximal/,"I'd turn it all the way up, with colour, pattern and personality on every page."],
+    [/colour|color|bold/,"I'd make it in colour you can see from across the room, with type that keeps up."]];
+  const andList=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
   const pick=(t,map,i=1)=>{const m=map.find(r=>r[0].test(t.toLowerCase()));return m?m[i]:''};
 
   /* little mock sections for each feature */
@@ -27,8 +45,8 @@
 
   const fonts=()=>{if(document.getElementById('sb-fonts'))return;const l=document.createElement('link');l.id='sb-fonts';l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;800&family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Shrikhand&family=Space+Mono:wght@400;700&display=swap';document.head.append(l)};
 
-  const loadFx=u=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>(j.items||[]).filter(x=>x.assetUrl).map(x=>({t:dec(x.title),img:fmt(x.assetUrl),url:x.fullUrl,tags:(x.tags||[]).concat(x.categories||[]).map(t=>t.toLowerCase())}))).catch(()=>[]);
-  const load=(u,order)=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>{const it=(j.items||[]).map(x=>({t:dec(x.title),w:firstP(x.body),img:x.assetUrl?fmt(x.assetUrl):'',imgs:bodyImgs(x.body)}));return order==='newest'?it:it.reverse()}).catch(()=>[]);
+  const loadFx=u=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>(j.items||[]).filter(x=>real(x.assetUrl)).map(x=>({t:dec(x.title),img:fmt(x.assetUrl),url:x.fullUrl,tags:(x.tags||[]).concat(x.categories||[]).map(t=>t.toLowerCase())}))).catch(()=>[]);
+  const load=(u,order)=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>{const it=(j.items||[]).map(x=>({t:dec(x.title),w:firstP(x.body),img:real(x.assetUrl)?fmt(x.assetUrl):'',ex:firstP(x.excerpt),imgs:bodyImgs(x.body)}));return order==='newest'?it:it.reverse()}).catch(()=>[]);
 
   const init=async el=>{
     if(el.dataset.sbOn)return;el.dataset.sbOn=1;
@@ -44,7 +62,7 @@
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
     el.innerHTML='<div class="sb-head"><div><h3 class="sb-q"></h3><p class="sb-hint"></p></div><div class="sb-steps">'+N.map((n,i)=>'<span>'+(i+1)+' '+n+'</span>').join('')+'</div></div>'+
-      '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your website is')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><p class="sb-fx"></p><div class="sb-form"></div><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Let\'s build it')+'</a><br><button class="sb-again" type="button">Start again</button></div>'+
+      '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your website is')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><div class="sb-blurb"></div><p class="sb-fx"></p><div class="sb-form"></div><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Get a quote')+'</a><br><button class="sb-again" type="button">Start again</button></div>'+
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>';
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back');
     const st={step:0,ind:null,feats:[],sty:null};
@@ -111,6 +129,8 @@
       const step=()=>{if(!el.classList.contains('sb-done'))return;const max=site.scrollHeight-site.clientHeight;if(max<=0)return;y+=dir*.6;if(y>=max){y=max;dir=-1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}if(y<=0){y=0;dir=1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}site.scrollTop=y;requestAnimationFrame(step)};
       tourT=setTimeout(()=>requestAnimationFrame(step),800)};
     const finish=()=>{const r=summary();$('.sb-title').textContent=r.t;$('.sb-sum').textContent=r.s;
+      const who=st.ind.ex||pick(st.ind.t,WHO)||'',vibe=st.sty.ex||pick(st.sty.t,VIBE)||'',fs=andList(st.feats.map(f=>f.t.toLowerCase()));
+      $('.sb-blurb').innerHTML='<p>'+who+'</p><p>'+vibe+(fs?' '+(ds.featuresIntro||'Underneath, it would hold your')+' '+fs+', set up so you can run it yourself.':'')+'</p><p>'+(ds.closing||'This is only a first sketch. Every site I make is designed around one business, and yours would be too.')+'</p>';
       const fx=fxFor(st.sty);$('.sb-fx').innerHTML=fx.length?(ds.effectsText||'Effects for your site')+': '+fx.map(e=>'<a href="'+e.url+'">'+e.t+'</a>').join(', '):'';
       if(!fb)fb=grabForm();if(fb)fill(fb,r.t+' | '+r.s);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}

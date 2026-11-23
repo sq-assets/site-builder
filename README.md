@@ -14,6 +14,8 @@ Every option is a blog post, so you add, rename or remove options in Squarespace
 
 Result title = **The [style word] [industry word]**.
 
+**Tailored write-up:** the result explains what their site would be like, built from their answers: a line about their industry, a line about their style and the features they picked, then a closing line. Built-in copy for each industry and style; to rewrite one, put your own text in that industry or style post's **excerpt**.
+
 **Use your own designs:** give a feature post a **thumbnail image** (a screenshot of a real section you've designed, or an animated WebP) and the laptop shows that instead of the drawn version. Give a style post a thumbnail (the top of a real homepage in that style: nav + hero) and it replaces the laptop's top when that style is picked. Posts without a thumbnail keep the drawn version.
 
 **Your effects per style:** tag posts in your effects blog (`data-effects`, default `/effects`) with style names (`luxury`, `minimal`, `editorial`, `quirky`, `maximalist`, `colourful`). When a visitor picks a style, the top of the laptop becomes a slideshow of the matching effects' thumbnails (animated WebPs play), and the result lists them as links. `data-effects="off"` to turn off, `data-effect-speed` = ms per slide (3200).
@@ -37,7 +39,7 @@ Result title = **The [style word] [industry word]**.
   data-styles="/site-builder-styles"
   data-font="aktiv-grotesk"
   data-logo="Your Name"
-  data-cta-text="Let's build it"
+  data-cta-text="Get a quote"
   data-cta-url="/contact"
   data-color="#383838"
   data-background="#f8f7f6"></div>
@@ -60,7 +62,8 @@ To save each visitor's result with their email, use a Form Block with an extra t
 | `data-question1/2/3`, `data-hint1/2/3`, `data-step1/2/3` | Step wording |
 | `data-logo`, `data-placeholder`, `data-hero-button` | Text on the laptop's mini site |
 | `data-result-intro`, `data-result-heading`, `data-result-hint`, `data-finish-text` | Result wording |
-| `data-cta-text`, `data-cta-url` | The result button |
+| `data-cta-text`, `data-cta-url` | The result button (`Get a quote`, `/contact`) |
+| `data-features-intro`, `data-closing` | Wording around the tailored write-up |
 | `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |
 | `data-laptop-image`, `data-screen` | Use your own laptop photo (front-on, blank screen) and where its screen is, as `top right bottom left` in % of the image (e.g. `6 12 14 12`) |
 | `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
