@@ -241,3 +241,15 @@
 .sb-psty em{font-family:var(--heading-font-font-family,inherit);font-size:clamp(1.2rem,2.3vw,2.1rem);line-height:1;letter-spacing:-.04em;text-transform:lowercase}
 @media (max-width:767px){.sb-board-in{aspect-ratio:4/5;border-radius:22px}.sb-pimg{width:44%}}
 @media (prefers-reduced-motion:reduce){.sb-pin{animation:none!important}}
+/* inspiration step: Pinterest-style grid */
+.sb-tray.sb-tray-img{display:block;columns:2 120px;column-gap:10px;max-height:min(540px,62vh);overflow:auto;padding:6px 8px 6px 4px;scrollbar-width:thin}
+.site-builder .sb-chip.sb-tile{display:block;position:relative;width:100%;margin:0 0 10px;padding:0;border:1px solid var(--sb-ink);border-radius:14px;overflow:hidden;background:#fff;break-inside:avoid;cursor:grab;text-transform:none;letter-spacing:0}
+.sb-chip.sb-tile::after{content:none}
+.sb-tile img{display:block;width:100%;height:auto;pointer-events:none;transition:transform .5s cubic-bezier(.2,.9,.2,1)}
+.sb-tile:hover img{transform:scale(1.06)}
+.sb-tile span{position:absolute;right:8px;top:8px;padding:.55em 1em;border-radius:999px;background:var(--sb-ink);color:var(--sb-paper);font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s}
+.sb-tile:hover span,.sb-tile.sel span{opacity:1;transform:none}
+.sb-tile.sel span{background:var(--sb-hover);color:var(--sb-ink)}
+.site-builder .sb-chip.sb-tile.sel{box-shadow:0 0 0 3px var(--sb-hover),0 0 26px 4px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
+.sb-psave{width:30%}
+@media (max-width:767px){.sb-tray.sb-tray-img{columns:3 90px;max-height:46vh}}
