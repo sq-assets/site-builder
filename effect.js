@@ -72,9 +72,8 @@
     const [I,F,S,FX]=await Promise.all([load(ds.industries||'/site-builder-industries',order),load(ds.features||'/site-builder-features',order),load(ds.styles||'/site-builder-styles',order),ds.effects==='off'?[]:loadFx(ds.effects||'/effects')]);
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||'What do you do?',ds.question2||'What does your site need?',ds.question3||'Pick your vibe'];
-    const touch=matchMedia('(pointer:coarse)').matches;
+    const touch=matchMedia('(pointer:coarse)').matches;const board=ds.stage!=='laptop';
     const H=[ds.hint1||(touch?'Tap one to pin it to your moodboard':(board?'Drag one onto your moodboard, or click it':'Drag one into the laptop, or click it')),ds.hint2||'Add as many as you like',ds.hint3||'Pick the one that feels most like you'];
-    const board=ds.stage!=='laptop';
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
     el.innerHTML='<div class="sb-head"><div><h3 class="sb-q"></h3><p class="sb-hint"></p></div><div class="sb-steps">'+N.map((n,i)=>'<span>'+(i+1)+' '+n+'</span>').join('')+'</div></div>'+
