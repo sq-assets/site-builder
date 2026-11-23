@@ -14,7 +14,9 @@ Every option is a blog post, so you add, rename or remove options in Squarespace
 
 Result title = **The [style word] [industry word]**.
 
-**Use your own designs:** give a feature post a **thumbnail image** (a screenshot of a real section you've designed, or an animated WebP) and the laptop shows that instead of the drawn version. Give a style post a thumbnail (the top of a real homepage in that style: nav + hero) and it replaces the laptop's top when that style is picked. Posts without a thumbnail keep the drawn version. Options show in the order you published them (`data-order="newest"` to flip).
+**Use your own designs:** give a feature post a **thumbnail image** (a screenshot of a real section you've designed, or an animated WebP) and the laptop shows that instead of the drawn version. Give a style post a thumbnail (the top of a real homepage in that style: nav + hero) and it replaces the laptop's top when that style is picked. Posts without a thumbnail keep the drawn version.
+
+**A version per style:** in a feature post's body, add one image per style and put the style's name in the file name, alt text or caption (e.g. `portfolio-luxury.png`, `portfolio-colourful.png`). When a visitor picks that style, the section swaps to it. Styles without their own image keep the thumbnail. Matching uses the first word of the style post's title (luxury, minimal, editorial, quirky, maximalist, colourful). Options show in the order you published them (`data-order="newest"` to flip).
 
 ## 2. Footer code injection
 
