@@ -14,20 +14,27 @@
   const STY=[[/lux/,'lux','Gilded'],[/minimal/,'min','Quiet'],[/editorial/,'edi','Headline'],[/quirk/,'qui','Offbeat'],[/maximal/,'max','Showstopping'],[/colour|color|bold/,'col','Technicolour']];
   const HEAD=[[/photo/,'Stories, beautifully captured'],[/creative/,'Ideas with a point of view'],[/agency|marketing/,'Brands people remember'],[/product|brand/,'Made to be noticed'],[/salon|stylist|beauty/,'Your best look, booked'],[/interior|architect/,'Spaces with character'],[/coach|educat/,'Learn it, live it'],[/event|hospitality/,'Pull up a chair']];
   /* the tailored write-up: industry line + style line + features. Override with each post's excerpt. */
-  const WHO=[[/photo/,"Your work does the talking, so your site should get out of its way: big images, quick pages and a clear path from \u201cwow\u201d to \u201care you free in June?\u201d"],
-    [/creative/,"You sell taste, which means your own site gets judged harder than anyone's. It needs to show how you think, not just what you've made."],
-    [/agency|marketing/,"You make other brands look good all day. Your own site should prove you can do it for yourself, and make the next client feel like the obvious fit."],
-    [/product|brand/,"People can't pick your products up online, so your site has to do the touching, the trying-on and the falling in love for them."],
-    [/salon|stylist|beauty|hair/,"People book you because they trust your eye. Your site should feel like walking into your space, and make booking the easiest part of their day."],
-    [/interior|architect/,"You think in space, light and detail. Your site should give your projects room to breathe, the way a good room does."],
-    [/coach|educat|course/,"People buy into you before they buy your course. Your site needs to sound like you on a good day and make the next step feel easy."],
-    [/event|hospitality|venue/,"You sell a feeling before anyone walks through the door. Your site should set the mood and get them booking."]];
-  const VIBE=[[/lux/,"I'd give it a quiet, expensive kind of confidence: generous space, refined type and nothing shouting."],
-    [/minimal/,"I'd pare it right back, so every word and every image earns its place."],
-    [/editorial/,"I'd build it like a magazine spread, with big headlines, strong crops and a layout that rewards the scroll."],
-    [/quirk/,"I'd hide enough unexpected moments in it that people remember you, and screenshot you."],
-    [/maximal/,"I'd turn it all the way up, with colour, pattern and personality on every page."],
-    [/colour|color|bold/,"I'd make it in colour you can see from across the room, with type that keeps up."]];
+  /* recap copy: where they're at (industry), what I'd focus on (features + style). Override with each post's excerpt. */
+  const WHO=[[/photo/,"You're a photographer, so your work has to do the selling. The usual sticking points: galleries that load slowly and bury your best shots, enquiries that arrive without dates or budgets, and a site that looks like every other photography template."],
+    [/creative/,"You sell taste and ideas, which makes your own site the hardest brief of all. The usual sticking points: a portfolio that shows what you've made but not how you think, services that are hard to compare, and work that's outgrown the site it sits on."],
+    [/agency|marketing/,"You make other brands look good, so your own site gets judged twice as hard. The usual sticking points: case studies buried three clicks deep, services described in jargon, and a site nobody's had time to touch since you last rebranded a client."],
+    [/product|brand/,"You're selling something people can't hold until it arrives. The usual sticking points: product pages that don't do the product justice, a checkout that loses people halfway, and a brand story that never makes it past the About page."],
+    [/salon|stylist|beauty|hair/,"Your clients book you because they trust your eye. The usual sticking points: booking that relies on DMs, a price list that's always out of date, and a site that feels nothing like walking into your space."],
+    [/interior|architect/,"You think in space, light and detail. The usual sticking points: projects squeezed into small galleries, no clear sense of how you work or where to start, and a site that feels flatter than the rooms you design."],
+    [/coach|educat|course/,"People buy into you before they buy your programme. The usual sticking points: a site that doesn't sound like you, offers that blur together, and no clear next step from \u201cI like her\u201d to \u201cI'm booked in\u201d."],
+    [/event|hospitality|venue/,"You're selling a feeling before anyone walks through the door. The usual sticking points: menus and info stuck in PDFs, enquiries that arrive without the details you need, and photos that don't capture the atmosphere."]];
+  const NEED=[[/portfolio|gallery|work/,"a portfolio that opens big and loads fast, with projects grouped so people find the work most like theirs"],
+    [/shop|store|product/,"a shop that keeps the falling-in-love moment and the buy button on the same page, with a checkout that stays out of the way"],
+    [/service|booking|appoint/,"services laid out so people can see what fits them, with booking built in so nobody has to DM you"],
+    [/blog|journal|news/,"a blog that's easy to keep up, with posts that link through to your services so reading turns into enquiring"],
+    [/podcast|audio|episode/,"a podcast home where every episode has its own page, so people can listen, subscribe and find you through search"],
+    [/course|member|class|learn/,"course and membership pages that sell the transformation, with sign-ups and logins that just work"]];
+  const VIBE=[[/lux/,"For a luxury feel: generous space, refined type and fewer, bigger images. Nothing shouting."],
+    [/minimal/,"For a minimal feel: a pared-back layout where every word and every image earns its place."],
+    [/editorial/,"For an editorial feel: big headlines, strong crops and layouts that read like a magazine spread."],
+    [/quirk/,"For a quirky feel: unexpected details and interactions that make people remember you, and screenshot you."],
+    [/maximal/,"For a maximalist feel: colour, pattern and personality turned all the way up."],
+    [/colour|color|bold/,"For a colourful, bold feel: confident colour and type you can see from across the room."]];
   const andList=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
   const pick=(t,map,i=1)=>{const m=map.find(r=>r[0].test(t.toLowerCase()));return m?m[i]:''};
 
@@ -58,11 +65,15 @@
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||'What do you do?',ds.question2||'What does your site need?',ds.question3||'Pick your vibe'];
     const touch=matchMedia('(pointer:coarse)').matches;
-    const H=[ds.hint1||(touch?'Tap one to add it':'Drag one into the laptop, or click it'),ds.hint2||'Add as many as you like',ds.hint3||'Watch your site change'];
+    const H=[ds.hint1||(touch?'Tap one to add it':'Drag one into the laptop, or click it'),ds.hint2||'Add as many as you like',ds.hint3||'Pick the one that feels most like you'];
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
     el.innerHTML='<div class="sb-head"><div><h3 class="sb-q"></h3><p class="sb-hint"></p></div><div class="sb-steps">'+N.map((n,i)=>'<span>'+(i+1)+' '+n+'</span>').join('')+'</div></div>'+
-      '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your website is')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><div class="sb-blurb"></div><p class="sb-fx"></p><div class="sb-form"></div><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Get a quote')+'</a><br><button class="sb-again" type="button">Start again</button></div>'+
+      '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your recap')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><div class="sb-blurb"></div><p class="sb-fx"></p>'+
+      '<div class="sb-ctas"><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Get your starting-point quote')+'</a>'+(ds.opinion==='off'?'':'<a class="sb-cta sb-cta2" href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+'</div>'+
+      '<div class="sb-form"></div>'+
+      ((ds.pinterest||ds.instagram)?'<div class="sb-social"><span>'+(ds.socialText||'Follow for new releases and offers')+'</span>'+(ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+'</div>':'')+
+      '<button class="sb-again" type="button">Start again</button></div>'+
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>';
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back');
     const st={step:0,ind:null,feats:[],sty:null};
@@ -74,7 +85,7 @@
       lists[st.step].forEach(o=>{const b=document.createElement('button');b.type='button';b.className='sb-chip';b.textContent=o.t;b.o=o;
         if(o===st.ind||st.feats.includes(o)||o===st.sty)b.classList.add('sel');tray.append(b)});
       next.disabled=!(st.step===0?st.ind:st.step===1?st.feats.length:st.sty);
-      next.textContent=st.step===2?(ds.finishText||'See my site'):'Next';
+      next.textContent=st.step===2?(ds.finishText||'See my recap'):'Next';
       back.hidden=st.step===0;
     };
     const styKey=()=>st.sty?(st.sty.t.toLowerCase().match(/[a-z]+/)||[''])[0]:'';
@@ -89,9 +100,12 @@
       if(srcs.length>1){let i=0;heroT=setInterval(()=>{const im=h.querySelectorAll('img');if(!im.length)return clearInterval(heroT);im[i].classList.remove('on');i=(i+1)%im.length;im[i].classList.add('on')},+(ds.effectSpeed||3200))}};
     /* your effects tagged with the picked style */
     const fxFor=o=>{const k=(o.t.toLowerCase().match(/[a-z]+/)||[''])[0];return k?FX.filter(e=>e.tags.some(t=>t.includes(k))):[]};
+    /* showcase (default): the laptop just rotates your effects + optional extra images; picks don't change it */
+    const show=ds.laptop!=='build';
     const bump=()=>{lap.classList.remove('sb-pulse');void lap.offsetWidth;lap.classList.add('sb-pulse')};
     const choose=o=>{
-      if(st.step===0){st.ind=o;$('.sb-kicker').textContent=o.t;$('.sb-h').textContent=pick(o.t,HEAD)||o.t}
+      if(show){if(st.step===0)st.ind=o;else if(st.step===1){const i=st.feats.indexOf(o);i>-1?st.feats.splice(i,1):st.feats.push(o)}else st.sty=o}
+      else if(st.step===0){st.ind=o;$('.sb-kicker').textContent=o.t;$('.sb-h').textContent=pick(o.t,HEAD)||o.t}
       else if(st.step===1){const i=st.feats.indexOf(o);
         if(i>-1){st.feats.splice(i,1);const s=secs.querySelector('[data-f="'+CSS.escape(o.t)+'"]');s&&s.remove()}
         else{st.feats.push(o);const s=document.createElement('div');const u=imgFor(o);s.className='sb-sec'+(u?' sb-real':'');s.dataset.f=o.t;s.innerHTML=u?'<img src="'+u+'" alt="">':'<h5>'+o.t+'</h5>'+mock(o.t);secs.append(s);site.scrollTop=s.offsetTop-site.clientHeight*.25}}
@@ -141,16 +155,20 @@
       const step=()=>{if(!el.classList.contains('sb-done'))return;const max=site.scrollHeight-site.clientHeight;if(max<=0)return;y+=dir*.6;if(y>=max){y=max;dir=-1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}if(y<=0){y=0;dir=1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}site.scrollTop=y;requestAnimationFrame(step)};
       tourT=setTimeout(()=>requestAnimationFrame(step),800)};
     const finish=()=>{const r=summary();$('.sb-title').textContent=r.t;$('.sb-sum').textContent=r.s;
-      const who=st.ind.ex||pick(st.ind.t,WHO)||'',vibe=st.sty.ex||pick(st.sty.t,VIBE)||'',fs=andList(st.feats.map(f=>f.t.toLowerCase()));
-      $('.sb-blurb').innerHTML='<p>'+who+'</p><p>'+vibe+(fs?' '+(ds.featuresIntro||'Underneath, it would hold your')+' '+fs+', set up so you can run it yourself.':'')+'</p><p>'+(ds.closing||'This is only a first sketch. Every site I make is designed around one business, and yours would be too.')+'</p>';
-      const fx=fxFor(st.sty);$('.sb-fx').innerHTML=fx.length?(ds.effectsText||'Effects for your site')+': '+fx.map(e=>'<a href="'+e.url+'">'+e.t+'</a>').join(', '):'';
+      const who=st.ind.ex||pick(st.ind.t,WHO)||'',vibe=st.sty.ex||pick(st.sty.t,VIBE)||'',needs=st.feats.map(f=>f.ex||pick(f.t,NEED)||f.t.toLowerCase());
+      $('.sb-blurb').innerHTML='<h4>'+(ds.recap1||'Where you\'re at')+'</h4><p>'+who+'</p><h4>'+(ds.recap2||'What I\'d focus on')+'</h4><p>'+(needs.length?'I\'d start with '+andList(needs)+'. ':'')+vibe+'</p><p class="sb-unique">'+(ds.closing||'<strong>Every site I design is completely unique.</strong> This is a starting point, so I can get a picture of where you\'re at and where you want to be. Get a starting-point quote, and you can book in a call from there.')+'</p>';
+      const fx=fxFor(st.sty);$('.sb-fx').innerHTML=fx.length?(ds.effectsText||'Effects that would suit you')+': '+fx.map(e=>'<a href="'+e.url+'">'+e.t+'</a>').join(', '):'';
       fb=grabForm(st.ind);if(fb)fill(fb,r.t+' | '+r.s);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
-      $('.sb-q').textContent=ds.resultHeading||'Here it is';$('.sb-hint').textContent=ds.resultHint||'Your site, built in three clicks';
-      el.classList.add('sb-done');tour();el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
+      $('.sb-q').textContent=ds.resultHeading||'Here\'s your recap';$('.sb-hint').textContent=ds.resultHint||'Based on what you told me';
+      el.classList.add('sb-done');show||tour();el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
     next.addEventListener('click',()=>{if(st.step<2){st.step++;render()}else finish()});
     back.addEventListener('click',()=>{if(st.step>0){st.step--;render()}});
-    $('.sb-again').addEventListener('click',()=>{st.step=0;st.ind=st.sty=null;st.feats=[];secs.innerHTML='';heroImg([]);site.className='sb-site';$('.sb-kicker').textContent='Your website';$('.sb-h').textContent=ds.placeholder||'Starts here';el.classList.remove('sb-done');site.style.scrollBehavior='';clearTimeout(tourT);render()});
+    $('.sb-again').addEventListener('click',()=>{st.step=0;st.ind=st.sty=null;st.feats=[];if(!show){secs.innerHTML='';heroImg([]);site.className='sb-site'}$('.sb-kicker').textContent='Your website';$('.sb-h').textContent=ds.placeholder||'Starts here';el.classList.remove('sb-done');site.style.scrollBehavior='';clearTimeout(tourT);render()});
+    if(show)Promise.all((ds.showcase||'').split(',').map(u=>u.trim()).filter(Boolean).map(loadFx)).then(x=>{
+      const imgs=(ds.effects==='off'?[]:FX.map(e=>e.img)).concat(...x.map(a=>a.map(e=>e.img)));
+      if(ds.shuffle==='on')imgs.sort(()=>Math.random()-.5);
+      site.classList.add('sb-show','sb-has-hero');heroImg(imgs)});
     render();
   };
   const run=()=>document.querySelectorAll('.site-builder').forEach(init);

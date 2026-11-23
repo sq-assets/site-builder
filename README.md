@@ -1,5 +1,7 @@
 # Site Builder
 
+**v2:** the laptop is a showcase (it rotates your effects, plus any extra images from `data-showcase`), and the result is a **recap**: where they're at (industry pain points), what you'd focus on (a suggestion per feature + a style note) and a reminder that every site is unique, then **Get your starting-point quote**, **Want an opinion on your current site?**, the email signup and Pinterest / Instagram follow links. `data-laptop="build"` brings back the v1 behaviour where the screen builds as they pick.
+
 Squarespace 7.1: visitors build their dream website in three steps. They pick their **industry**, drag in the **features** they need, then choose a **style**, and a laptop builds and restyles a little website as they go. At the end they get a named result (e.g. "The Gilded Lens") with your email signup and a call-to-action button.
 
 Every option is a blog post, so you add, rename or remove options in Squarespace with no code.
@@ -26,8 +28,8 @@ Result title = **The [style word] [industry word]**.
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.5.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.5.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.0.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.0.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
