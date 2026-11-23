@@ -30,8 +30,8 @@ Result title = **The [style word] [industry word]**.
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.2.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.2.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.3.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.3.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
@@ -72,6 +72,7 @@ Make one mailing list per industry, then add one **Newsletter Block** per indust
 | `data-logo`, `data-placeholder`, `data-hero-button` | Text on the laptop's mini site |
 | `data-result-intro`, `data-result-heading`, `data-result-hint`, `data-finish-text` | Result wording |
 | `data-signup-title`, `data-signup-text` | Heading and text shown on the signup in the result (`keep` = block's own title) |
+| `data-ideas`, `data-ideas-title`, `data-ideas-text`, `data-ideas-button`, `data-ideas-thanks` | Email card (`off` hides). Its email field passes the address to a signup block if there is one, and fires a `sitebuilder:email` event |
 | `data-cta-text`, `data-cta-url` | The result button (`Get a quote`, `/contact`) |
 | `data-features-intro`, `data-closing` | Wording around the tailored write-up |
 | `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |

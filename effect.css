@@ -170,7 +170,7 @@
 .sbp-side{display:grid;gap:clamp(20px,2.6vw,40px)}
 .sbp-side h4{margin:0 0 .55em;font-family:var(--sb-hf);font-size:clamp(1.7rem,2.8vw,2.6rem);line-height:.95;letter-spacing:-.03em;text-transform:uppercase}
 .sbp-side p{margin:0 0 1.4em;line-height:1.6}
-.sbp-btn,.sbp-mail button{display:block;width:100%;text-align:center;padding:1.15em 1.4em;border:var(--sb-line) solid var(--sb-ink);border-radius:999px;background:var(--sb-ink);color:var(--sb-paper)!important;text-decoration:none;font:inherit;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.sbp-btn,.sbp-mail button{display:block;width:100%;box-sizing:border-box;text-align:center;padding:1.15em 1.4em;border:var(--sb-line) solid var(--sb-ink);border-radius:999px;background:var(--sb-ink);color:var(--sb-paper)!important;text-decoration:none;font:inherit;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
 .sbp-btn:hover,.sbp-mail button:hover{background:var(--sb-hover);color:var(--sb-ink)!important;box-shadow:0 0 22px 3px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
 .sbp-mail label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.9em}
 .sbp-mail label[hidden],.sbp-mail button[hidden]{display:none}
