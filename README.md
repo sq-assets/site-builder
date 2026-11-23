@@ -69,7 +69,7 @@ Make one mailing list per industry, then add one **Newsletter Block** per indust
 | `data-cta-text`, `data-cta-url` | The result button (`Get a quote`, `/contact`) |
 | `data-features-intro`, `data-closing` | Wording around the tailored write-up |
 | `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |
-| `data-laptop-image`, `data-screen` | Use your own laptop photo (front-on, blank screen) and where its screen is, as `top right bottom left` in % of the image (e.g. `6 12 14 12`) |
+| `data-laptop-image`, `data-screen` | Use your own laptop photo (front-on; a transparent screen area works best, the mini site shows through it) and where its screen is, as `top right bottom left` in % of the image (e.g. `6 12 14 12`) |
 | `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
 | `data-glow`, `data-glow-color` | `on` (default) = orange glow when an option is picked, on picked options and on the laptop; colour `#ED6A5E` |
 | `data-hover-color` | Hover / picked colour for options and buttons (`#E8A6D6`) |
