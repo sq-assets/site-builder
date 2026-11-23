@@ -58,6 +58,7 @@ To save each visitor's result with their email, use a Form Block with an extra t
 | `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |
 | `data-laptop-image`, `data-screen` | Use your own laptop photo (front-on, blank screen) and where its screen is, as `top right bottom left` in % of the image (e.g. `6 12 14 12`) |
 | `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
+| `data-glow`, `data-glow-color` | `on` (default) = orange glow when an option is picked, on picked options and on the laptop; colour `#ED6A5E` |
 | `data-hover-color` | Hover / picked colour for options and buttons (`#E8A6D6`) |
 | `data-color`, `data-background` | Your ink and paper colours (buttons, pills) |
 | `data-fonts` | `off` = don't load the style fonts (Playfair Display, DM Sans, Shrikhand, Space Mono) |

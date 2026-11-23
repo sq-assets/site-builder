@@ -1,5 +1,5 @@
 /* Site Builder: drag your industry, features and style into a laptop */
-.site-builder{--sb-ink:#383838;--sb-paper:#f8f7f6;--sb-accent:#ED6A5E;--sb-hover:#E8A6D6;position:relative;color:var(--sb-ink);font:inherit;user-select:none;-webkit-user-select:none}
+.site-builder{--sb-ink:#383838;--sb-paper:#f8f7f6;--sb-accent:#ED6A5E;--sb-hover:#E8A6D6;--sb-glow:#ED6A5E;position:relative;color:var(--sb-ink);font:inherit;user-select:none;-webkit-user-select:none}
 .sb-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.6em 2em;margin-bottom:1.4em}
 .sb-steps{display:flex;gap:.4em;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
 .sb-steps span{padding:.45em 1em;border:1px solid var(--sb-ink);border-radius:999px;opacity:.35;transition:opacity .3s,background .3s,color .3s}
@@ -15,6 +15,9 @@
 .sb-chip:hover{transform:translateY(-2px) rotate(-1deg)}
 .sb-chip:hover,.sb-chip:active,.sb-chip.sel{background:var(--sb-hover);color:var(--sb-ink)}
 .sb-chip.sel::after{content:" ✓"}
+.sb-glow .sb-chip.sel{box-shadow:0 0 18px 2px color-mix(in srgb,var(--sb-glow) 55%,transparent)}
+.sb-glow .sb-flash{animation:sbGlow .9s ease-out}
+@keyframes sbGlow{0%{box-shadow:0 0 0 0 var(--sb-glow)}35%{box-shadow:0 0 30px 9px var(--sb-glow)}100%{box-shadow:0 0 18px 2px color-mix(in srgb,var(--sb-glow) 55%,transparent)}}
 .sb-ghost{position:fixed;z-index:100000;pointer-events:none;margin:0;transform:rotate(-4deg) scale(1.05);box-shadow:0 12px 30px rgba(0,0,0,.18);cursor:grabbing}
 .sb-fly{position:fixed;z-index:100000;pointer-events:none;margin:0;transition:transform .55s cubic-bezier(.6,0,.3,1),opacity .55s}
 /* laptop */
@@ -28,6 +31,8 @@
 .sb-over .sb-drop{opacity:1}
 .sb-pulse{animation:sbPulse .5s ease}
 @keyframes sbPulse{40%{transform:scale(1.015)}}
+.sb-glow .sb-pulse{animation:sbPulse .5s ease,sbLapGlow 1s ease-out}
+@keyframes sbLapGlow{35%{filter:drop-shadow(0 0 26px var(--sb-glow))}}
 /* real laptop photo: the mini site sits over the photo's screen (data-screen = top right bottom left, in %) */
 .sb-photo-mode .sb-photo{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
 .sb-photo-mode .sb-view{position:absolute;aspect-ratio:auto;border-radius:2px}
