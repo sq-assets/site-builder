@@ -175,19 +175,24 @@
       const vibe=st.sty.ex||pick(st.sty.t,VIBE)||'';
       const fx=fxFor(st.sty).slice(0,+(ds.effectsMax||4));
       const sec=(h,t)=>t?'<div class="sbp-sec"><h5>'+esc(h)+'</h5><p>'+t+'</p></div>':'';
-      P.innerHTML='<div class="sbp-head"><small>'+(ds.profileKicker||'Your profile')+'</small><h3>'+(ds.profileHeading||'Your profile is ready')+'</h3><p>'+(ds.profileIntro||'Here\'s where I\'d start.')+'</p>'+
+      P.innerHTML='<div class="sbp-head"><small>'+(ds.profileKicker||'Your profile')+'</small><h3>'+(ds.profileHeading||'Your profile is <em>ready</em>')+'</h3><p>'+(ds.profileIntro||'Here\'s where I\'d start.')+'</p>'+
         '<div class="sbp-pills"><span>'+N[0]+'</span><span>'+N[1]+'</span><span>'+N[2]+'</span><span class="on">'+(ds.profilePill||'Your profile')+'</span></div></div>'+
-        '<div class="sbp-grid"><div class="sbp-card sbp-main"><small>'+(ds.profileCardKicker||'Your business profile')+'</small><h3 class="sb-title">'+esc(r.t)+'</h3>'+
+        '<div class="sbp-grid"><div class="sbp-card sbp-main"><small>'+(ds.profileCardKicker||'Your business profile')+'</small><h3 class="sb-title">'+esc(r.t).replace(/^(The )(\S+)/,'$1<em>$2</em>')+'</h3>'+
         '<div class="sbp-chips">'+[st.ind,...st.feats,st.sty].map(o=>'<span>'+esc(o.t)+'</span>').join('')+'</div>'+
         sec(st.ind.t,who)+st.feats.map(f=>sec(f.t,f.ex||((pick(f.t,NEED)?'I\'d build '+pick(f.t,NEED)+'.':'')))).join('')+sec(st.sty.t,vibe)+
         (fx.length?'<div class="sbp-sec"><h5>'+(ds.effectsText||'Effects that would suit you')+'</h5><div class="sbp-fx">'+fx.map(e=>'<a href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+'</span></a>').join('')+'</div></div>':'')+
         '</div><div class="sbp-side"><div class="sbp-card"><h4>'+(ds.brainstormTitle||'Book a design brainstorm')+'</h4><p>'+(ds.brainstormText||'Every site I design is completely bespoke. No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
         '<a class="sbp-btn" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Book a design brainstorm')+'</a></div>'+
-        '<div class="sbp-card sbp-email" hidden><h4>'+(ds.ideasTitle||'Email me some design ideas')+'</h4><p>'+(ds.ideasText||'Not ready yet? Get design ideas and effects matched to your profile, straight to your inbox.')+'</p><div class="sb-form"></div></div>'+
+        (ds.ideas==='off'?'':'<div class="sbp-card sbp-email"><h4>'+(ds.ideasTitle||'Email me some <em>design ideas</em>')+'</h4><p>'+(ds.ideasText||'Not ready yet? Get design ideas and effects matched to your profile, straight to your inbox.')+'</p><form class="sbp-mail" novalidate><label>Email address<input type="email" required placeholder="you@yourbusiness.com"></label><button type="submit">'+(ds.ideasButton||'Send me ideas')+'</button><p class="sbp-ok" hidden>'+(ds.ideasThanks||'Lovely, ideas are on their way.')+'</p></form><div class="sb-form" hidden></div></div>')+
         '<div class="sbp-more">'+(ds.opinion==='off'?'':'<a class="sbp-link" href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+
         ((ds.pinterest||ds.instagram)?'<div class="sb-social"><span>'+(ds.socialText||'Follow for new releases and offers')+'</span>'+(ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+'</div>':'')+
         '<button class="sb-again" type="button">Start again</button></div></div></div>';
-      form=P.querySelector('.sb-form');fb=grabForm(st.ind);if(fb){fill(fb,r.t+' | '+r.s);P.querySelector('.sbp-email').hidden=false}
+      form=P.querySelector('.sb-form');fb=form?grabForm(st.ind):null;if(fb)fill(fb,r.t+' | '+r.s);
+      const mf=P.querySelector('.sbp-mail');if(mf)mf.addEventListener('submit',e=>{e.preventDefault();const em=mf.querySelector('input');if(!em.checkValidity()){em.reportValidity();return}
+        if(fb){const i=fb.querySelector('input[type=email],input[name=email]');if(i){const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;set.call(i,em.value);i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}))}
+          const b=fb.querySelector('button[type=submit],input[type=submit],button');b&&b.click()}
+        el.dispatchEvent(new CustomEvent('sitebuilder:email',{bubbles:true,detail:{email:em.value,profile:r}}));
+        mf.querySelector('label').hidden=true;mf.querySelector('button').hidden=true;mf.querySelector('.sbp-ok').hidden=false});
       P.querySelector('.sb-again').addEventListener('click',again);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
       el.querySelectorAll('.sb-steps span').forEach(s=>{s.classList.remove('on');s.classList.add('done')});
