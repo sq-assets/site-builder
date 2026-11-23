@@ -147,7 +147,7 @@
 .sb-profile{margin-top:clamp(48px,8vw,110px)}
 .sb-profile[hidden]{display:none}
 .sbx{--x-ink:var(--sb-paper,#f8f7f6);--x-paper:var(--sb-ink,#383838);position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--x-ink);color:var(--x-paper);overflow:hidden;padding-bottom:clamp(60px,8vw,120px)}
-.sbx em{font-style:italic;text-transform:lowercase;color:inherit}
+.sbx em,.sbx em *{font-style:italic;text-transform:lowercase!important;color:inherit}
 .sbx a{color:inherit}
 .sbx h1,.sbx h2,.sbx h3,.sbx p,.sbx small,.sbx li{color:var(--x-paper)}
 .sbx h1,.sbx h2,.sbx h3{text-transform:uppercase}
