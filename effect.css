@@ -41,7 +41,7 @@
 @keyframes sbIn{from{opacity:0;transform:translateY(18px)}}
 .sb-sec h5{margin:0 0 1em;font-family:var(--hf);font-weight:var(--hw);font-size:1.5em;text-transform:var(--tt);color:var(--ink)}
 .sb-g{display:grid;gap:.8em}
-.sb-g3{grid-template-columns:repeat(3,1fr)}.sb-g2{grid-template-columns:repeat(2,1fr)}
+.sb-g3{grid-template-columns:repeat(3,minmax(0,1fr))}.sb-g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .sb-box{border-radius:var(--rad);background:var(--acc);opacity:.85}
 .sb-ln{height:.5em;border-radius:9px;background:currentColor;opacity:.35;margin:.5em 0}
 .sb-ln.s{width:55%}.sb-ln.xs{width:30%}
@@ -69,6 +69,7 @@
 .site-builder.sb-done .sb-tray{display:none}
 .site-builder.sb-done .sb-result{display:block;animation:sbIn .7s cubic-bezier(.2,.8,.2,1) both}
 .site-builder.sb-done .sb-ctrl{display:none}
+.site-builder.sb-done .sb-steps span{opacity:1;background:none;color:inherit}
 .sb-result small{display:block;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
 .sb-title{margin:.15em 0 .3em;font-size:clamp(2rem,4.4vw,3.6rem);line-height:1}
 .sb-sum{margin:0 0 1.4em;font-size:.95rem;opacity:.8}
