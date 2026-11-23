@@ -29,6 +29,7 @@ Result title = **The [style word] [industry word]**. Options show in the order y
   data-industries="/site-builder-industries"
   data-features="/site-builder-features"
   data-styles="/site-builder-styles"
+  data-font="aktiv-grotesk"
   data-logo="Your Name"
   data-cta-text="Let's build it"
   data-cta-url="/contact"
@@ -54,6 +55,7 @@ To save each visitor's result with their email, use a Form Block with an extra t
 | `data-logo`, `data-placeholder`, `data-hero-button` | Text on the laptop's mini site |
 | `data-result-intro`, `data-result-heading`, `data-result-hint`, `data-finish-text` | Result wording |
 | `data-cta-text`, `data-cta-url` | The result button |
+| `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |
 | `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
 | `data-color`, `data-background` | Your ink and paper colours (buttons, pills) |
 | `data-fonts` | `off` = don't load the style fonts (Playfair Display, DM Sans, Shrikhand, Space Mono) |
