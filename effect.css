@@ -205,7 +205,13 @@
 .sbx-foot{display:flex;flex-wrap:wrap;gap:.8em;margin-top:clamp(50px,7vw,100px)}
 .sbx-foot a,.sbx-foot .sb-again{margin:0;padding:.9em 1.6em;border:1px solid color-mix(in srgb,var(--x-paper) 45%,transparent);border-radius:999px;background:none;color:var(--x-paper);text-decoration:none;font:inherit;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
 .sbx-foot a:hover,.sbx-foot .sb-again:hover{background:var(--sb-hover);border-color:var(--sb-hover);color:var(--x-ink)}
-@media (max-width:767px){.sbx-row{grid-template-columns:1fr;gap:.6em}.sbx-fxh{grid-template-columns:1fr;gap:.4em}.sbx-fx{grid-template-columns:1fr 1fr}.sbx-cta{grid-template-columns:1fr}.sbx-badge{justify-self:start}}
+.sbx-picks{list-style:none;margin:0;padding:clamp(20px,3vw,40px) 0;display:flex;flex-wrap:wrap;gap:clamp(14px,2vw,26px) clamp(24px,4vw,64px);border-top:1px solid color-mix(in srgb,var(--x-paper) 25%,transparent);border-bottom:1px solid color-mix(in srgb,var(--x-paper) 25%,transparent)}
+.sbx-picks li{display:flex;align-items:flex-start;gap:.6em}
+.sbx-picks .sbx-n{padding-top:.5em}
+.sbx-story{margin-top:clamp(36px,5vw,70px);display:grid;grid-template-columns:clamp(50px,8vw,120px) minmax(0,1fr);gap:clamp(14px,3vw,48px)}
+.sbx-story::before{content:"";}
+.sbx-story p{margin:0;max-width:34em;font-size:clamp(1.15rem,1.9vw,1.7rem);line-height:1.5;letter-spacing:-.01em}
+@media (max-width:767px){.sbx-story{grid-template-columns:1fr}.sbx-story::before{display:none}.sbx-row{grid-template-columns:1fr;gap:.6em}.sbx-fxh{grid-template-columns:1fr;gap:.4em}.sbx-fx{grid-template-columns:1fr 1fr}.sbx-cta{grid-template-columns:1fr}.sbx-badge{justify-self:start}}
 @media (prefers-reduced-motion:reduce){.sbx *{animation:none!important;transition:none!important}.sbx-c,.sbx-r{opacity:1;transform:none}}
 .sb-profiled .sb-ctrl .sb-next{visibility:hidden}
 @media (max-width:767px){.sbp-grid{grid-template-columns:1fr}.sbp-fx{grid-template-columns:1fr 1fr;gap:.7em}.sbp-head,.sbp-more{text-align:left}}

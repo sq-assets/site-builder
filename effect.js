@@ -180,11 +180,15 @@
       const no=String([...r.s].reduce((h,c)=>(h*31+c.charCodeAt(0))%997,7)).padStart(3,'0');
       const picks=[st.ind,...st.feats,st.sty].map(o=>esc(o.t)).join(' <i>✦</i> ')+' <i>✦</i> ';
       const cta=ds.ctaText||'Book a design brainstorm';
+      const story=()=>{const h=+no,needs=st.feats.map(f=>f.ex||pick(f.t,NEED)).filter(Boolean),v=(vibe.split(': ')[1]||vibe).replace(/\.$/,'');
+        const lead=['So here\'s where I\'d start: ','For you, I\'d bring together ','What I\'d build around that: '][h%3];
+        const wrap=['all wrapped in '+v.charAt(0).toLowerCase()+v.slice(1),'and because you\'re drawn to <em>'+esc(st.sty.t.toLowerCase())+'</em>, I\'d style it with '+v.charAt(0).toLowerCase()+v.slice(1)][h%2];
+        return esc(who)+' '+(needs.length?lead+andList(needs)+'; '+wrap+'.':'');};
       P.innerHTML='<div class="sbx"><div class="sbx-glow"></div><div class="sbx-tick"><div>'+picks.repeat(6)+'</div></div><div class="sbx-in">'+
         '<div class="sbx-top sbx-r"><small>'+(ds.profileCardKicker||'Your business profile')+' · No. '+no+'</small><small>'+(ds.profileKicker||'Prepared by Kill Vanilla Studio')+'</small></div>'+
         '<h3 class="sbx-title">'+title+'</h3>'+
         '<p class="sbx-lede sbx-r">'+(ds.profileIntro||'A one-off read on where you are now, and where a <em>bespoke</em> site could take you.')+'</p>'+
-        '<ol class="sbx-rows">'+row(st.ind.t,who)+st.feats.map(f=>row(f.t,f.ex||((pick(f.t,NEED)?'I\'d build '+pick(f.t,NEED)+'.':'')))).join('')+row(st.sty.t,vibe)+'</ol>'+
+        '<ol class="sbx-picks">'+[st.ind,...st.feats,st.sty].map((o,i)=>'<li class="sbx-r" style="--d:'+i+'"><span class="sbx-n">0'+(++n)+'</span><h5>'+esc(o.t)+'</h5></li>').join('')+'</ol>'+'<div class="sbx-story sbx-r"><p>'+story()+'</p></div>'+
         (fx.length?'<div class="sbx-fxh sbx-r"><span class="sbx-n">0'+(++n)+'</span><h5>'+(ds.effectsText||'effects made for you')+'</h5></div><div class="sbx-fx">'+fx.map((e,i)=>'<a class="sbx-r" style="--d:'+i+'" href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+' <b>→</b></span></a>').join('')+'</div>':'')+
         '<div class="sbx-cta sbx-r"><div><h4>'+(ds.brainstormTitle||'Every site I design is <em>completely bespoke.</em>')+'</h4><p>'+(ds.brainstormText||'No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
         '<a class="sbx-btn" href="'+(ds.ctaUrl||'/contact')+'">'+cta+' <b>→</b></a></div>'+
