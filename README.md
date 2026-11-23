@@ -18,8 +18,8 @@ Result title = **The [style word] [industry word]**. Options show in the order y
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.0.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.0.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.1.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.1.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it

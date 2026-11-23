@@ -8,7 +8,8 @@
 .sb-q{margin:0;font-size:clamp(1.6rem,3.4vw,2.8rem);line-height:1.05}
 .sb-hint{margin:.3em 0 0;font-size:.85rem;opacity:.65}
 .sb-stage{display:grid;grid-template-columns:minmax(220px,.8fr) 1.6fr;gap:clamp(20px,4vw,56px);align-items:center}
-.sb-tray{display:flex;flex-wrap:wrap;gap:.6em;align-content:center;min-height:120px}
+.sb-side{align-self:center}
+.sb-tray{display:flex;flex-wrap:wrap;gap:.6em;align-content:center}
 .sb-chip{appearance:none;font:inherit;font-size:.95rem;color:var(--sb-ink);background:var(--sb-paper);border:1px solid var(--sb-ink);border-radius:999px;padding:.6em 1.25em;cursor:grab;touch-action:pan-y;transition:background .25s,color .25s,transform .25s,opacity .25s}
 .sb-chip:hover{transform:translateY(-2px) rotate(-1deg)}
 .sb-chip.sel{background:var(--sb-ink);color:var(--sb-paper)}
@@ -59,16 +60,15 @@
 .sb-card{padding:.9em;border-radius:var(--rad);border:1px solid color-mix(in srgb,currentColor 30%,transparent)}
 .sb-foot-site{padding:2em 2.4em;opacity:.6;font-size:.85em}
 /* buttons */
-.sb-ctrl{display:flex;justify-content:space-between;align-items:center;gap:1em;margin-top:1.6em}
+.sb-ctrl{display:flex;align-items:center;gap:.8em;margin-top:1.8em}
 .sb-ctrl button,.sb-result .sb-cta{appearance:none;font:inherit;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:.9em 2em;border-radius:999px;border:1px solid var(--sb-ink);background:transparent;color:var(--sb-ink);cursor:pointer;text-decoration:none;transition:opacity .25s,background .25s,color .25s}
 .sb-ctrl .sb-next,.sb-result .sb-cta{background:var(--sb-ink);color:var(--sb-paper)}
 .sb-ctrl button:disabled{opacity:.25;cursor:default}
-.sb-ctrl .sb-back[hidden]{display:inline-block;visibility:hidden}
+.sb-ctrl .sb-back[hidden]{display:none}
 /* result */
 .sb-result{display:none;align-self:center}
-.site-builder.sb-done .sb-tray{display:none}
+.site-builder.sb-done .sb-side{display:none}
 .site-builder.sb-done .sb-result{display:block;animation:sbIn .7s cubic-bezier(.2,.8,.2,1) both}
-.site-builder.sb-done .sb-ctrl{display:none}
 .site-builder.sb-done .sb-steps span{opacity:1;background:none;color:inherit}
 .sb-result small{display:block;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
 .sb-title{margin:.15em 0 .3em;font-size:clamp(2rem,4.4vw,3.6rem);line-height:1}
@@ -99,7 +99,7 @@
 @media (max-width:767px){
   .sb-stage{grid-template-columns:1fr}
   .sb-laptop{order:-1}
-  .sb-tray{justify-content:center;min-height:0}
+  .sb-tray,.sb-ctrl{justify-content:center}
   .sb-chip{font-size:.85rem;padding:.55em 1.05em}
   .sb-head{justify-content:center;text-align:center}
   .sb-result{text-align:center}
