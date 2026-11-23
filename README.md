@@ -1,5 +1,7 @@
 # Site Builder
 
+**v2.1:** the result is a **profile** that opens underneath the builder: a business profile card (their picks, their industry + how a custom site helps, each feature, their style, effects that suit them), a **Book a design brainstorm** card and an **Email me some design ideas** card (holds a Newsletter/Form Block from the same section; hidden if there isn't one). Settings: `data-profile-heading`, `data-profile-intro`, `data-brainstorm-title`, `data-brainstorm-text`, `data-ideas-title`, `data-ideas-text`, `data-effects-max` (4), `data-card` colour via `--sb-card`.
+
 **v2:** the laptop is a showcase (it rotates your effects, plus any extra images from `data-showcase`), and the result is a **recap**: where they're at (industry pain points), what you'd focus on (a suggestion per feature + a style note) and a reminder that every site is unique, then **Get your starting-point quote**, **Want an opinion on your current site?**, the email signup and Pinterest / Instagram follow links. `data-laptop="build"` brings back the v1 behaviour where the screen builds as they pick.
 
 Squarespace 7.1: visitors build their dream website in three steps. They pick their **industry**, drag in the **features** they need, then choose a **style**, and a laptop builds and restyles a little website as they go. At the end they get a named result (e.g. "The Gilded Lens") with your email signup and a call-to-action button.
@@ -28,8 +30,8 @@ Result title = **The [style word] [industry word]**.
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.0.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.0.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.1.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v2.1.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it

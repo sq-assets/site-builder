@@ -23,6 +23,14 @@
     [/interior|architect/,"You think in space, light and detail. The usual sticking points: projects squeezed into small galleries, no clear sense of how you work or where to start, and a site that feels flatter than the rooms you design."],
     [/coach|educat|course/,"People buy into you before they buy your programme. The usual sticking points: a site that doesn't sound like you, offers that blur together, and no clear next step from \u201cI like her\u201d to \u201cI'm booked in\u201d."],
     [/event|hospitality|venue/,"You're selling a feeling before anyone walks through the door. The usual sticking points: menus and info stuck in PDFs, enquiries that arrive without the details you need, and photos that don't capture the atmosphere."]];
+  const HELP=[[/photo/,"A custom site gives your images the space they deserve and turns browsing into booking, with an enquiry flow that asks the right questions before you reply."],
+    [/creative/,"A custom site shows your thinking as well as your work, so the right clients see themselves in it before they've even got in touch."],
+    [/agency|marketing/,"A custom site becomes your best case study: sharp, fast and impossible to mistake for anyone else."],
+    [/product|brand/,"A custom site is built around your products, with photography, story and checkout working together so browsing turns into buying."],
+    [/salon|stylist|beauty|hair/,"A custom site captures the feel of your space and puts booking one tap away, so your chair stays full without you living in your DMs."],
+    [/interior|architect/,"A custom site gives each project room to breathe and walks people through how you work, so enquiries arrive ready to start."],
+    [/coach|educat|course/,"A custom site sounds like you on a good day and lays out a clear path from first visit to booked call."],
+    [/event|hospitality|venue/,"A custom site sets the mood the moment it loads and gathers the details you need, so enquiries turn into bookings faster."]];
   const NEED=[[/portfolio|gallery|work/,"a portfolio that opens big and loads fast, with projects grouped so people find the work most like theirs"],
     [/shop|store|product/,"a shop that keeps the falling-in-love moment and the buy button on the same page, with a checkout that stays out of the way"],
     [/service|booking|appoint/,"services laid out so people can see what fits them, with booking built in so nobody has to DM you"],
@@ -75,6 +83,7 @@
       ((ds.pinterest||ds.instagram)?'<div class="sb-social"><span>'+(ds.socialText||'Follow for new releases and offers')+'</span>'+(ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+'</div>':'')+
       '<button class="sb-again" type="button">Start again</button></div>'+
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>';
+    el.insertAdjacentHTML('beforeend','<div class="sb-profile" hidden></div>');
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back');
     if(ds.laptop!=='build')site.classList.add('sb-show','sb-has-hero');
     const st={step:0,ind:null,feats:[],sty:null};
@@ -86,7 +95,7 @@
       lists[st.step].forEach(o=>{const b=document.createElement('button');b.type='button';b.className='sb-chip';b.textContent=o.t;b.o=o;
         if(o===st.ind||st.feats.includes(o)||o===st.sty)b.classList.add('sel');tray.append(b)});
       next.disabled=!(st.step===0?st.ind:st.step===1?st.feats.length:st.sty);
-      next.textContent=st.step===2?(ds.finishText||'See my recap'):'Next';
+      next.textContent=st.step===2?(ds.finishText||'See my profile'):'Next';
       back.hidden=st.step===0;
     };
     const styKey=()=>st.sty?(st.sty.t.toLowerCase().match(/[a-z]+/)||[''])[0]:'';
@@ -130,7 +139,7 @@
     addEventListener('pointercancel',()=>{if(drag&&drag.g){drag.g.remove();drag.b.style.opacity=''}drag=null;lap.classList.remove('sb-over')});
 
     /* result */
-    const form=$('.sb-form');
+    let form=$('.sb-form');
     /* signup: one Newsletter/Form Block per industry in the same section, titled with the industry name.
        On the live page they're all hidden; the visitor's industry block moves into the result. */
     const live=!document.body.classList.contains('sqs-edit-mode-active');
@@ -143,29 +152,45 @@
       const k=norm(ind.t),k1=k.split(' ')[0];
       const blk=sigs.find(b=>norm(titleOf(b))===k)||sigs.find(b=>norm(titleOf(b)).includes(k1))||sigs.find(b=>!I.some(i=>norm(titleOf(b)).includes(norm(i.t).split(' ')[0])))||sigs[0];
       [...form.children].forEach(c=>{const h=home.get(c);h&&h.append(c)});blk.style.display='';form.append(blk);
-      const h=blk.querySelector('.newsletter-form-header-title');if(h&&ds.signupTitle!=='keep')h.textContent=ds.signupTitle||'Want ideas like this in your inbox?';
-      const dsc=blk.querySelector('.newsletter-form-header-description');if(dsc&&ds.signupText)dsc.textContent=ds.signupText;
+      blk.querySelectorAll('.newsletter-form-header-title,.newsletter-form-header-description').forEach(h=>h.style.display='none');
+      
       return blk};
     let fb=null;
     const summary=()=>{const t='The '+(st.sty.w||pick(st.sty.t,STY,2)||st.sty.t)+' '+(st.ind.w||pick(st.ind.t,IND)||st.ind.t.split(/[ &]/)[0]);
       return {t,s:st.ind.t+' · '+st.feats.map(f=>f.t).join(', ')+' · '+st.sty.t}};
     const fill=(blk,txt)=>{blk.querySelectorAll('input,textarea').forEach(i=>{const w=i.closest('.form-item,.field,fieldset,div');const lab=((w&&w.textContent)||'')+' '+(i.name||'')+' '+(i.placeholder||'');
-      if(/result|blueprint|your site|site builder/i.test(lab)&&!/mail/i.test(i.type)){const set=Object.getOwnPropertyDescriptor(i.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype,'value').set;set.call(i,txt);i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));if(ds.showResultField!=='on'&&w)w.style.display='none'}})};
+      if(/result|blueprint|your site|site builder|profile|industry/i.test(lab)&&!/mail/i.test(i.type)){const set=Object.getOwnPropertyDescriptor(i.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype,'value').set;set.call(i,txt);i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));if(ds.showResultField!=='on'&&w)w.style.display='none'}})};
     /* slowly scroll the laptop through the finished site */
     let tourT=null;const tour=()=>{clearTimeout(tourT);site.style.scrollBehavior='auto';let y=0,dir=1;
       const step=()=>{if(!el.classList.contains('sb-done'))return;const max=site.scrollHeight-site.clientHeight;if(max<=0)return;y+=dir*.6;if(y>=max){y=max;dir=-1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}if(y<=0){y=0;dir=1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}site.scrollTop=y;requestAnimationFrame(step)};
       tourT=setTimeout(()=>requestAnimationFrame(step),800)};
-    const finish=()=>{const r=summary();$('.sb-title').textContent=r.t;$('.sb-sum').textContent=r.s;
-      const who=st.ind.ex||pick(st.ind.t,WHO)||'',vibe=st.sty.ex||pick(st.sty.t,VIBE)||'',needs=st.feats.map(f=>f.ex||pick(f.t,NEED)||f.t.toLowerCase());
-      $('.sb-blurb').innerHTML='<h4>'+(ds.recap1||'Where you\'re at')+'</h4><p>'+who+'</p><h4>'+(ds.recap2||'What I\'d focus on')+'</h4><p>'+(needs.length?'I\'d start with '+andList(needs)+'. ':'')+vibe+'</p><p class="sb-unique">'+(ds.closing||'<strong>Every site I design is completely unique.</strong> This is a starting point, so I can get a picture of where you\'re at and where you want to be. Get a starting-point quote, and you can book in a call from there.')+'</p>';
-      const fx=fxFor(st.sty);$('.sb-fx').innerHTML=fx.length?(ds.effectsText||'Effects that would suit you')+': '+fx.map(e=>'<a href="'+e.url+'">'+e.t+'</a>').join(', '):'';
-      fb=grabForm(st.ind);if(fb)fill(fb,r.t+' | '+r.s);
+    const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const finish=()=>{const r=summary(),P=$('.sb-profile');
+      const who=st.ind.ex||((pick(st.ind.t,WHO)||'')+' '+(pick(st.ind.t,HELP)||'')).trim();
+      const vibe=st.sty.ex||pick(st.sty.t,VIBE)||'';
+      const fx=fxFor(st.sty).slice(0,+(ds.effectsMax||4));
+      const sec=(h,t)=>t?'<div class="sbp-sec"><h5>'+esc(h)+'</h5><p>'+t+'</p></div>':'';
+      P.innerHTML='<div class="sbp-head"><small>'+(ds.profileKicker||'Your profile')+'</small><h3>'+(ds.profileHeading||'Your profile is ready')+'</h3><p>'+(ds.profileIntro||'Here\'s where I\'d start.')+'</p>'+
+        '<div class="sbp-pills"><span>'+N[0]+'</span><span>'+N[1]+'</span><span>'+N[2]+'</span><span class="on">'+(ds.profilePill||'Your profile')+'</span></div></div>'+
+        '<div class="sbp-grid"><div class="sbp-card sbp-main"><small>'+(ds.profileCardKicker||'Your business profile')+'</small><h3 class="sb-title">'+esc(r.t)+'</h3>'+
+        '<div class="sbp-chips">'+[st.ind,...st.feats,st.sty].map(o=>'<span>'+esc(o.t)+'</span>').join('')+'</div>'+
+        sec(st.ind.t,who)+st.feats.map(f=>sec(f.t,f.ex||((pick(f.t,NEED)?'I\'d build '+pick(f.t,NEED)+'.':'')))).join('')+sec(st.sty.t,vibe)+
+        (fx.length?'<div class="sbp-sec"><h5>'+(ds.effectsText||'Effects that would suit you')+'</h5><div class="sbp-fx">'+fx.map(e=>'<a href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+'</span></a>').join('')+'</div></div>':'')+
+        '</div><div class="sbp-side"><div class="sbp-card"><h4>'+(ds.brainstormTitle||'Book a design brainstorm')+'</h4><p>'+(ds.brainstormText||'Every site I design is completely bespoke. No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
+        '<a class="sbp-btn" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Book a design brainstorm')+'</a></div>'+
+        '<div class="sbp-card sbp-email" hidden><h4>'+(ds.ideasTitle||'Email me some design ideas')+'</h4><p>'+(ds.ideasText||'Not ready yet? Get design ideas and effects matched to your profile, straight to your inbox.')+'</p><div class="sb-form"></div></div>'+
+        '<div class="sbp-more">'+(ds.opinion==='off'?'':'<a class="sbp-link" href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+
+        ((ds.pinterest||ds.instagram)?'<div class="sb-social"><span>'+(ds.socialText||'Follow for new releases and offers')+'</span>'+(ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+'</div>':'')+
+        '<button class="sb-again" type="button">Start again</button></div></div></div>';
+      form=P.querySelector('.sb-form');fb=grabForm(st.ind);if(fb){fill(fb,r.t+' | '+r.s);P.querySelector('.sbp-email').hidden=false}
+      P.querySelector('.sb-again').addEventListener('click',again);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
-      $('.sb-q').textContent=ds.resultHeading||'Here\'s your recap';$('.sb-hint').textContent=ds.resultHint||'Based on what you told me';
-      el.classList.add('sb-done');show||tour();el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
+      el.querySelectorAll('.sb-steps span').forEach(s=>{s.classList.remove('on');s.classList.add('done')});
+      P.hidden=false;el.classList.add('sb-profiled');requestAnimationFrame(()=>P.scrollIntoView({behavior:'smooth',block:'start'}));
+      el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
     next.addEventListener('click',()=>{if(st.step<2){st.step++;render()}else finish()});
     back.addEventListener('click',()=>{if(st.step>0){st.step--;render()}});
-    $('.sb-again').addEventListener('click',()=>{st.step=0;st.ind=st.sty=null;st.feats=[];if(!show){secs.innerHTML='';heroImg([]);site.className='sb-site'}$('.sb-kicker').textContent='Your website';$('.sb-h').textContent=ds.placeholder||'Starts here';el.classList.remove('sb-done');site.style.scrollBehavior='';clearTimeout(tourT);render()});
+    const again=()=>{const P=$('.sb-profile');if(fb){const h=home.get(fb);h&&h.append(fb);fb=null}P.hidden=true;P.innerHTML='';el.classList.remove('sb-profiled','sb-done');st.step=0;st.ind=st.sty=null;st.feats=[];render();el.scrollIntoView({behavior:'smooth',block:'start'})};
     if(show)Promise.all((ds.showcase||'').split(',').map(u=>u.trim()).filter(Boolean).map(loadFx)).then(x=>{
       const imgs=(ds.effects==='off'?[]:FX.map(e=>e.img)).concat(...x.map(a=>a.map(e=>e.img)));
       if(ds.shuffle==='on')imgs.sort(()=>Math.random()-.5);
