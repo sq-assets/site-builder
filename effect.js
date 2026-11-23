@@ -116,9 +116,20 @@
 
     /* result */
     const form=$('.sb-form');
-    const grabForm=()=>{if(document.body.classList.contains('sqs-edit-mode-active'))return null;
-      const sec=el.closest('section')||document;const blk=[...sec.querySelectorAll('.sqs-block-newsletter,.sqs-block-form')].find(b=>!el.contains(b));
-      if(!blk)return null;const fe=blk.closest('.fe-block')||blk;form.append(blk);fe!==blk&&(fe.style.display='none');return blk};
+    /* signup: one Newsletter/Form Block per industry in the same section, titled with the industry name.
+       On the live page they're all hidden; the visitor's industry block moves into the result. */
+    const live=!document.body.classList.contains('sqs-edit-mode-active');
+    const sigs=live?[...(el.closest('section')||document).querySelectorAll('.sqs-block-newsletter,.sqs-block-form')].filter(b=>!el.contains(b)):[];
+    sigs.forEach(b=>{const fe=b.closest('.fe-block');if(fe)fe.style.display='none';else b.style.display='none'});
+    const titleOf=b=>((b.querySelector('.newsletter-form-header-title,h1,h2,h3,h4,legend')||{}).textContent||'').trim();
+    const norm=t=>t.toLowerCase().replace(/&amp;|&/g,'and').replace(/[^a-z]+/g,' ').trim();
+    const grabForm=ind=>{if(!sigs.length)return null;
+      const k=norm(ind.t),k1=k.split(' ')[0];
+      const blk=sigs.find(b=>norm(titleOf(b))===k)||sigs.find(b=>norm(titleOf(b)).includes(k1))||sigs.find(b=>!I.some(i=>norm(titleOf(b)).includes(norm(i.t).split(' ')[0])))||sigs[0];
+      [...form.children].forEach(c=>form.append&&c.remove());const fe=blk.closest('.fe-block');blk.style.display='';form.append(blk);
+      const h=blk.querySelector('.newsletter-form-header-title');if(h&&ds.signupTitle!=='keep')h.textContent=ds.signupTitle||'Want ideas like this in your inbox?';
+      const dsc=blk.querySelector('.newsletter-form-header-description');if(dsc&&ds.signupText)dsc.textContent=ds.signupText;
+      return blk};
     let fb=null;
     const summary=()=>{const t='The '+(st.sty.w||pick(st.sty.t,STY,2)||st.sty.t)+' '+(st.ind.w||pick(st.ind.t,IND)||st.ind.t.split(/[ &]/)[0]);
       return {t,s:st.ind.t+' · '+st.feats.map(f=>f.t).join(', ')+' · '+st.sty.t}};
@@ -132,7 +143,7 @@
       const who=st.ind.ex||pick(st.ind.t,WHO)||'',vibe=st.sty.ex||pick(st.sty.t,VIBE)||'',fs=andList(st.feats.map(f=>f.t.toLowerCase()));
       $('.sb-blurb').innerHTML='<p>'+who+'</p><p>'+vibe+(fs?' '+(ds.featuresIntro||'Underneath, it would hold your')+' '+fs+', set up so you can run it yourself.':'')+'</p><p>'+(ds.closing||'This is only a first sketch. Every site I make is designed around one business, and yours would be too.')+'</p>';
       const fx=fxFor(st.sty);$('.sb-fx').innerHTML=fx.length?(ds.effectsText||'Effects for your site')+': '+fx.map(e=>'<a href="'+e.url+'">'+e.t+'</a>').join(', '):'';
-      if(!fb)fb=grabForm();if(fb)fill(fb,r.t+' | '+r.s);
+      fb=grabForm(st.ind);if(fb)fill(fb,r.t+' | '+r.s);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
       $('.sb-q').textContent=ds.resultHeading||'Here it is';$('.sb-hint').textContent=ds.resultHint||'Your site, built in three clicks';
       el.classList.add('sb-done');tour();el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
