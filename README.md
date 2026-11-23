@@ -12,14 +12,16 @@ Every option is a blog post, so you add, rename or remove options in Squarespace
 | `/site-builder-features` | feature | e.g. *Portfolio*; the laptop draws a matching section for portfolio, shop, services/bookings, blog, podcast, courses/memberships (anything else gets a generic section) | not used |
 | `/site-builder-styles` | style | e.g. *Luxury*; the laptop restyles for luxury, minimal, editorial, quirky, maximalist, colourful/bold | the result's first word, e.g. *Gilded* |
 
-Result title = **The [style word] [industry word]**. Options show in the order you published them (`data-order="newest"` to flip).
+Result title = **The [style word] [industry word]**.
+
+**Use your own designs:** give a feature post a **thumbnail image** (a screenshot of a real section you've designed, or an animated WebP) and the laptop shows that instead of the drawn version. Give a style post a thumbnail (the top of a real homepage in that style: nav + hero) and it replaces the laptop's top when that style is picked. Posts without a thumbnail keep the drawn version. Options show in the order you published them (`data-order="newest"` to flip).
 
 ## 2. Footer code injection
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.2.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.2.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.3.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v1.3.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it

@@ -67,6 +67,10 @@
 .sb-bar{height:.45em;border-radius:9px;background:color-mix(in srgb,currentColor 18%,transparent);overflow:hidden}
 .sb-bar i{display:block;height:100%;background:var(--acc)}
 .sb-card{padding:.9em;border-radius:var(--rad);border:1px solid color-mix(in srgb,currentColor 30%,transparent)}
+.sb-sec.sb-real{padding:0;transform:none!important;background:none!important}
+.sb-real img,.sb-real-hero img{display:block;width:100%;height:auto}
+.sb-real-hero{animation:sbIn .6s cubic-bezier(.2,.8,.2,1) both}
+.sb-has-hero .sb-nav,.sb-has-hero .sb-hero{display:none}
 .sb-foot-site{padding:2em 2.4em;opacity:.6;font-size:.85em}
 /* buttons */
 .sb-ctrl{display:flex;align-items:center;gap:.8em;margin-top:1.8em}
