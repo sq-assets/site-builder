@@ -28,6 +28,9 @@
 .sb-over .sb-drop{opacity:1}
 .sb-pulse{animation:sbPulse .5s ease}
 @keyframes sbPulse{40%{transform:scale(1.015)}}
+/* real laptop photo: the mini site sits over the photo's screen (data-screen = top right bottom left, in %) */
+.sb-photo-mode .sb-photo{display:block;width:100%;height:auto;pointer-events:none;-webkit-user-drag:none}
+.sb-photo-mode .sb-view{position:absolute;aspect-ratio:auto;border-radius:2px}
 /* the mini site */
 .sb-site{--bg:#fafafa;--ink:#8a8a8a;--acc:#cfcfcf;--hf:inherit;--bf:inherit;--hw:600;--rad:4px;--tt:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;background:var(--bg);color:var(--ink);font-family:var(--bf);font-size:clamp(6px,1.05vw,11px);line-height:1.35;transition:background .6s,color .6s;scroll-behavior:smooth}
 .sb-site::-webkit-scrollbar{display:none}

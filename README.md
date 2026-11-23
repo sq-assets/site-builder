@@ -56,6 +56,7 @@ To save each visitor's result with their email, use a Form Block with an extra t
 | `data-result-intro`, `data-result-heading`, `data-result-hint`, `data-finish-text` | Result wording |
 | `data-cta-text`, `data-cta-url` | The result button |
 | `data-font`, `data-option-size`, `data-option-size-mobile` | Font for the options (e.g. `aktiv-grotesk`) and their size (`.7rem`, phones `.66rem`) |
+| `data-laptop-image`, `data-screen` | Use your own laptop photo (front-on, blank screen) and where its screen is, as `top right bottom left` in % of the image (e.g. `6 12 14 12`) |
 | `data-uppercase` | `on` (default) = options in capitals; `off` = as typed |
 | `data-hover-color` | Hover / picked colour for options and buttons (`#E8A6D6`) |
 | `data-color`, `data-background` | Your ink and paper colours (buttons, pills) |
