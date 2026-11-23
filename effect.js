@@ -73,7 +73,7 @@
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||'What do you do?',ds.question2||'What does your site need?',ds.question3||'Pick your vibe'];
     const touch=matchMedia('(pointer:coarse)').matches;
-    const H=[ds.hint1||(touch?'Tap one to add it':'Drag one into the laptop, or click it'),ds.hint2||'Add as many as you like',ds.hint3||'Pick the one that feels most like you'];
+    const H=[ds.hint1||(touch?'Tap one to pin it to your moodboard':(board?'Drag one onto your moodboard, or click it':'Drag one into the laptop, or click it')),ds.hint2||'Add as many as you like',ds.hint3||'Pick the one that feels most like you'];
     const board=ds.stage!=='laptop';
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
@@ -116,12 +116,12 @@
     const show=ds.laptop!=='build';
     const bump=()=>{lap.classList.remove('sb-pulse');void lap.offsetWidth;lap.classList.add('sb-pulse')};
     /* moodboard: picks pin onto a board with your effects; everything can be dragged around */
-    const bd=board?$('.sb-board-in'):null;let zTop=5,lastInd=null,lastSty=null;
+    const bd=board?$('.sb-board-in'):null;let zTop=20,lastInd=null,lastSty=null;
     const SL={img:[[3,7,-6],[59,5,5],[6,55,4],[61,53,-5]],ft:[[6,38,-5],[64,33,6],[36,76,-3],[5,84,4],[68,82,-6],[40,10,4]]};
     const pin=(key,cls,html,at,dl)=>{const o=bd.querySelector('[data-k="'+CSS.escape(key)+'"]');o&&o.remove();const p=document.createElement('div');p.className='sb-pin '+cls;p.dataset.k=key;
       p.style.cssText='left:'+at[0]+'%;top:'+at[1]+'%;--r:'+at[2]+'deg;z-index:'+(++zTop)+';animation-delay:'+(dl||0)+'ms';p.innerHTML=html;bd.append(p);return p};
     const unpin=p=>{if(!p||p.classList.contains('sb-out'))return;p.classList.add('sb-out');setTimeout(()=>p.remove(),450)};
-    const pinImgs=list=>{bd.querySelectorAll('.sb-pimg').forEach(unpin);list.slice(0,4).forEach((u,i)=>pin('i'+Math.random(),'sb-pimg','<img src="'+u+'" alt="" draggable="false">',SL.img[i],120+i*130))};
+    const pinImgs=list=>{bd.querySelectorAll('.sb-pimg').forEach(unpin);list.slice(0,4).forEach((u,i)=>pin('i'+Math.random(),'sb-pimg','<img src="'+u+'" alt="" draggable="false">',SL.img[i],120+i*130).style.zIndex=1+i)};
     const boardSync=()=>{if(!bd)return;const E=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
       if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[27,30,-7]):unpin(bd.querySelector('[data-k="ind"]'))}
       const want=st.feats.map(f=>'f:'+f.t);bd.querySelectorAll('.sb-pft').forEach(p=>want.includes(p.dataset.k)||unpin(p));
