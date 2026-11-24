@@ -81,6 +81,9 @@
     const seen=new Set(),PICS=(MB.length?MB:FX.concat(S.flatMap(o=>[o.img].concat(o.imgs.map(x=>x.src)).filter(Boolean).map(u=>({t:'',img:u,tags:[kw(o.t)]})))))
       .filter(x=>x.img&&!seen.has(x.img)&&seen.add(x.img)).sort(()=>Math.random()-.5).slice(0,+(ds.pinboardMax||18)).map(x=>Object.assign({pic:1},x));
     const pics=ds.stage!=='laptop'&&ds.pinboard==='on'&&PICS.length>=4;
+    /* features in a sensible order: the basics first (data-feature-order="about,services,..." to change) */
+    if(ds.featureOrder!=='off'){const ord=(ds.featureOrder||'about|bio,service|booking,portfolio|gallery,enquir|contact|form,testimonial|review,shop|store|product,blog|journal,email|newsletter|sign,team|staff,faq,course|member,podcast').split(',').map(k=>new RegExp(k.trim(),'i'));
+      const rank=o=>{const i=ord.findIndex(r=>r.test(o.t));return i<0?ord.length:i};F.sort((a,b)=>rank(a)-rank(b))}
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||(board?'Pick your industry':'What do you do?'),ds.question2||(board?'What does your website need?':'What does your site need?'),ds.question3||(board?'What\'s your style?':'Pick your vibe')];
     const touch=matchMedia('(pointer:coarse)').matches;
