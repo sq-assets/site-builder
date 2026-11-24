@@ -366,3 +366,4 @@
 .sb-binder .sb-ctrl button{font-size:.64rem;padding:.75em 1.4em}
 @media (max-width:767px){.site-builder.sb-caps .sb-binder .sb-chip{font-size:.6rem;padding:.5em .9em;letter-spacing:.07em}.sb-binder .sb-tray{gap:.3em .35em}}
 .site-builder .sb-hint{margin:.55em 0 0!important;font-size:clamp(.85rem,1vw,.95rem)!important;line-height:1.45!important;letter-spacing:.005em!important;opacity:.8;max-width:30em}
+.sb-binder .sb-ctrl button{white-space:nowrap}
