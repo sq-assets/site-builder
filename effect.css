@@ -319,3 +319,6 @@
 .sb-pnote{padding:1em 1.1em 1.1em}.sb-pnote b{font-size:.66rem;margin-bottom:.6em}.sb-pnote ul{gap:.35em}.sb-pnote li{font-size:.7rem}
 .sb-pind span{font-size:clamp(1rem,1.9vw,1.8rem)}
 @media (max-width:767px){.sb-binder .sb-board-in{aspect-ratio:4/5}}
+.sb-ptext{z-index:30!important;padding:.2em .4em;font-size:clamp(.85rem,1.3vw,1.15rem);letter-spacing:.02em;white-space:nowrap;animation:none}
+.sb-ptext span{display:inline-block;min-height:1.2em}
+.sb-ptext span.sb-typing::after{content:"▌";animation:sbBlink .7s steps(1) infinite}
