@@ -82,7 +82,7 @@
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
     if(pics){Q[2]=ds.question3||'What catches your eye?';H[2]=ds.hint3||'Save the images that speak to you';N[2]=ds.step3||'Inspiration'}
-    el.innerHTML=(board&&ds.intro!=='off'?'<p class="sb-intro">'+(ds.intro||'Three quick steps to a moodboard for your future site. There are no wrong answers, just pick what feels like you, and I\'ll turn it into a profile with ideas for your bespoke site.')+'</p>':'')+'<div class="sb-head"><div><small class="sb-stepno"></small><h3 class="sb-q"></h3><p class="sb-hint"></p></div><div class="sb-steps">'+N.map((n,i)=>'<span>'+(i+1)+' '+n+'</span>').join('')+'</div></div>'+
+    el.innerHTML='<div class="sb-head"><div>'+(board&&ds.intro!=='off'?'<p class="sb-intro">'+(ds.intro||'Three quick steps to a moodboard for your future site. There are no wrong answers, just pick what feels like you, and I\'ll turn it into a profile with ideas for your bespoke site.')+'</p>':'')+'<small class="sb-stepno"></small><h3 class="sb-q"></h3><p class="sb-hint"></p></div><div class="sb-steps">'+N.map((n,i)=>'<span>'+(i+1)+' '+n+'</span>').join('')+'</div></div>'+
       '<div class="sb-stage"><div class="sb-side"><div class="sb-tray"></div><div class="sb-ctrl"><button class="sb-back" type="button">Back</button><button class="sb-next" type="button" disabled>Next</button></div></div><div class="sb-result"><small>'+(ds.resultIntro||'Your recap')+'</small><h3 class="sb-title"></h3><p class="sb-sum"></p><div class="sb-blurb"></div><p class="sb-fx"></p>'+
       '<div class="sb-ctas"><a class="sb-cta" href="'+(ds.ctaUrl||'/contact')+'">'+(ds.ctaText||'Get your starting-point quote')+'</a>'+(ds.opinion==='off'?'':'<a class="sb-cta sb-cta2" href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+'</div>'+
       '<div class="sb-form"></div>'+
@@ -97,7 +97,7 @@
       set('',ds.boardImage);set('-m',ds.boardImageMobile||ds.boardImage);
       const ar=v=>v.split(/[ ,]+/).map(x=>parseFloat(x)+'%').join(' ');lap.style.setProperty('--sb-ba',ar(ds.boardArea||'8 6 8 10'));lap.style.setProperty('--sb-ba-m',ar(ds.boardAreaMobile||ds.boardArea||'10 8 6 8'))}
     /* binder background: questions on the left page, moodboard on the right; on mobile it turns so the rings run across the top */
-    if(board&&ds.boardBackground){const wr=document.createElement('div');wr.className='sb-binder';el.prepend(wr);wr.append(...[el.querySelector('.sb-intro'),el.querySelector('.sb-head'),el.querySelector('.sb-stage')].filter(Boolean));
+    if(board&&ds.boardBackground){const wr=document.createElement('div');wr.className='sb-binder';el.prepend(wr);wr.append(el.querySelector('.sb-head'),el.querySelector('.sb-stage'));
       const sec=el.closest('section'),host=(sec&&sec.querySelector('.section-background'))||null,bg=document.createElement('div');bg.className='sb-binder-bg';
       if(host)host.append(bg);else{wr.classList.add('sb-own');wr.prepend(bg)}
       const box=host?sec:wr,sp=+(ds.spine||35)/100,r0=+(ds.ringStart||30.5)/100,r1=+(ds.ringEnd||39.2)/100,ratio=+(ds.boardBackgroundRatio||.5625);

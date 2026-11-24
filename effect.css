@@ -282,7 +282,8 @@
 .sb-has-bfont .sb-pind span,.sb-has-bfont .sb-psty em{letter-spacing:-.03em}
 
 /* guidance + industry images + must-haves note */
-.sb-intro{margin:0 0 clamp(18px,2.4vw,32px)!important;max-width:34em;font-size:clamp(.95rem,1.2vw,1.1rem);line-height:1.5}
+.sb-intro{margin:0 0 clamp(18px,2.4vw,30px)!important;max-width:30em;font-size:clamp(.9rem,1.1vw,1.02rem);line-height:1.5}
+.sb-binder .sb-steps{align-self:end}
 .sb-stepno{display:block;margin-bottom:.7em;font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
 .sb-board-hint{opacity:.75;font-size:.7rem}
 .sb-next.sb-ready{box-shadow:0 0 22px 3px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
