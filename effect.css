@@ -282,7 +282,10 @@
 @media (max-width:767px){
   .sb-binder-bg::before{inset:auto;top:var(--sb-rtop,0);left:0;width:var(--sb-plen);height:var(--sb-bgh);transform-origin:0 0;transform:rotate(90deg) translateY(-100%);background-size:var(--sb-bgw) auto;background-position:var(--sb-bgx) center;-webkit-mask-image:linear-gradient(to right,#000 70%,transparent);mask-image:linear-gradient(to right,#000 70%,transparent)}
   .sb-binder{grid-template-columns:1fr;row-gap:14px}.sb-binder .sb-head>div:first-child,.sb-binder .sb-steps,.sb-binder .sb-board,.sb-binder .sb-side{grid-column:1;grid-row:auto;margin-top:0}
-  .sb-binder .sb-head>div:first-child{order:1}.sb-binder .sb-steps{order:2}.sb-binder .sb-board{order:3}.sb-binder .sb-side{order:4}
+  .sb-binder .sb-head>div:first-child{order:1}.sb-binder .sb-side{order:2;margin-top:0}.sb-binder .sb-board{order:3;margin-top:10px}
+  .sb-binder .sb-steps,.sb-binder .sb-hint{display:none}
+  .sb-binder .sb-board-t{display:none}
+  .sb-binder .sb-board-hint{position:static;display:block;max-width:none;text-align:left;margin:0 0 10px!important;font-size:.66rem;opacity:.85}
 }
 /* moodboard font (data-board-font) */
 .sb-has-bfont .sb-board-in,.sb-has-bfont .sb-board-in *{font-family:"SB Board",ui-monospace,monospace!important}
