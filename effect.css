@@ -266,7 +266,13 @@
 .sb-binder.sb-own .sb-binder-bg{z-index:-1}
 .sb-binder-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:var(--sb-paperc,#edeae7)}
 .sb-binder-bg::before{content:"";position:absolute;inset:0;background:var(--sb-bbg) var(--sb-spine,35%) center/cover no-repeat}
-.sb-binder .sb-stage,.sb-binder .sb-head{display:grid;grid-template-columns:var(--sb-col,28%) 1fr;column-gap:var(--sb-gap,7vw);align-items:start}
+.sb-binder{display:grid;grid-template-columns:var(--sb-col,28%) 1fr;column-gap:var(--sb-gap,7vw);align-items:start}
+.sb-binder .sb-head,.sb-binder .sb-stage{display:contents}
+.sb-binder .sb-head>div:first-child{grid-column:1;grid-row:1}
+.sb-binder .sb-side{grid-column:1;grid-row:2;margin-top:clamp(14px,2vw,24px)}
+.sb-binder .sb-steps{grid-column:2;grid-row:1;align-self:start;position:relative;z-index:3}
+.sb-binder .sb-board{grid-column:2;grid-row:1/span 2;align-self:start;margin-top:clamp(56px,6vw,80px)}
+.sb-binder .sb-result{display:none}
 .sb-binder .sb-steps{justify-self:start}
 .sb-binder .sb-board{max-width:none}
 .sb-binder .sb-board-in{background:none;border:0;border-radius:18px;overflow:visible}
@@ -275,7 +281,8 @@
 .sb-binder .sb-board-t{left:0;top:0}
 @media (max-width:767px){
   .sb-binder-bg::before{inset:auto;top:var(--sb-rtop,0);left:0;width:var(--sb-plen);height:var(--sb-bgh);transform-origin:0 0;transform:rotate(90deg) translateY(-100%);background-size:var(--sb-bgw) auto;background-position:var(--sb-bgx) center;-webkit-mask-image:linear-gradient(to right,#000 70%,transparent);mask-image:linear-gradient(to right,#000 70%,transparent)}
-  .sb-binder .sb-stage,.sb-binder .sb-head{grid-template-columns:1fr;row-gap:14px}
+  .sb-binder{grid-template-columns:1fr;row-gap:14px}.sb-binder .sb-head>div:first-child,.sb-binder .sb-steps,.sb-binder .sb-board,.sb-binder .sb-side{grid-column:1;grid-row:auto;margin-top:0}
+  .sb-binder .sb-head>div:first-child{order:1}.sb-binder .sb-steps{order:2}.sb-binder .sb-board{order:3}.sb-binder .sb-side{order:4}
 }
 /* moodboard font (data-board-font) */
 .sb-has-bfont .sb-board-in,.sb-has-bfont .sb-board-in *{font-family:"SB Board",ui-monospace,monospace!important}
@@ -283,7 +290,6 @@
 
 /* guidance + industry images + must-haves note */
 .sb-intro{margin:0 0 clamp(18px,2.4vw,30px)!important;max-width:30em;font-size:clamp(.9rem,1.1vw,1.02rem);line-height:1.5}
-.sb-binder .sb-steps{align-self:end}
 .sb-stepno{display:block;margin-bottom:.7em;font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
 .sb-board-hint{opacity:.75;font-size:.7rem}
 .sb-next.sb-ready{box-shadow:0 0 22px 3px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
