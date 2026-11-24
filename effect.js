@@ -98,10 +98,15 @@
       const ar=v=>v.split(/[ ,]+/).map(x=>parseFloat(x)+'%').join(' ');lap.style.setProperty('--sb-ba',ar(ds.boardArea||'8 6 8 10'));lap.style.setProperty('--sb-ba-m',ar(ds.boardAreaMobile||ds.boardArea||'10 8 6 8'))}
     /* binder background: questions on the left page, moodboard on the right; on mobile it turns so the rings run across the top */
     if(board&&ds.boardBackground){const wr=document.createElement('div');wr.className='sb-binder';el.prepend(wr);wr.append(el.querySelector('.sb-head'),el.querySelector('.sb-stage'));
-      const sp=+(ds.spine||35)/100,r0=+(ds.ringStart||30.5)/100,r1=+(ds.ringEnd||39.2)/100,ratio=+(ds.boardBackgroundRatio||.5625);
-      wr.style.setProperty('--sb-bbg','url("'+ds.boardBackground+'")');wr.style.setProperty('--sb-spine',sp*100+'%');wr.style.setProperty('--sb-spinev',sp*100+'vw');if(ds.paper)wr.style.setProperty('--sb-paperc',ds.paper);
-      const fit=()=>{const W=wr.clientWidth,bgw=Math.max(1.8*W,W/ratio*1.02),v=(k,x)=>wr.style.setProperty(k,x+'px');v('--sb-bgw',bgw);v('--sb-bgx',-(r0-.01)*bgw);v('--sb-ringpad',(r1-r0+.02)*bgw);v('--sb-bgh',W);v('--sb-plen',(1-r0+.01)*bgw)};
-      fit();addEventListener('resize',fit)}
+      const sec=el.closest('section'),host=(sec&&sec.querySelector('.section-background'))||null,bg=document.createElement('div');bg.className='sb-binder-bg';
+      if(host)host.append(bg);else{wr.classList.add('sb-own');wr.prepend(bg)}
+      const box=host?sec:wr,sp=+(ds.spine||35)/100,r0=+(ds.ringStart||30.5)/100,r1=+(ds.ringEnd||39.2)/100,ratio=+(ds.boardBackgroundRatio||.5625);
+      bg.style.setProperty('--sb-bbg','url("'+ds.boardBackground+'")');bg.style.setProperty('--sb-spine',sp*100+'%');if(ds.paper)bg.style.setProperty('--sb-paperc',ds.paper);
+      const fit=()=>{const B=box.getBoundingClientRect(),R=wr.getBoundingClientRect(),W=B.width,bgw=Math.max(1.8*W,W/ratio*1.02),v=(e,k,x)=>e.style.setProperty(k,x+'px'),gap=Math.max(28,W*.07);
+        v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-.01)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
+        v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
+        wr.style.paddingTop=innerWidth<768?Math.max(0,(r1-r0+.02)*bgw+14-(R.top-B.top))+'px':''};
+      fit();addEventListener('resize',fit);setTimeout(fit,600)}
     if(board&&ds.boardFont){const f=document.createElement('style');f.textContent='@font-face{font-family:"SB Board";src:url("'+ds.boardFont+'");font-display:swap}';document.head.append(f);el.classList.add('sb-has-bfont')}
     const st={step:0,ind:null,feats:[],sty:null,saved:[]};
     const lists=[I,F,pics?PICS:S];
