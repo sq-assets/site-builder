@@ -149,21 +149,21 @@
     const pinImgs=list=>{bd.querySelectorAll('.sb-pimg').forEach(unpin);list.slice(0,4).forEach((u,i)=>pin('i'+Math.random(),'sb-pimg','<img src="'+u+'" alt="" draggable="false">',SL.img[i],120+i*130).style.zIndex=1+i)};
     const styleFrom=()=>{if(!st.saved.length)return null;let best=null,n=0;S.forEach(o=>{const k=kw(o.t),w=kw(o.w||'');const c=st.saved.filter(p=>p.tags.some(t=>(k&&t.includes(k))||(w&&t.includes(w)))).length;if(c>n){n=c;best=o}});return best||st.sty||S[0]};
     const SV=[[4,8,-6],[58,6,5],[33,38,-3],[6,56,4],[62,52,-5],[30,3,3],[38,68,-4],[70,26,6]];
-    const SLI=[[42,3,5],[70,6,-4],[44,28,3],[71,31,-5]],SLF=[[3,62,-3],[35,67,4],[67,60,-2]];
+    const SLI=[[44,9,5],[71,12,-4],[46,32,3],[72,35,-5]],SLF=[[3,70,-3],[35,74,4],[67,68,-2]];
     const indImgs=()=>{const o=st.ind;if(!o)return[];let a=o.imgs.length?o.imgs:(o.img?[{src:o.img,key:''}]:[]);
       if(st.sty){const k=kw(st.sty.t),w=kw(st.sty.w||''),m=a.filter(x=>(k&&x.key.includes(k))||(w&&x.key.includes(w)));if(m.length)a=m.concat(a.filter(x=>!m.includes(x)))}
       return a.slice(0,+(ds.industryImages||4)).map(x=>x.src)};
     const typeOut=(li,t)=>{let i=0;li.classList.add('sb-typing');const tick=()=>{if(!li.isConnected)return;li.textContent=t.slice(0,++i);if(i<t.length)setTimeout(tick,40+Math.random()*60);else li.classList.remove('sb-typing')};tick()};
     let lastII='';
     const boardSync=()=>{if(!bd)return;const E=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),img=u=>'<img src="'+u+'" alt="" draggable="false">';
-      if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[3,3,-5]):unpin(bd.querySelector('[data-k="ind"]'))}
+      if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[3,8,-5]):unpin(bd.querySelector('[data-k="ind"]'))}
       if(st.sty!==lastSty){lastSty=st.sty;bd.querySelectorAll('.sb-pfx').forEach(unpin);
         if(st.sty){const w=(st.sty.w||'').trim();if(pics||ds.styleSticker==='on')pin('sty','sb-psty',pics?'<span>'+(ds.vibeLabel||'Your vibe')+'</span><em>'+E(w&&w.length<22?w:st.sty.t)+'</em>':'<span>'+E(st.sty.t)+'</span>'+(w&&w.length<22?'<em>'+E(w)+'</em>':''),[5,68,-6]);
           if(!pics)fxFor(st.sty).slice(0,+(ds.styleEffects||3)).forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),SLF[i],250+i*160).style.zIndex=10+i)}
         else unpin(bd.querySelector('[data-k="sty"]'))}
       const ii=indImgs(),ik=ii.join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((u,i)=>pin('n'+i+Math.random(),'sb-pimg sb-pii',img(u),SLI[i],180+i*130).style.zIndex=2+i)}
       let note=bd.querySelector('.sb-pnote:not(.sb-out)');
-      if(st.feats.length){if(!note)note=pin('note','sb-pnote'+(ds.noteImage?' sb-paper':''),'<b>'+(ds.mustTitle||'Must haves')+'</b><ul></ul>',[5,17,-3]);if(ds.noteImage)note.style.backgroundImage='url("'+ds.noteImage+'")';const ul=note.querySelector('ul'),have=[...ul.children].map(li=>li.dataset.t);
+      if(st.feats.length){if(!note)note=pin('note','sb-pnote'+(ds.noteImage?' sb-paper':''),'<b>'+(ds.mustTitle||'Must haves')+'</b><ul></ul>',[5,22,-3]);if(ds.noteImage)note.style.backgroundImage='url("'+ds.noteImage+'")';const ul=note.querySelector('ul'),have=[...ul.children].map(li=>li.dataset.t);
         [...ul.children].forEach(li=>st.feats.some(f=>f.t===li.dataset.t)||li.remove());st.feats.forEach(f=>{if(!have.includes(f.t)){const li=document.createElement('li');li.dataset.t=f.t;ul.append(li);typeOut(li,f.t)}})}
       else if(note)unpin(note);
       if(pics){const keep=st.saved.map(p=>'m:'+p.img);bd.querySelectorAll('.sb-psave').forEach(p=>keep.includes(p.dataset.k)||unpin(p));

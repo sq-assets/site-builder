@@ -315,3 +315,7 @@
 .sb-pnote.sb-paper b{border-bottom-color:transparent}
 /* real pins (data-pin-image) instead of tape */
 .sb-has-pinimg .sb-pimg::before,.sb-has-pinimg .sb-pnote::before,.sb-has-pinimg .sb-pft::before{width:var(--sb-pin-size,38px);height:var(--sb-pin-size,38px);top:calc(var(--sb-pin-size,38px) * -.45);background:var(--sb-pinimg) center/contain no-repeat;transform:translateX(-50%) rotate(calc(var(--r,0deg) * -1));z-index:2;filter:drop-shadow(2px 4px 3px rgba(0,0,0,.25))}
+.sb-binder .sb-board-in{aspect-ratio:1/1}
+.sb-pnote{padding:1em 1.1em 1.1em}.sb-pnote b{font-size:.66rem;margin-bottom:.6em}.sb-pnote ul{gap:.35em}.sb-pnote li{font-size:.7rem}
+.sb-pind span{font-size:clamp(1rem,1.9vw,1.8rem)}
+@media (max-width:767px){.sb-binder .sb-board-in{aspect-ratio:4/5}}
