@@ -356,3 +356,7 @@
 .sb-binder{grid-template-rows:auto 1fr}
 .sb-binder .sb-side{margin-top:clamp(8px,1vw,14px)}
 @media (max-width:767px){.sb-binder{grid-template-rows:none}}
+.sb-binder .sb-side{margin-top:0;padding-top:clamp(12px,1.4vw,18px)}
+.sb-binder .sb-tray{gap:.45em .5em}
+.site-builder.sb-caps .sb-binder .sb-chip{padding:.62em 1.2em}
+@media (max-width:767px){.sb-binder .sb-side{padding-top:10px}.sb-binder .sb-tray{gap:.35em}.site-builder.sb-caps .sb-binder .sb-chip{padding:.55em 1em}}
