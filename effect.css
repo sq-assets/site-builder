@@ -342,3 +342,5 @@
 .sb-pnote.sb-paper ul{margin:0;padding:0;display:block}
 .sb-pnote.sb-paper li{min-height:0;font-size:4.9cqw;letter-spacing:.04em}
 .sb-pnote.sb-paper li::before{margin-right:.35em}
+.sb-board-t:empty{display:none}
+.sb-board-hint{left:0;right:0;max-width:none;text-align:left}
