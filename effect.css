@@ -406,3 +406,4 @@
   .sb-binder.sb-book .sb-ptext{font-size:clamp(1rem,1.5vw,1.35rem)}
   .sb-binder.sb-book .sb-board-hint{font-size:.66rem}
 }
+@media (min-width:768px){.sb-binder.sb-book .sb-board-hint{top:-1.9em}}
