@@ -65,7 +65,7 @@
 
   const init=async el=>{
     if(el.dataset.sbOn)return;el.dataset.sbOn=1;
-    const ds=el.dataset,order=ds.order||'oldest';
+    const ds=el.dataset,order=ds.order||'oldest';const board=ds.stage!=='laptop';
     const css=(k,v)=>v&&el.style.setProperty(k,v);css('--sb-ink',ds.color);css('--sb-paper',ds.background);css('--sb-accent',ds.accent);css('--sb-font',ds.font);css('--sb-hover',ds.hoverColor);css('--sb-glow',ds.glowColor);if(ds.glow!=='off')el.classList.add('sb-glow');css('--sb-size',ds.optionSize);css('--sb-size-m',ds.optionSizeMobile||ds.optionSize);
     if(ds.fonts!=='off')fonts();if(ds.uppercase!=='off')el.classList.add('sb-caps');
     el.innerHTML='<p class="sb-loading">Loading…</p>';
@@ -77,7 +77,7 @@
     const pics=ds.stage!=='laptop'&&ds.pinboard==='on'&&PICS.length>=4;
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||(board?'Pick your industry':'What do you do?'),ds.question2||(board?'What does your website need?':'What does your site need?'),ds.question3||(board?'What\'s your style?':'Pick your vibe')];
-    const touch=matchMedia('(pointer:coarse)').matches;const board=ds.stage!=='laptop';
+    const touch=matchMedia('(pointer:coarse)').matches;
     const H=[ds.hint1||(touch?'Tap your industry to pin it to your moodboard.':(board?'Click your industry, or drag it onto your moodboard.':'Drag one into the laptop, or click it')),ds.hint2||(board?'Pick as many as you need. Each one is added to your must haves.':'Add as many as you like'),ds.hint3||(board?'Pick the style that feels most like you, and I\'ll pin some of my work in that style.':'Pick the one that feels most like you')];
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
