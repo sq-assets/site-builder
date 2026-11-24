@@ -325,10 +325,10 @@
 .sb-pnote.sb-paper::before{content:none}
 .sb-pnote.sb-paper b{margin:0;padding:10cqw 8cqw 0 14cqw;border:0;font-size:6cqw;line-height:10cqw;letter-spacing:.16em}
 .sb-pnote.sb-paper ul{margin-top:1.25cqw;padding:0 8cqw 0 14cqw;gap:0}
-.sb-pnote.sb-paper li{box-sizing:border-box;height:13.24cqw;display:flex;align-items:flex-end;padding-bottom:.9cqw;min-height:0;font-size:6.2cqw;line-height:1;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-pnote.sb-paper li{box-sizing:border-box;height:13.24cqw;display:block;padding-top:6.6cqw;min-height:0;font-size:5.3cqw;line-height:5.9cqw;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* real drawing pins (data-note-pin, data-industry-pin) */
 .sb-has-notepin .sb-pnote::after,.sb-has-indpin .sb-pind::after{content:"";position:absolute;left:50%;pointer-events:none;background:center/contain no-repeat;filter:drop-shadow(3px 6px 4px rgba(0,0,0,.28));animation:sbPinPress .45s cubic-bezier(.3,1.6,.5,1) .55s backwards}
-.sb-has-notepin .sb-pnote::after{background-image:var(--sb-notepin);width:24%;aspect-ratio:540/675;top:-9%;transform:translateX(-50%);z-index:2}
+.sb-has-notepin .sb-pnote::after{background-image:var(--sb-notepin);width:24%;aspect-ratio:540/675;top:-9%;left:80%;transform:translateX(-50%);z-index:2}
 .sb-has-notepin .sb-pnote:not(.sb-paper)::after{width:46px;top:-26px}
 .sb-has-notepin .sb-pnote:not(.sb-paper)::before{content:none}
 .sb-has-indpin .sb-pind::after{background-image:var(--sb-indpin);width:clamp(38px,4.4vw,56px);aspect-ratio:540/675;top:clamp(-34px,-2.6vw,-24px);left:12%;transform:translateX(-50%)}
