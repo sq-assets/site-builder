@@ -309,3 +309,5 @@
 .sb-binder .sb-board-in{margin-top:8px}
 .sb-title-main{margin:0 0 .35em!important;text-transform:uppercase}
 .sb-title-main em{font-style:italic;text-transform:lowercase}
+.sb-stepno:empty{display:none}
+.sb-binder .sb-q{text-transform:uppercase}

@@ -111,7 +111,7 @@
     const st={step:0,ind:null,feats:[],sty:null,saved:[]};
     const lists=[I,F,pics?PICS:S];
     const render=()=>{
-      $('.sb-q').textContent=Q[st.step];$('.sb-stepno').textContent=(ds.stepText||'Step {n} of 3').replace('{n}',st.step+1);$('.sb-hint').textContent=H[st.step];
+      $('.sb-q').textContent=(board?(st.step+1)+'. ':'')+Q[st.step];$('.sb-stepno').textContent=ds.stepText?ds.stepText.replace('{n}',st.step+1):'';$('.sb-hint').textContent=H[st.step];
       el.querySelectorAll('.sb-steps span').forEach((s,i)=>{s.classList.toggle('on',i===st.step);s.classList.toggle('done',i<st.step)});
       tray.innerHTML='';
       tray.classList.toggle('sb-tray-img',!!lists[st.step][0].pic);
