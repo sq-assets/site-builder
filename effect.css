@@ -360,3 +360,8 @@
 .sb-binder .sb-tray{gap:.45em .5em}
 .site-builder.sb-caps .sb-binder .sb-chip{padding:.62em 1.2em}
 @media (max-width:767px){.sb-binder .sb-side{padding-top:10px}.sb-binder .sb-tray{gap:.35em}.site-builder.sb-caps .sb-binder .sb-chip{padding:.55em 1em}}
+/* compact options */
+.site-builder.sb-caps .sb-binder .sb-chip{font-size:.64rem;padding:.55em 1.05em;letter-spacing:.09em;line-height:1.2}
+.sb-binder .sb-tray{gap:.4em .45em}
+.sb-binder .sb-ctrl button{font-size:.64rem;padding:.75em 1.4em}
+@media (max-width:767px){.site-builder.sb-caps .sb-binder .sb-chip{font-size:.6rem;padding:.5em .9em;letter-spacing:.07em}.sb-binder .sb-tray{gap:.3em .35em}}
