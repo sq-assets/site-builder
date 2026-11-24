@@ -165,7 +165,7 @@
     const styleFrom=()=>{if(!st.saved.length)return null;let best=null,n=0;S.forEach(o=>{const k=kw(o.t),w=kw(o.w||'');const c=st.saved.filter(p=>p.tags.some(t=>(k&&t.includes(k))||(w&&t.includes(w)))).length;if(c>n){n=c;best=o}});return best||st.sty||S[0]};
     const SV=[[4,8,-6],[58,6,5],[33,38,-3],[6,56,4],[62,52,-5],[30,3,3],[38,68,-4],[70,26,6]];
     const fxb=bd?document.createElement('div'):null;if(fxb){fxb.className='sb-fxboard';$('.sb-side').append(fxb)}
-    const fxHost=()=>fxb&&innerWidth>=768&&el.querySelector('.sb-book')?fxb:bd;const SLF2=[[0,20,-3],[30,36,4],[56,14,-2]];
+    const fxHost=()=>fxb&&innerWidth>=768&&el.querySelector('.sb-book')?fxb:bd;const jit=(a)=>a.map(([x,y,r])=>[x+Math.random()*6-3,y+Math.random()*5-2.5,r+Math.random()*3-1.5]),SLF2=[[0,13,-3],[45,30,4],[5,58,-2]];
     const SLI=[[44,9,5],[71,12,-4],[46,32,3],[72,35,-5]],SLF=[[3,70,-3],[35,74,4],[67,68,-2]];
     const indImgs=()=>{const o=st.ind;if(!o)return[];let a=o.imgs.length?o.imgs:(o.img?[{src:o.img,key:''}]:[]);
       if(st.sty){const k=kw(st.sty.t),w=kw(st.sty.w||''),m=a.filter(x=>(k&&x.key.includes(k))||(w&&x.key.includes(w)));if(m.length)a=m.concat(a.filter(x=>!m.includes(x)))}
@@ -176,8 +176,8 @@
       if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[3,8,-5]):unpin(bd.querySelector('[data-k="ind"]'))}
       if(st.sty!==lastSty){lastSty=st.sty;el.querySelectorAll('.sb-pfx').forEach(unpin);
         if(st.sty){const w=(st.sty.w||'').trim();if(pics||ds.styleSticker==='on')pin('sty','sb-psty',pics?'<span>'+(ds.vibeLabel||'Your vibe')+'</span><em>'+E(w&&w.length<22?w:st.sty.t)+'</em>':'<span>'+E(st.sty.t)+'</span>'+(w&&w.length<22?'<em>'+E(w)+'</em>':''),[5,68,-6]);
-          if(!pics){const fx=fxFor(st.sty).slice(0,+(ds.styleEffects||3)),fh=fxHost(),sl=fh===bd?SLF:SLF2;fx.forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),sl[i],250+i*160,fh).style.zIndex=10+i);
-            if(fx.length&&ds.fxNote!=='off'){const tn=pin('fxnote','sb-pfx sb-ptext','<span></span>',fh===bd?[36,60,-3]:[4,4,-2],0,fh);setTimeout(()=>typeOut(tn.querySelector('span'),ds.fxNote||'something like this?'),250+fx.length*160+500)}}}
+          if(!pics){const fx=fxFor(st.sty).slice(0,+(ds.styleEffects||3)),fh=fxHost(),sl=fh===bd?SLF:jit(SLF2);fx.forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),sl[i],250+i*160,fh).style.zIndex=10+i);
+            if(fx.length&&ds.fxNote!=='off'){const tn=pin('fxnote','sb-pfx sb-ptext','<span></span>',fh===bd?[36,60,-3]:[3,1,-2],0,fh);setTimeout(()=>typeOut(tn.querySelector('span'),ds.fxNote||'something like this?'),250+fx.length*160+500)}}}
         else unpin(bd.querySelector('[data-k="sty"]'))}
       const ii=indImgs(),ik=ii.map(x=>x.src).join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((x,i)=>{const obj=/\.png(\?|$)|^data:image\/(png|webp)/i.test(x.src)||/cutout|polaroid|print/.test(x.key),pr=/polaroid|print/.test(x.key);pin('n'+i+Math.random(),'sb-pimg sb-pii'+(obj?' sb-obj':'')+(pr?' sb-print':''),img(x.src),SLI[i],180+i*130).style.zIndex=2+i})}
       let note=bd.querySelector('.sb-pnote:not(.sb-out)');
