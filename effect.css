@@ -275,7 +275,7 @@
 .sb-binder .sb-board.sb-pulse .sb-board-in{animation:none}
 .sb-binder .sb-board-t{left:0;top:0}
 @media (max-width:767px){
-  .sb-binder-bg::before{inset:auto;top:0;left:0;width:var(--sb-plen);height:var(--sb-bgh);transform-origin:0 0;transform:rotate(90deg) translateY(-100%);background-size:var(--sb-bgw) auto;background-position:var(--sb-bgx) center;-webkit-mask-image:linear-gradient(to right,#000 70%,transparent);mask-image:linear-gradient(to right,#000 70%,transparent)}
+  .sb-binder-bg::before{inset:auto;top:var(--sb-rtop,0);left:0;width:var(--sb-plen);height:var(--sb-bgh);transform-origin:0 0;transform:rotate(90deg) translateY(-100%);background-size:var(--sb-bgw) auto;background-position:var(--sb-bgx) center;-webkit-mask-image:linear-gradient(to right,#000 70%,transparent);mask-image:linear-gradient(to right,#000 70%,transparent)}
   .sb-binder .sb-stage,.sb-binder .sb-head{grid-template-columns:1fr;row-gap:14px}
 }
 /* moodboard font (data-board-font) */

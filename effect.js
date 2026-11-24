@@ -105,7 +105,7 @@
       const fit=()=>{const B=box.getBoundingClientRect(),R=wr.getBoundingClientRect(),W=B.width,bgw=Math.max(1.8*W,W/ratio*1.02),v=(e,k,x)=>e.style.setProperty(k,x+'px'),dw=Math.max(W,B.height/ratio),gap=(r1-r0)*dw+Math.max(36,W*.04);
         v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-.01)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
         v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
-        wr.style.paddingTop=innerWidth<768?Math.max(0,(r1-r0+.02)*bgw+14-(R.top-B.top))+'px':''};
+        const band=(r1-r0+.02)*bgw,off=R.top-B.top,mob=innerWidth<768;v(bg,'--sb-rtop',mob?Math.max(0,off-band-10):0);wr.style.paddingTop=mob?Math.max(0,band+10-off)+'px':''};
       fit();addEventListener('resize',fit);setTimeout(fit,600)}
     if(board&&ds.boardFont){const f=document.createElement('style');f.textContent='@font-face{font-family:"SB Board";src:url("'+ds.boardFont+'");font-display:swap}';document.head.append(f);el.classList.add('sb-has-bfont')}
     const st={step:0,ind:null,feats:[],sty:null,saved:[]};
