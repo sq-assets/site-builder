@@ -383,3 +383,9 @@
 .sb-pimg.sb-obj::before{content:none}
 .sb-has-indpin .sb-pimg.sb-print::after{content:"";position:absolute;left:50%;top:-6%;width:22%;aspect-ratio:540/675;background:var(--sb-indpin) center/contain no-repeat;transform:translateX(-50%);filter:drop-shadow(3px 6px 4px rgba(0,0,0,.28));pointer-events:none;animation:sbPinPress .45s cubic-bezier(.3,1.6,.5,1) .55s backwards}
 .sb-pii{width:28%}
+/* book mode (data-book-image): an open notebook lying on the page, desktop only */
+@media (min-width:768px){
+  .sb-binder.sb-book{isolation:isolate;aspect-ratio:var(--sb-book-ratio,1426/999);box-sizing:border-box;padding:var(--sb-bpt,5%) var(--sb-bpr,4.5%) var(--sb-bpt,5%) var(--sb-bpl,5.5%);margin:clamp(10px,2vw,30px) 0}
+  .sb-binder.sb-book::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--sb-book) center/100% 100% no-repeat;filter:drop-shadow(0 22px 30px rgba(0,0,0,.18)) drop-shadow(0 4px 8px rgba(0,0,0,.08));pointer-events:none}
+  .sb-binder.sb-book .sb-board-in{aspect-ratio:auto;height:100%;min-height:clamp(380px,40vw,620px)}
+}
