@@ -165,7 +165,7 @@
         else unpin(bd.querySelector('[data-k="sty"]'))}
       const ii=indImgs(),ik=ii.join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((u,i)=>pin('n'+i+Math.random(),'sb-pimg sb-pii',img(u),SLI[i],180+i*130).style.zIndex=2+i)}
       let note=bd.querySelector('.sb-pnote:not(.sb-out)');
-      if(st.feats.length){if(!note)note=pin('note','sb-pnote'+(ds.noteImage?' sb-paper':''),'<b>'+(ds.mustTitle||'Must haves')+'</b><ul></ul>',[5,22,-3]);if(ds.noteImage)note.style.backgroundImage='url("'+ds.noteImage+'")';const ul=note.querySelector('ul'),have=[...ul.children].map(li=>li.dataset.t);
+      if(st.feats.length){if(!note)note=pin('note','sb-pnote'+(ds.noteImage?' sb-paper':''),'<div class="sb-lines"><b>'+(ds.mustTitle||'Must haves')+'</b><ul></ul></div>',[5,22,-3]);if(ds.noteImage)note.style.backgroundImage='url("'+ds.noteImage+'")';const ul=note.querySelector('ul'),have=[...ul.children].map(li=>li.dataset.t);
         [...ul.children].forEach(li=>st.feats.some(f=>f.t===li.dataset.t)||li.remove());st.feats.forEach(f=>{if(!have.includes(f.t)){const li=document.createElement('li');li.dataset.t=f.t;ul.append(li);typeOut(li,f.t)}})}
       else if(note)unpin(note);
       if(pics){const keep=st.saved.map(p=>'m:'+p.img);bd.querySelectorAll('.sb-psave').forEach(p=>keep.includes(p.dataset.k)||unpin(p));
