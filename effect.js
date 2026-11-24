@@ -157,7 +157,7 @@
     const boardSync=()=>{if(!bd)return;const E=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),img=u=>'<img src="'+u+'" alt="" draggable="false">';
       if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[4,5,-6]):unpin(bd.querySelector('[data-k="ind"]'))}
       if(st.sty!==lastSty){lastSty=st.sty;bd.querySelectorAll('.sb-pfx').forEach(unpin);
-        if(st.sty){const w=(st.sty.w||'').trim();pin('sty','sb-psty',pics?'<span>'+(ds.vibeLabel||'Your vibe')+'</span><em>'+E(w&&w.length<22?w:st.sty.t)+'</em>':'<span>'+E(st.sty.t)+'</span>'+(w&&w.length<22?'<em>'+E(w)+'</em>':''),[5,68,-6]);
+        if(st.sty){const w=(st.sty.w||'').trim();if(pics||ds.styleSticker==='on')pin('sty','sb-psty',pics?'<span>'+(ds.vibeLabel||'Your vibe')+'</span><em>'+E(w&&w.length<22?w:st.sty.t)+'</em>':'<span>'+E(st.sty.t)+'</span>'+(w&&w.length<22?'<em>'+E(w)+'</em>':''),[5,68,-6]);
           if(!pics)fxFor(st.sty).slice(0,+(ds.styleEffects||3)).forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),SLF[i],250+i*160).style.zIndex=10+i)}
         else unpin(bd.querySelector('[data-k="sty"]'))}
       const ii=indImgs(),ik=ii.join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((u,i)=>pin('n'+i+Math.random(),'sb-pimg sb-pii',img(u),SLI[i],180+i*130).style.zIndex=2+i)}
