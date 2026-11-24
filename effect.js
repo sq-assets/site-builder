@@ -158,12 +158,14 @@
     /* moodboard: picks pin onto a board with your effects; everything can be dragged around */
     const bd=board?$('.sb-board-in'):null;let zTop=20,lastInd=null,lastSty=null;
     const SL={img:[[3,7,-6],[59,5,5],[6,55,4],[61,53,-5]],ft:[[6,38,-5],[64,33,6],[36,76,-3],[5,84,4],[68,82,-6],[40,10,4]]};
-    const pin=(key,cls,html,at,dl)=>{const o=bd.querySelector('[data-k="'+CSS.escape(key)+'"]');o&&o.remove();const p=document.createElement('div');p.className='sb-pin '+cls;p.dataset.k=key;
-      p.style.cssText='left:'+at[0]+'%;top:'+at[1]+'%;--r:'+at[2]+'deg;z-index:'+(++zTop)+';animation-delay:'+(dl||0)+'ms';p.innerHTML=html;bd.append(p);return p};
+    const pin=(key,cls,html,at,dl,host)=>{host=host||bd;const o=host.querySelector('[data-k="'+CSS.escape(key)+'"]');o&&o.remove();const p=document.createElement('div');p.className='sb-pin '+cls;p.dataset.k=key;
+      p.style.cssText='left:'+at[0]+'%;top:'+at[1]+'%;--r:'+at[2]+'deg;z-index:'+(++zTop)+';animation-delay:'+(dl||0)+'ms';p.innerHTML=html;host.append(p);return p};
     const unpin=p=>{if(!p||p.classList.contains('sb-out'))return;p.classList.add('sb-out');setTimeout(()=>p.remove(),450)};
     const pinImgs=list=>{bd.querySelectorAll('.sb-pimg').forEach(unpin);list.slice(0,4).forEach((u,i)=>pin('i'+Math.random(),'sb-pimg','<img src="'+u+'" alt="" draggable="false">',SL.img[i],120+i*130).style.zIndex=1+i)};
     const styleFrom=()=>{if(!st.saved.length)return null;let best=null,n=0;S.forEach(o=>{const k=kw(o.t),w=kw(o.w||'');const c=st.saved.filter(p=>p.tags.some(t=>(k&&t.includes(k))||(w&&t.includes(w)))).length;if(c>n){n=c;best=o}});return best||st.sty||S[0]};
     const SV=[[4,8,-6],[58,6,5],[33,38,-3],[6,56,4],[62,52,-5],[30,3,3],[38,68,-4],[70,26,6]];
+    const fxb=bd?document.createElement('div'):null;if(fxb){fxb.className='sb-fxboard';$('.sb-side').append(fxb)}
+    const fxHost=()=>fxb&&innerWidth>=768&&el.querySelector('.sb-book')?fxb:bd;const SLF2=[[2,22,-3],[36,30,4],[66,20,-2]];
     const SLI=[[44,9,5],[71,12,-4],[46,32,3],[72,35,-5]],SLF=[[3,70,-3],[35,74,4],[67,68,-2]];
     const indImgs=()=>{const o=st.ind;if(!o)return[];let a=o.imgs.length?o.imgs:(o.img?[{src:o.img,key:''}]:[]);
       if(st.sty){const k=kw(st.sty.t),w=kw(st.sty.w||''),m=a.filter(x=>(k&&x.key.includes(k))||(w&&x.key.includes(w)));if(m.length)a=m.concat(a.filter(x=>!m.includes(x)))}
@@ -172,10 +174,10 @@
     let lastII='';
     const boardSync=()=>{if(!bd)return;const E=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),img=u=>'<img src="'+u+'" alt="" draggable="false">';
       if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[3,8,-5]):unpin(bd.querySelector('[data-k="ind"]'))}
-      if(st.sty!==lastSty){lastSty=st.sty;bd.querySelectorAll('.sb-pfx').forEach(unpin);
+      if(st.sty!==lastSty){lastSty=st.sty;el.querySelectorAll('.sb-pfx').forEach(unpin);
         if(st.sty){const w=(st.sty.w||'').trim();if(pics||ds.styleSticker==='on')pin('sty','sb-psty',pics?'<span>'+(ds.vibeLabel||'Your vibe')+'</span><em>'+E(w&&w.length<22?w:st.sty.t)+'</em>':'<span>'+E(st.sty.t)+'</span>'+(w&&w.length<22?'<em>'+E(w)+'</em>':''),[5,68,-6]);
-          if(!pics){const fx=fxFor(st.sty).slice(0,+(ds.styleEffects||3));fx.forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),SLF[i],250+i*160).style.zIndex=10+i);
-            if(fx.length&&ds.fxNote!=='off'){const tn=pin('fxnote','sb-pfx sb-ptext','<span></span>',[36,60,-3]);setTimeout(()=>typeOut(tn.querySelector('span'),ds.fxNote||'something like this?'),250+fx.length*160+500)}}}
+          if(!pics){const fx=fxFor(st.sty).slice(0,+(ds.styleEffects||3)),fh=fxHost(),sl=fh===bd?SLF:SLF2;fx.forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),sl[i],250+i*160,fh).style.zIndex=10+i);
+            if(fx.length&&ds.fxNote!=='off'){const tn=pin('fxnote','sb-pfx sb-ptext','<span></span>',fh===bd?[36,60,-3]:[4,4,-2],0,fh);setTimeout(()=>typeOut(tn.querySelector('span'),ds.fxNote||'something like this?'),250+fx.length*160+500)}}}
         else unpin(bd.querySelector('[data-k="sty"]'))}
       const ii=indImgs(),ik=ii.map(x=>x.src).join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((x,i)=>{const obj=/\.png(\?|$)|^data:image\/(png|webp)/i.test(x.src)||/cutout|polaroid|print/.test(x.key),pr=/polaroid|print/.test(x.key);pin('n'+i+Math.random(),'sb-pimg sb-pii'+(obj?' sb-obj':'')+(pr?' sb-print':''),img(x.src),SLI[i],180+i*130).style.zIndex=2+i})}
       let note=bd.querySelector('.sb-pnote:not(.sb-out)');
@@ -185,10 +187,10 @@
       if(pics){const keep=st.saved.map(p=>'m:'+p.img);bd.querySelectorAll('.sb-psave').forEach(p=>keep.includes(p.dataset.k)||unpin(p));
         st.saved.forEach((p,i)=>{if(!bd.querySelector('[data-k="'+CSS.escape('m:'+p.img)+'"]:not(.sb-out)'))pin('m:'+p.img,'sb-pimg sb-psave',img(p.img),SV[i%8]).style.zIndex=2+i})}
       const has=!!(st.ind||st.feats.length||st.sty);bd.classList.toggle('sb-has',has);const h=bd.querySelector('.sb-board-hint');if(h)h.textContent=innerWidth<768?(ds.boardHintMobile||'Drag and drop to reposition elements on your moodboard'):(ds.boardHint||'Drag and drop to reposition elements on your moodboard')};
-    if(bd){let pd=null;
+    const dragOn=bd=>{let pd=null;
       bd.addEventListener('pointerdown',e=>{const p=e.target.closest('.sb-pin');if(!p||p.classList.contains('sb-out'))return;e.preventDefault();const pr=p.getBoundingClientRect();pd={p,dx:e.clientX-pr.left,dy:e.clientY-pr.top,r:bd.getBoundingClientRect()};p.style.zIndex=++zTop;p.style.animation='none';p.classList.add('sb-held');try{p.setPointerCapture(e.pointerId)}catch(x){}});
       bd.addEventListener('pointermove',e=>{if(!pd)return;const {p,r}=pd;p.style.left=(e.clientX-pd.dx-r.left)/r.width*100+'%';p.style.top=(e.clientY-pd.dy-r.top)/r.height*100+'%'});
-      const up=()=>{if(pd){pd.p.classList.remove('sb-held');pd=null}};bd.addEventListener('pointerup',up);bd.addEventListener('pointercancel',up)}
+      const up=()=>{if(pd){pd.p.classList.remove('sb-held');pd=null}};bd.addEventListener('pointerup',up);bd.addEventListener('pointercancel',up)};if(bd){dragOn(bd);dragOn(fxb)}
 
     const choose=o=>{
       if(show){if(st.step===0)st.ind=o;else if(st.step===1){const i=st.feats.indexOf(o);i>-1?st.feats.splice(i,1):st.feats.push(o)}else if(o.pic){const i=st.saved.indexOf(o);i>-1?st.saved.splice(i,1):st.saved.push(o);st.sty=styleFrom()}else st.sty=o}

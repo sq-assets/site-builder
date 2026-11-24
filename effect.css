@@ -399,11 +399,18 @@
   .sb-binder.sb-book .sb-stepno{font-size:.74rem;margin-bottom:.9em}
   .sb-binder.sb-book .sb-side{padding-top:clamp(18px,2vw,30px)}
   .sb-binder.sb-book .sb-steps span{font-size:.72rem}
-  .sb-binder.sb-book .sb-pind span{font-size:clamp(1.3rem,2.4vw,2.4rem)}
-  .sb-binder.sb-book .sb-pnote.sb-paper{width:48%}
+  .sb-binder.sb-book .sb-pnote.sb-paper{width:60%}
   .sb-binder.sb-book .sb-pii{width:34%}
   .sb-binder.sb-book .sb-pfx{width:38%}
   .sb-binder.sb-book .sb-ptext{font-size:clamp(1rem,1.5vw,1.35rem)}
   .sb-binder.sb-book .sb-board-hint{font-size:.66rem}
 }
 @media (min-width:768px){.sb-binder.sb-book .sb-board-hint{top:-1.9em}}
+/* left-page effects board (book mode, desktop) */
+.sb-fxboard{display:none}
+@media (min-width:768px){
+  .sb-binder.sb-book .sb-fxboard{display:block;position:relative;width:100%;aspect-ratio:5/3;margin-top:clamp(16px,2vw,28px)}
+  .sb-binder.sb-book .sb-fxboard .sb-pfx{width:40%}
+  .sb-binder.sb-book .sb-fxboard .sb-ptext{width:auto;font-family:"SB Board",ui-monospace,monospace}
+}
+.sb-has-bfont .sb-fxboard,.sb-has-bfont .sb-fxboard *{font-family:"SB Board",ui-monospace,monospace!important}
