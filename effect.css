@@ -298,3 +298,6 @@
 .sb-pnote li.sb-typing::after{content:"▌";animation:sbBlink .7s steps(1) infinite}
 @keyframes sbBlink{50%{opacity:0}}
 @media (max-width:767px){.sb-pnote{width:48%}.sb-pii{width:34%}.sb-pfx{width:40%}}
+.sb-board-hint{left:auto;right:0;top:0;bottom:auto;text-align:right;max-width:55%}
+.site-builder:not(.sb-binder-on) .sb-board-in>.sb-board-hint{right:24px;top:20px}
+.sb-binder .sb-board-in{margin-top:8px}
