@@ -107,6 +107,7 @@
         v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
         const band=(r1-r0+.02)*bgw,off=R.top-B.top,mob=innerWidth<768;v(bg,'--sb-rtop',mob?Math.max(0,off-band-10):0);wr.style.paddingTop=mob?Math.max(0,band+10-off)+'px':''};
       fit();addEventListener('resize',fit);setTimeout(fit,600)}
+    if(board&&ds.pinImage){el.classList.add('sb-has-pinimg');el.style.setProperty('--sb-pinimg','url("'+ds.pinImage+'")')}
     if(board&&ds.boardFont){const f=document.createElement('style');f.textContent='@font-face{font-family:"SB Board";src:url("'+ds.boardFont+'");font-display:swap}';document.head.append(f);el.classList.add('sb-has-bfont')}
     const st={step:0,ind:null,feats:[],sty:null,saved:[]};
     const lists=[I,F,pics?PICS:S];
