@@ -102,7 +102,7 @@
       if(host)host.append(bg);else{wr.classList.add('sb-own');wr.prepend(bg)}
       const box=host?sec:wr,sp=+(ds.spine||35)/100,r0=+(ds.ringStart||30.5)/100,r1=+(ds.ringEnd||39.2)/100,ratio=+(ds.boardBackgroundRatio||.5625);
       bg.style.setProperty('--sb-bbg','url("'+ds.boardBackground+'")');bg.style.setProperty('--sb-spine',sp*100+'%');if(ds.paper)bg.style.setProperty('--sb-paperc',ds.paper);
-      const fit=()=>{const B=box.getBoundingClientRect(),R=wr.getBoundingClientRect(),W=B.width,bgw=Math.max(1.8*W,W/ratio*1.02),v=(e,k,x)=>e.style.setProperty(k,x+'px'),gap=Math.max(28,W*.07);
+      const fit=()=>{const B=box.getBoundingClientRect(),R=wr.getBoundingClientRect(),W=B.width,bgw=Math.max(1.8*W,W/ratio*1.02),v=(e,k,x)=>e.style.setProperty(k,x+'px'),dw=Math.max(W,B.height/ratio),gap=(r1-r0)*dw+Math.max(36,W*.04);
         v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-.01)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
         v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
         wr.style.paddingTop=innerWidth<768?Math.max(0,(r1-r0+.02)*bgw+14-(R.top-B.top))+'px':''};
