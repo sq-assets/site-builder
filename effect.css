@@ -353,3 +353,6 @@
   .site-builder.sb-caps .sb-binder .sb-chip{font-size:.58rem;padding:.55em 1em;letter-spacing:.08em}
   .sb-binder .sb-ctrl button{font-size:.62rem;padding:.8em 1.3em}
 }
+.sb-binder{grid-template-rows:auto 1fr}
+.sb-binder .sb-side{margin-top:clamp(8px,1vw,14px)}
+@media (max-width:767px){.sb-binder{grid-template-rows:none}}
