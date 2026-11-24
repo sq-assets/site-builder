@@ -30,8 +30,8 @@ Result title = **The [style word] [industry word]**.
 
 ```html
 <!-- Site Builder -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v3.0.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v3.0.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v4.0.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/site-builder@v4.0.0/effect.js"></script>
 ```
 
 ## 3. Code Block where you want it
@@ -85,3 +85,14 @@ Make one mailing list per industry, then add one **Newsletter Block** per indust
 | `data-show-result-field` | `on` = show the filled-in "Your site" form field |
 
 The result is also saved in `sessionStorage` (`site-builder`) and fired as a `sitebuilder:done` event, for connecting other tools.
+
+## Moodboard (default)
+
+The picks pin onto a moodboard (`data-stage="laptop"` brings back the laptop).
+
+| Setting | What it does |
+|---|---|
+| `data-moodboard` | Blog of inspiration images for step 3 (default `/site-builder-moodboard`). One image per post, tagged with a style. Falls back to your effects until it exists. `data-pinboard="off"` goes back to style buttons |
+| `data-board-image`, `data-board-image-mobile` | Background for the board, e.g. a folder with binder rings (landscape for desktop, portrait for mobile) |
+| `data-board-area`, `data-board-area-mobile` | Where pins can sit on that image: top right bottom left, in % |
+| `data-board-title`, `data-board-hint`, `data-vibe-label` | Board wording |

@@ -93,6 +93,9 @@
     el.insertAdjacentHTML('beforeend','<div class="sb-profile" hidden></div>');
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back');
     if(ds.laptop!=='build')site.classList.add('sb-show','sb-has-hero');
+    if(board&&ds.boardImage){lap.classList.add('sb-folder');const set=(k,u)=>{lap.style.setProperty('--sb-bimg'+k,'url("'+u+'")');const i=new Image();i.onload=()=>lap.style.setProperty('--sb-bar'+k,i.naturalWidth+'/'+i.naturalHeight);i.src=u};
+      set('',ds.boardImage);set('-m',ds.boardImageMobile||ds.boardImage);
+      const ar=v=>v.split(/[ ,]+/).map(x=>parseFloat(x)+'%').join(' ');lap.style.setProperty('--sb-ba',ar(ds.boardArea||'8 6 8 10'));lap.style.setProperty('--sb-ba-m',ar(ds.boardAreaMobile||ds.boardArea||'10 8 6 8'))}
     const st={step:0,ind:null,feats:[],sty:null,saved:[]};
     const lists=[I,F,pics?PICS:S];
     const render=()=>{

@@ -253,3 +253,10 @@
 .site-builder .sb-chip.sb-tile.sel{box-shadow:0 0 0 3px var(--sb-hover),0 0 26px 4px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
 .sb-psave{width:30%}
 @media (max-width:767px){.sb-tray.sb-tray-img{columns:3 90px;max-height:46vh}}
+
+/* folder / binder background (data-board-image, data-board-image-mobile) */
+.sb-folder{aspect-ratio:var(--sb-bar,4/3);background:var(--sb-bimg) center/100% 100% no-repeat;transition:filter .3s}
+.sb-folder .sb-board-in{position:absolute;inset:var(--sb-ba);width:auto;aspect-ratio:auto;border:0;border-radius:0;background:none;overflow:visible}
+.sb-folder.sb-over .sb-board-in,.sb-folder.sb-pulse .sb-board-in{transform:none;box-shadow:none;animation:none}
+.sb-folder.sb-over,.sb-folder.sb-pulse{filter:drop-shadow(0 0 26px color-mix(in srgb,var(--sb-glow) 55%,transparent))}
+@media (max-width:767px){.sb-folder{aspect-ratio:var(--sb-bar-m,3/4);background-image:var(--sb-bimg-m)}.sb-folder .sb-board-in{inset:var(--sb-ba-m)}}
