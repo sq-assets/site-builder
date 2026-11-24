@@ -224,7 +224,6 @@
 @keyframes sbBoardPulse{35%{box-shadow:0 0 0 3px var(--sb-hover),0 0 60px 12px color-mix(in srgb,var(--sb-glow) 50%,transparent)}}
 .sb-board-t{position:absolute;left:24px;top:20px;z-index:1;font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;pointer-events:none}
 .sb-board-hint{position:absolute;left:0;right:0;bottom:20px;z-index:1;margin:0!important;text-align:center;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.55;pointer-events:none;transition:opacity .4s}
-.sb-board-in.sb-has .sb-board-hint{opacity:0}
 .sb-pin{position:absolute;transform:rotate(var(--r));cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;animation:sbPinIn .75s cubic-bezier(.2,1.5,.4,1) backwards;transition:transform .25s,box-shadow .25s,filter .25s}
 .sb-pin:hover{filter:drop-shadow(0 10px 18px rgba(0,0,0,.14))}
 .sb-pin.sb-held{cursor:grabbing;transform:rotate(0) scale(1.06);filter:drop-shadow(0 20px 30px rgba(0,0,0,.22));transition:filter .25s,transform .25s}
@@ -233,7 +232,7 @@
 @keyframes sbPinOut{to{opacity:0;transform:translateY(30px) rotate(calc(var(--r) - 25deg)) scale(.5)}}
 .sb-pimg{width:37%}
 .sb-pimg img{display:block;width:100%;height:auto;border:1px solid var(--sb-ink);border-radius:14px;background:#fff;pointer-events:none}
-.sb-pimg::before,.sb-pft::before{content:"";position:absolute;left:50%;top:-11px;width:64px;height:22px;transform:translateX(-50%) rotate(-5deg);background:color-mix(in srgb,var(--sb-hover) 60%,transparent);z-index:1}
+.sb-pimg::before,.sb-pft::before,.sb-pnote::before{content:"";position:absolute;left:50%;top:-11px;width:64px;height:22px;transform:translateX(-50%) rotate(-5deg);background:color-mix(in srgb,var(--sb-hover) 60%,transparent);z-index:1}
 .sb-pind span{display:block;padding:.55em 1.1em .6em;border:1px solid var(--sb-ink);border-radius:999px;background:var(--sb-hover);font-family:var(--heading-font-font-family,inherit);font-size:clamp(1.1rem,2.2vw,2.1rem);font-weight:500;line-height:1;letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 34px 5px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
 .sb-pft{padding:.95em 1.3em;border:1px solid var(--sb-ink);background:var(--sb-paper,#f8f7f6);font-size:clamp(.6rem,.9vw,.74rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
 .sb-psty{display:grid;place-content:center;gap:.2em;width:clamp(110px,15vw,180px);aspect-ratio:1;border:1px solid var(--sb-ink);border-radius:50%;background:var(--sb-glow);text-align:center;box-shadow:0 0 40px 6px color-mix(in srgb,var(--sb-glow) 45%,transparent)}
@@ -281,3 +280,20 @@
 /* moodboard font (data-board-font) */
 .sb-has-bfont .sb-board-in,.sb-has-bfont .sb-board-in *{font-family:"SB Board",ui-monospace,monospace!important}
 .sb-has-bfont .sb-pind span,.sb-has-bfont .sb-psty em{letter-spacing:-.03em}
+
+/* guidance + industry images + must-haves note */
+.sb-intro{margin:0 0 clamp(18px,2.4vw,32px)!important;max-width:34em;font-size:clamp(.95rem,1.2vw,1.1rem);line-height:1.5}
+.sb-stepno{display:block;margin-bottom:.7em;font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.sb-board-hint{opacity:.75;font-size:.7rem}
+.sb-next.sb-ready{box-shadow:0 0 22px 3px color-mix(in srgb,var(--sb-glow) 50%,transparent)}
+.sb-next[hidden],.sb-back[hidden]{display:none!important}
+.sb-pii{width:26%}
+.sb-pfx{width:31%}
+.sb-pnote{width:34%;min-width:150px;box-sizing:border-box;padding:1.2em 1.2em 1.3em;border:1px solid var(--sb-ink);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.sb-pnote b{display:block;margin-bottom:.8em;padding-bottom:.55em;border-bottom:1px solid var(--sb-ink);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.sb-pnote ul{list-style:none;margin:0;padding:0;display:grid;gap:.5em}
+.sb-pnote li{min-height:1.2em;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+.sb-pnote li::before{content:"✓ ";color:var(--sb-glow)}
+.sb-pnote li.sb-typing::after{content:"▌";animation:sbBlink .7s steps(1) infinite}
+@keyframes sbBlink{50%{opacity:0}}
+@media (max-width:767px){.sb-pnote{width:48%}.sb-pii{width:34%}.sb-pfx{width:40%}}
