@@ -165,7 +165,7 @@
     const SLI=[[44,9,5],[71,12,-4],[46,32,3],[72,35,-5]],SLF=[[3,70,-3],[35,74,4],[67,68,-2]];
     const indImgs=()=>{const o=st.ind;if(!o)return[];let a=o.imgs.length?o.imgs:(o.img?[{src:o.img,key:''}]:[]);
       if(st.sty){const k=kw(st.sty.t),w=kw(st.sty.w||''),m=a.filter(x=>(k&&x.key.includes(k))||(w&&x.key.includes(w)));if(m.length)a=m.concat(a.filter(x=>!m.includes(x)))}
-      return a.slice(0,+(ds.industryImages||4)).map(x=>x.src)};
+      return a.slice(0,+(ds.industryImages||4))};
     const typeOut=(li,t)=>{let i=0;li.classList.add('sb-typing');const tick=()=>{if(!li.isConnected)return;li.textContent=t.slice(0,++i);if(i<t.length)setTimeout(tick,40+Math.random()*60);else li.classList.remove('sb-typing')};tick()};
     let lastII='';
     const boardSync=()=>{if(!bd)return;const E=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),img=u=>'<img src="'+u+'" alt="" draggable="false">';
@@ -175,7 +175,7 @@
           if(!pics){const fx=fxFor(st.sty).slice(0,+(ds.styleEffects||3));fx.forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),SLF[i],250+i*160).style.zIndex=10+i);
             if(fx.length&&ds.fxNote!=='off'){const tn=pin('fxnote','sb-pfx sb-ptext','<span></span>',[36,60,-3]);setTimeout(()=>typeOut(tn.querySelector('span'),ds.fxNote||'something like this?'),250+fx.length*160+500)}}}
         else unpin(bd.querySelector('[data-k="sty"]'))}
-      const ii=indImgs(),ik=ii.join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((u,i)=>pin('n'+i+Math.random(),'sb-pimg sb-pii',img(u),SLI[i],180+i*130).style.zIndex=2+i)}
+      const ii=indImgs(),ik=ii.map(x=>x.src).join('|');if(ik!==lastII){lastII=ik;bd.querySelectorAll('.sb-pii').forEach(unpin);ii.forEach((x,i)=>{const obj=/\.png(\?|$)|^data:image\/(png|webp)/i.test(x.src)||/cutout|polaroid|print/.test(x.key),pr=/polaroid|print/.test(x.key);pin('n'+i+Math.random(),'sb-pimg sb-pii'+(obj?' sb-obj':'')+(pr?' sb-print':''),img(x.src),SLI[i],180+i*130).style.zIndex=2+i})}
       let note=bd.querySelector('.sb-pnote:not(.sb-out)');
       if(st.feats.length){if(!note)note=pin('note','sb-pnote'+(ds.noteImage?' sb-paper':''),'<div class="sb-lines"><b>'+(ds.mustTitle||'Must haves')+'</b><ul></ul></div>',[5,22,-3]);if(ds.noteImage)note.style.backgroundImage='url("'+ds.noteImage+'")';const ul=note.querySelector('ul'),have=[...ul.children].map(li=>li.dataset.t);
         [...ul.children].forEach(li=>st.feats.some(f=>f.t===li.dataset.t)||li.remove());st.feats.forEach(f=>{if(!have.includes(f.t)){const li=document.createElement('li');li.dataset.t=f.t;ul.append(li);typeOut(li,f.t)}})}

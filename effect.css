@@ -378,3 +378,8 @@
 .site-builder .sb-binder .sb-ctrl button{font-size:.64rem;padding:.55em 1.05em;letter-spacing:.09em;line-height:1.2;min-height:0}
 .sb-binder .sb-ctrl{gap:.45em;margin-top:.9em}
 @media (max-width:767px){.site-builder .sb-binder .sb-ctrl button{font-size:.6rem;padding:.5em .9em;letter-spacing:.07em}.sb-binder .sb-ctrl{gap:.35em;margin-top:.7em}}
+/* PNG cutouts and prints sit on the paper as they are */
+.sb-pimg.sb-obj img{border:0;border-radius:0;background:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.22))}
+.sb-pimg.sb-obj::before{content:none}
+.sb-has-indpin .sb-pimg.sb-print::after{content:"";position:absolute;left:50%;top:-6%;width:22%;aspect-ratio:540/675;background:var(--sb-indpin) center/contain no-repeat;transform:translateX(-50%);filter:drop-shadow(3px 6px 4px rgba(0,0,0,.28));pointer-events:none;animation:sbPinPress .45s cubic-bezier(.3,1.6,.5,1) .55s backwards}
+.sb-pii{width:28%}
