@@ -374,3 +374,7 @@
   .sb-binder-bg::before{z-index:1}
   .sb-binder-bg::after{content:"";position:absolute;left:0;right:0;top:0;height:var(--sb-toph,0);background:var(--sb-bbg) right center/var(--sb-topw,170vw) auto no-repeat}
 }
+/* Back / Next match the option buttons */
+.site-builder .sb-binder .sb-ctrl button{font-size:.64rem;padding:.55em 1.05em;letter-spacing:.09em;line-height:1.2;min-height:0}
+.sb-binder .sb-ctrl{gap:.45em;margin-top:.9em}
+@media (max-width:767px){.site-builder .sb-binder .sb-ctrl button{font-size:.6rem;padding:.5em .9em;letter-spacing:.07em}.sb-binder .sb-ctrl{gap:.35em;margin-top:.7em}}
