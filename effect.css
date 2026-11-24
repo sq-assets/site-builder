@@ -344,3 +344,12 @@
 .sb-pnote.sb-paper li::before{margin-right:.35em}
 .sb-board-t:empty{display:none}
 .sb-board-hint{left:0;right:0;max-width:none;text-align:left}
+.sb-hint[hidden]{display:none}
+.sb-binder .sb-side{align-self:start;margin-top:clamp(10px,1.4vw,18px)}
+.sb-binder .sb-tray{align-content:flex-start}
+@media (max-width:767px){
+  .sb-binder .sb-q{font-size:clamp(1.35rem,6vw,1.8rem)}
+  .sb-binder .sb-tray{gap:.4em}
+  .site-builder.sb-caps .sb-binder .sb-chip{font-size:.58rem;padding:.55em 1em;letter-spacing:.08em}
+  .sb-binder .sb-ctrl button{font-size:.62rem;padding:.8em 1.3em}
+}

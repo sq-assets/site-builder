@@ -36,7 +36,13 @@
     [/service|booking|appoint/,"services laid out so people can see what fits them, with booking built in so nobody has to DM you"],
     [/blog|journal|news/,"a blog that's easy to keep up, with posts that link through to your services so reading turns into enquiring"],
     [/podcast|audio|episode/,"a podcast home where every episode has its own page, so people can listen, subscribe and find you through search"],
-    [/course|member|class|learn/,"course and membership pages that sell the transformation, with sign-ups and logins that just work"]];
+    [/course|member|class|learn/,"course and membership pages that sell the transformation, with sign-ups and logins that just work"],
+    [/about|bio|story/,"an about page that tells your story in your voice, so people feel like they know you before they get in touch"],
+    [/team|staff|people/,"team profiles that show the faces behind the work, so clients know exactly who they'll be dealing with"],
+    [/enquir|contact|form/,"an enquiry form that asks the right questions up front, so every message lands with dates, budgets and the details you need"],
+    [/email|newsletter|sign.?up|mailing/,"an email sign-up with a reason to join, so visitors who aren't ready yet stay in your world until they are"],
+    [/testimonial|review|kind words/,"testimonials placed right where people hesitate, so your past clients do the convincing for you"],
+    [/faq|question/,"an FAQ that answers the same five questions before anyone has to ask them"]];
   const VIBE=[[/lux/,"For a luxury feel: generous space, refined type and fewer, bigger images. Nothing shouting."],
     [/minimal/,"For a minimal feel: a pared-back layout where every word and every image earns its place."],
     [/editorial/,"For an editorial feel: big headlines, strong crops and layouts that read like a magazine spread."],
@@ -78,7 +84,7 @@
     if(!I.length||!F.length||!S.length){el.innerHTML='<p class="sb-loading">Site Builder: couldn\'t find the Industries, Features or Styles blog.</p>';return}
     const Q=[ds.question1||(board?'Pick your industry':'What do you do?'),ds.question2||(board?'What does your website need?':'What does your site need?'),ds.question3||(board?'What\'s your style?':'Pick your vibe')];
     const touch=matchMedia('(pointer:coarse)').matches;
-    const H=[ds.hint1||(touch?'Tap your industry to pin it to your moodboard.':(board?'Click your industry, or drag it onto your moodboard.':'Drag one into the laptop, or click it')),ds.hint2||(board?'Pick as many as you need. Each one is added to your must haves.':'Add as many as you like'),ds.hint3||(board?'Pick the style that feels most like you, and I\'ll pin some of my work in that style.':'Pick the one that feels most like you')];
+    const H=[ds.hint1||(board?'':'Drag one into the laptop, or click it'),ds.hint2||(board?'Pick as many as you need. Each one is added to your must haves.':'Add as many as you like'),ds.hint3||(board?'Pick the style that feels most like you, and I\'ll pin some of my work in that style.':'Pick the one that feels most like you')];
     const sc=(ds.screen||'6 12 14 12').split(/[ ,]+/).map(parseFloat);
     const N=[ds.step1||'Industry',ds.step2||'Features',ds.step3||'Style'];
     if(pics){Q[2]=ds.question3||'What catches your eye?';H[2]=ds.hint3||'Save the images that speak to you';N[2]=ds.step3||'Inspiration'}
@@ -113,7 +119,7 @@
     const st={step:0,ind:null,feats:[],sty:null,saved:[]};
     const lists=[I,F,pics?PICS:S];
     const render=()=>{
-      $('.sb-q').textContent=(board?(st.step+1)+'. ':'')+Q[st.step];$('.sb-stepno').textContent=(ds.stepText||'Step {n} of 3').replace('{n}',st.step+1);$('.sb-hint').textContent=H[st.step];
+      $('.sb-q').textContent=(board?(st.step+1)+'. ':'')+Q[st.step];$('.sb-stepno').textContent=(ds.stepText||'Step {n} of 3').replace('{n}',st.step+1);$('.sb-hint').textContent=H[st.step];$('.sb-hint').hidden=!H[st.step];
       el.querySelectorAll('.sb-steps span').forEach((s,i)=>{s.classList.toggle('on',i===st.step);s.classList.toggle('done',i<st.step)});
       tray.innerHTML='';
       tray.classList.toggle('sb-tray-img',!!lists[st.step][0].pic);
