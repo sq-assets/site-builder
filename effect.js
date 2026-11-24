@@ -103,6 +103,7 @@
       set('',ds.boardImage);set('-m',ds.boardImageMobile||ds.boardImage);
       const ar=v=>v.split(/[ ,]+/).map(x=>parseFloat(x)+'%').join(' ');lap.style.setProperty('--sb-ba',ar(ds.boardArea||'8 6 8 10'));lap.style.setProperty('--sb-ba-m',ar(ds.boardAreaMobile||ds.boardArea||'10 8 6 8'))}
     /* binder background: questions on the left page, moodboard on the right; on mobile it turns so the rings run across the top */
+    let refit=()=>{};
     if(board&&ds.boardBackground){const wr=document.createElement('div');wr.className='sb-binder';el.prepend(wr);wr.append(el.querySelector('.sb-head'),el.querySelector('.sb-stage'));
       const sec=el.closest('section'),host=(sec&&sec.querySelector('.section-background'))||null,bg=document.createElement('div');bg.className='sb-binder-bg';
       if(host)host.append(bg);else{wr.classList.add('sb-own');wr.prepend(bg)}
@@ -111,7 +112,9 @@
       const fit=()=>{const B=box.getBoundingClientRect(),R=wr.getBoundingClientRect(),W=B.width,bgw=Math.max(1.8*W,W/ratio*1.02),v=(e,k,x)=>e.style.setProperty(k,x+'px'),dw=Math.max(W,B.height/ratio),gap=(r1-r0)*dw+Math.max(36,W*.04);
         v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-.01)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
         v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
-        const band=(r1-r0+.02)*bgw,off=R.top-B.top,mob=innerWidth<768;v(bg,'--sb-rtop',mob?Math.max(0,off-band-10):0);wr.style.paddingTop=mob?Math.max(0,band+10-off)+'px':''};
+        const band=(r1-r0+.02)*bgw,mob=innerWidth<768;v(wr,'--sb-band',band);v(bg,'--sb-rtop',0);wr.style.paddingTop='';
+        if(mob){const L=lap.getBoundingClientRect();bg.style.top=Math.max(0,L.top-B.top-band-8)+'px'}else bg.style.top=''};
+      refit=()=>requestAnimationFrame(fit);
       fit();addEventListener('resize',fit);setTimeout(fit,600)}
     if(board){const sv=(k,u)=>u&&el.style.setProperty(k,'url("'+u+'")');sv('--sb-notepin',ds.notePin);sv('--sb-indpin',ds.industryPin);if(ds.notePin)el.classList.add('sb-has-notepin');if(ds.industryPin)el.classList.add('sb-has-indpin')}
     if(board&&ds.pinImage){el.classList.add('sb-has-pinimg');el.style.setProperty('--sb-pinimg','url("'+ds.pinImage+'")')}
@@ -129,7 +132,7 @@
         if(o===st.ind||st.feats.includes(o)||o===st.sty)b.classList.add('sel');tray.append(b)});
       next.disabled=!(st.step===0?st.ind:st.step===1?st.feats.length:(pics?st.saved.length:st.sty));
       next.textContent=st.step===2?(ds.finishText||'See my profile'):'Next';
-      back.hidden=st.step===0;
+      back.hidden=st.step===0;refit();
       if(board){next.hidden=st.step===0||(st.step===2&&next.disabled);next.textContent=st.step===1?(ds.nextText||'Next: pick your style →'):(ds.finishText||'See my profile →');next.classList.toggle('sb-ready',!next.disabled)}
     };
     const styKey=()=>st.sty?(st.sty.t.toLowerCase().match(/[a-z]+/)||[''])[0]:'';
