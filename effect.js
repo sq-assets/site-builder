@@ -115,7 +115,7 @@
       const book=ds.bookImage,bk=(ds.bookPages||'46.8 52.8').split(/[ ,]+/).map(x=>+x/100);if(book)wr.style.setProperty('--sb-book','url("'+book+'")');
       const fit=()=>{if(book&&innerWidth>=768){wr.classList.add('sb-book');bg.style.display='none';const W=wr.getBoundingClientRect().width,v=(k,x)=>wr.style.setProperty(k,x+'px');v('--sb-col',W*(bk[0]-.085));v('--sb-gap',W*(bk[1]-bk[0]+.085+.03));v('--sb-bpl',W*.055);v('--sb-bpr',W*.045);v('--sb-bpt',W*.05);return}
         wr.classList.remove('sb-book');bg.style.display='';const B=box.getBoundingClientRect(),R=wr.getBoundingClientRect(),W=B.width,bgw=Math.max(1.8*W,W/ratio*1.02),v=(e,k,x)=>e.style.setProperty(k,x+'px'),dw=Math.max(W,B.height/ratio),gap=(r1-r0)*dw+Math.max(36,W*.04);
-        v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-.01)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
+        v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-(+(ds.ringLead||0))/100)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
         v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
         const band=(r1-r0+.02)*bgw,mob=innerWidth<768;v(wr,'--sb-band',band);v(bg,'--sb-rtop',0);wr.style.paddingTop='';
         bg.style.top='';if(mob){const L=lap.getBoundingClientRect(),rt=Math.max(0,L.top-B.top-band-8);v(bg,'--sb-rtop',rt);v(bg,'--sb-toph',rt+2);v(bg,'--sb-topw',Math.max(W/(1-r1-.015)*1.03,(rt+2)/ratio*1.02))}};
