@@ -336,7 +336,7 @@
 @keyframes sbPinPress{from{opacity:0;transform:translateX(-50%) translateY(-18px) scale(1.35)}}
 @media (max-width:767px){.sb-pnote.sb-paper{width:52%}}
 /* writing follows the notepaper's lines: they rise ~3.2deg left to right, 7.15% of the paper's width apart */
-.sb-pnote.sb-paper .sb-lines{position:absolute;left:var(--sb-line-x,14.8cqw);top:var(--sb-line-y,18.45cqw);width:76cqw;transform:rotate(var(--sb-line-tilt,-3.2deg));transform-origin:0 0}
+.sb-pnote.sb-paper .sb-lines{position:absolute;left:var(--sb-line-x,14.8cqw);top:var(--sb-line-y,18.45cqw);width:76cqw;transform:rotate(var(--sb-line-tilt,-3deg));transform-origin:0 0}
 .sb-pnote.sb-paper b,.sb-pnote.sb-paper li{display:block;box-sizing:border-box;height:var(--sb-line-gap,7.15cqw);padding-top:1.5cqw;margin:0;border:0;line-height:5cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-pnote.sb-paper b{font-size:5.4cqw;letter-spacing:.16em}
 .sb-pnote.sb-paper ul{margin:0;padding:0;display:block}
