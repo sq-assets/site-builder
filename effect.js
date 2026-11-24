@@ -165,7 +165,7 @@
     const styleFrom=()=>{if(!st.saved.length)return null;let best=null,n=0;S.forEach(o=>{const k=kw(o.t),w=kw(o.w||'');const c=st.saved.filter(p=>p.tags.some(t=>(k&&t.includes(k))||(w&&t.includes(w)))).length;if(c>n){n=c;best=o}});return best||st.sty||S[0]};
     const SV=[[4,8,-6],[58,6,5],[33,38,-3],[6,56,4],[62,52,-5],[30,3,3],[38,68,-4],[70,26,6]];
     const fxb=bd?document.createElement('div'):null;if(fxb){fxb.className='sb-fxboard';$('.sb-side').append(fxb)}
-    const fxHost=()=>fxb&&innerWidth>=768&&el.querySelector('.sb-book')?fxb:bd;const SLF2=[[2,22,-3],[36,30,4],[66,20,-2]];
+    const fxHost=()=>fxb&&innerWidth>=768&&el.querySelector('.sb-book')?fxb:bd;const SLF2=[[0,20,-3],[30,36,4],[56,14,-2]];
     const SLI=[[44,9,5],[71,12,-4],[46,32,3],[72,35,-5]],SLF=[[3,70,-3],[35,74,4],[67,68,-2]];
     const indImgs=()=>{const o=st.ind;if(!o)return[];let a=o.imgs.length?o.imgs:(o.img?[{src:o.img,key:''}]:[]);
       if(st.sty){const k=kw(st.sty.t),w=kw(st.sty.w||''),m=a.filter(x=>(k&&x.key.includes(k))||(w&&x.key.includes(w)));if(m.length)a=m.concat(a.filter(x=>!m.includes(x)))}
