@@ -260,3 +260,23 @@
 .sb-folder.sb-over .sb-board-in,.sb-folder.sb-pulse .sb-board-in{transform:none;box-shadow:none;animation:none}
 .sb-folder.sb-over,.sb-folder.sb-pulse{filter:drop-shadow(0 0 26px color-mix(in srgb,var(--sb-glow) 55%,transparent))}
 @media (max-width:767px){.sb-folder{aspect-ratio:var(--sb-bar-m,3/4);background-image:var(--sb-bimg-m)}.sb-folder .sb-board-in{inset:var(--sb-ba-m)}}
+
+/* binder background (data-board-background) */
+.sb-binder{position:relative;isolation:isolate;width:100vw;margin-left:calc(50% - 50vw);box-sizing:border-box;padding:clamp(40px,5vw,90px) 5vw clamp(50px,6vw,100px);background:var(--sb-paperc,#edeae7);overflow:hidden}
+.sb-binder::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--sb-bbg) var(--sb-spine,35%) center/cover no-repeat}
+.sb-binder .sb-stage{grid-template-columns:calc(var(--sb-spinev,35vw) - 9vw) 1fr;column-gap:8vw;align-items:start}
+.sb-binder .sb-head{display:grid;grid-template-columns:calc(var(--sb-spinev,35vw) - 9vw) 1fr;column-gap:8vw;align-items:start}
+.sb-binder .sb-steps{justify-self:start}
+.sb-binder .sb-board{max-width:none}
+.sb-binder .sb-board-in{background:none;border:0;border-radius:18px;overflow:visible}
+.sb-binder .sb-board.sb-over .sb-board-in{transform:none;box-shadow:none;outline:2px dashed var(--sb-ink);outline-offset:8px}
+.sb-binder .sb-board.sb-pulse .sb-board-in{animation:none}
+.sb-binder .sb-board-t{left:0;top:0}
+@media (max-width:767px){
+  .sb-binder{padding:calc(var(--sb-ringpad,90px) + 14px) 6vw 50px}
+  .sb-binder::before{inset:auto;top:0;left:0;width:var(--sb-plen);height:var(--sb-bgh);transform-origin:0 0;transform:rotate(90deg) translateY(-100%);background-size:var(--sb-bgw) auto;background-position:var(--sb-bgx) center;-webkit-mask-image:linear-gradient(to right,#000 70%,transparent);mask-image:linear-gradient(to right,#000 70%,transparent)}
+  .sb-binder .sb-stage,.sb-binder .sb-head{grid-template-columns:1fr;row-gap:14px}
+}
+/* moodboard font (data-board-font) */
+.sb-has-bfont .sb-board-in,.sb-has-bfont .sb-board-in *{font-family:"SB Board",ui-monospace,monospace!important}
+.sb-has-bfont .sb-pind span,.sb-has-bfont .sb-psty em{letter-spacing:-.03em}
