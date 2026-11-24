@@ -118,7 +118,7 @@
         v(bg,'--sb-bgw',bgw);v(bg,'--sb-bgx',-(r0-.01)*bgw);v(bg,'--sb-bgh',W);v(bg,'--sb-plen',(1-r0+.01)*bgw);
         v(wr,'--sb-col',Math.max(200,B.left+W*sp-R.left-gap/2));v(wr,'--sb-gap',gap);
         const band=(r1-r0+.02)*bgw,mob=innerWidth<768;v(wr,'--sb-band',band);v(bg,'--sb-rtop',0);wr.style.paddingTop='';
-        bg.style.top='';if(mob){const L=lap.getBoundingClientRect(),rt=Math.max(0,L.top-B.top-band-8);v(bg,'--sb-rtop',rt);v(bg,'--sb-toph',rt+2);v(bg,'--sb-topw',Math.max(1.7*W,(rt+2)/ratio*1.02))}};
+        bg.style.top='';if(mob){const L=lap.getBoundingClientRect(),rt=Math.max(0,L.top-B.top-band-8);v(bg,'--sb-rtop',rt);v(bg,'--sb-toph',rt+2);v(bg,'--sb-topw',Math.max(W/(1-r1-.015)*1.03,(rt+2)/ratio*1.02))}};
       refit=()=>requestAnimationFrame(fit);
       fit();addEventListener('resize',fit);setTimeout(fit,600)}
     if(board){const sv=(k,u)=>u&&el.style.setProperty(k,'url("'+u+'")');sv('--sb-notepin',ds.notePin);sv('--sb-indpin',ds.industryPin);if(ds.notePin)el.classList.add('sb-has-notepin');if(ds.industryPin)el.classList.add('sb-has-indpin')}
