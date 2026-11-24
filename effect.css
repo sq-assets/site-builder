@@ -370,3 +370,7 @@
   .sb-binder-bg{bottom:0;height:auto}
   .sb-binder .sb-board{margin-top:calc(var(--sb-band,80px) + 14px)!important}
 }
+@media (max-width:767px){
+  .sb-binder-bg::before{z-index:1}
+  .sb-binder-bg::after{content:"";position:absolute;left:0;right:0;top:0;height:var(--sb-toph,0);background:var(--sb-bbg) right center/var(--sb-topw,170vw) auto no-repeat}
+}
