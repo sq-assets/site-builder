@@ -464,7 +464,7 @@
 .sb-mimg .sb-mail-f input{padding:0;font-size:calc(var(--u,3.8px)*3.1);line-height:calc(var(--u,3.8px)*6.43);height:calc(var(--u,3.8px)*6.43)}
 .sb-mimg .sb-mail-f button{font-size:calc(var(--u,3.8px)*3);line-height:calc(var(--u,3.8px)*6.43)}
 .sb-mimg .sb-mail-skip{margin:0;font-size:calc(var(--u,3.8px)*2.7);line-height:calc(var(--u,3.8px)*6.43)}
-@media (max-width:767px){.sb-pmail.sb-mimg{width:118%;padding:0;font-size:inherit}.sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*2.15)}}
+@media (max-width:767px){.sb-pmail.sb-mimg{width:112%;padding:0;font-size:inherit}.sb-mimg .sb-mail-in{right:10%!important}.sb-mimg .sb-mail-x{gap:calc(var(--u,3.8px)*.8)}.sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*2.3);padding:0 calc(var(--u,3.8px)*.8);letter-spacing:-.02em}}
 .sb-binder.sb-book .sb-pmail.sb-mimg{width:126%;font-size:inherit}
 .sb-binder .sb-steps{display:none!important}
 
