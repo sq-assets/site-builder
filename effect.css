@@ -501,3 +501,4 @@
 .sb-mimg .sb-mail-in{right:14%}
 .sb-mimg .sb-mail-x{gap:calc(var(--u,3.8px)*.9);width:100%}
 .sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*1.8);padding:0 calc(var(--u,3.8px)*.9);overflow:hidden;text-overflow:ellipsis;letter-spacing:-.03em}
+@media (max-width:767px){.sb-mimg .sb-mail-in{right:10%}.sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*2.2)}}
