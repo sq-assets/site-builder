@@ -477,3 +477,4 @@
 .sb-mail-x button:hover{background:color-mix(in srgb,var(--sb-hover,#E8A6D6) 45%,transparent)}
 .sb-pmail:not(.sb-mimg) .sb-mail-x{height:auto;margin-top:.7em;gap:.4em}
 .sb-pmail:not(.sb-mimg) .sb-mail-x button,.sb-pmail:not(.sb-mimg) .sb-mail-x input{height:2.2em;font-size:.7em}
+@media (max-width:767px){.sb-board-in.sb-tall{aspect-ratio:4/7.6!important}}
