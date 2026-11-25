@@ -453,26 +453,28 @@
 .sb-pmail *{font-family:inherit!important}
 
 /* email paper using an uploaded paper image (data-mail-image); text sits on the paper's lines */
-.sb-pmail.sb-mimg{width:84%;aspect-ratio:1680/945;padding:0;background:var(--sb-mailimg) center/100% 100% no-repeat;box-shadow:none;container-type:inline-size}
+.sb-pmail.sb-mimg{width:84%;aspect-ratio:1680/945;padding:0;background:none;box-shadow:none}
+.sb-mimg .sb-mbg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none;-webkit-user-select:none}
+@supports not (aspect-ratio:1){.sb-pmail.sb-mimg{height:0;padding-bottom:47.4%}}
 .sb-pmail.sb-mimg::after{display:none}
-.sb-mimg .sb-mail-in{position:absolute;left:29.5%;right:14%;top:17.3cqw;font-size:3.2cqw;line-height:6.43cqw}
-.sb-mimg .sb-mail-in b{font-size:3.6cqw;line-height:6.43cqw;min-height:6.43cqw}
-.sb-mimg .sb-mail-in p{margin:0;font-size:3.1cqw;line-height:6.43cqw}
-.sb-mimg .sb-mail-f{border-bottom:0;height:6.43cqw;align-items:center}
-.sb-mimg .sb-mail-f input{padding:0;font-size:3.1cqw;line-height:6.43cqw;height:6.43cqw}
-.sb-mimg .sb-mail-f button{font-size:3cqw;line-height:6.43cqw}
-.sb-mimg .sb-mail-skip{margin:0;font-size:2.7cqw;line-height:6.43cqw}
-@media (max-width:767px){.sb-pmail.sb-mimg{width:112%;padding:0;font-size:inherit}}
+.sb-mimg .sb-mail-in{position:absolute;left:29.5%;right:14%;top:calc(var(--u,3.8px)*17.3);font-size:calc(var(--u,3.8px)*3.2);line-height:calc(var(--u,3.8px)*6.43)}
+.sb-mimg .sb-mail-in b{font-size:calc(var(--u,3.8px)*3.6);line-height:calc(var(--u,3.8px)*6.43);min-height:calc(var(--u,3.8px)*6.43)}
+.sb-mimg .sb-mail-in p{margin:0;font-size:calc(var(--u,3.8px)*3.1);line-height:calc(var(--u,3.8px)*6.43)}
+.sb-mimg .sb-mail-f{border-bottom:0;height:calc(var(--u,3.8px)*6.43);align-items:center}
+.sb-mimg .sb-mail-f input{padding:0;font-size:calc(var(--u,3.8px)*3.1);line-height:calc(var(--u,3.8px)*6.43);height:calc(var(--u,3.8px)*6.43)}
+.sb-mimg .sb-mail-f button{font-size:calc(var(--u,3.8px)*3);line-height:calc(var(--u,3.8px)*6.43)}
+.sb-mimg .sb-mail-skip{margin:0;font-size:calc(var(--u,3.8px)*2.7);line-height:calc(var(--u,3.8px)*6.43)}
+@media (max-width:767px){.sb-pmail.sb-mimg{width:118%;padding:0;font-size:inherit}.sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*2.15)}}
 .sb-binder.sb-book .sb-pmail.sb-mimg{width:126%;font-size:inherit}
 .sb-binder .sb-steps{display:none!important}
 
 /* paper image layout v2: heading one line higher, pink email bubble, pinterest / website extras */
-.sb-mimg .sb-mail-in{top:14.1cqw;left:28.5%;right:13%}
-.sb-mimg .sb-mail-f{background:var(--sb-hover,#E8A6D6);border-radius:99px;height:4.6cqw;margin:.9cqw 0;padding:0 1.6cqw 0 2cqw;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
-.sb-mimg .sb-mail-f input{height:4.6cqw;line-height:4.6cqw}
+.sb-mimg .sb-mail-in{top:calc(var(--u,3.8px)*14.1);left:28.5%;right:13%}
+.sb-mimg .sb-mail-f{background:var(--sb-hover,#E8A6D6);border-radius:99px;height:calc(var(--u,3.8px)*4.6);margin:calc(var(--u,3.8px)*.9) 0;padding:0 calc(var(--u,3.8px)*1.6) 0 calc(var(--u,3.8px)*2);box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
+.sb-mimg .sb-mail-f input{height:calc(var(--u,3.8px)*4.6);line-height:calc(var(--u,3.8px)*4.6)}
 .sb-mimg .sb-mail-f input::placeholder{color:color-mix(in srgb,var(--sb-ink) 55%,transparent)}
-.sb-mail-x{display:flex;gap:1.2cqw;align-items:center;height:6.43cqw}
-.sb-mail-x button,.sb-mail-x input{flex:1 1 0;min-width:0;height:4.2cqw;border:1px solid var(--sb-ink);border-radius:99px;background:transparent;font:inherit;font-size:1.95cqw;line-height:1;color:var(--sb-ink);padding:0 1.2cqw;cursor:pointer;white-space:nowrap;box-sizing:border-box;user-select:text;-webkit-user-select:text}
+.sb-mail-x{display:flex;gap:calc(var(--u,3.8px)*1.2);align-items:center;height:calc(var(--u,3.8px)*6.43)}
+.sb-mail-x button,.sb-mail-x input{flex:1 1 0;min-width:0;height:calc(var(--u,3.8px)*4.2);border:1px solid var(--sb-ink);border-radius:99px;background:transparent;font:inherit;font-size:calc(var(--u,3.8px)*1.95);line-height:1;color:var(--sb-ink);padding:0 calc(var(--u,3.8px)*1.2);cursor:pointer;white-space:nowrap;box-sizing:border-box;user-select:text;-webkit-user-select:text}
 .sb-mail-x input{background:color-mix(in srgb,var(--sb-hover,#E8A6D6) 55%,transparent);border-color:transparent;outline:none;cursor:text}
 .sb-mail-x button:hover{background:color-mix(in srgb,var(--sb-hover,#E8A6D6) 45%,transparent)}
 .sb-pmail:not(.sb-mimg) .sb-mail-x{height:auto;margin-top:.7em;gap:.4em}
