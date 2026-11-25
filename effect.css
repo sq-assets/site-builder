@@ -530,3 +530,6 @@
 @media (max-width:560px){.sbx-plan{grid-template-columns:1fr}}
 .sbx-fxh p{grid-column:2;margin:.3em 0 0;opacity:.8}
 @media (max-width:767px){.sbx-fxh p{grid-column:1}}
+.sbx-plan{grid-template-columns:repeat(var(--n,4),minmax(0,1fr))}
+@media (max-width:1000px){.sbx-plan{grid-template-columns:repeat(var(--n2,2),minmax(0,1fr))}}
+@media (max-width:560px){.sbx-plan{grid-template-columns:1fr}}

@@ -291,7 +291,7 @@
         const v=(vibe.split(': ')[1]||vibe).replace(/\.$/,'');
         const sec=(h,b,open)=>'<details class="sbx-acc-i sbx-r"'+(open?' open':'')+'><summary><span class="sbx-n">0'+(++n)+'</span><h3>'+h+'</h3><i aria-hidden="true"></i></summary><div class="sbx-acc-b">'+b+'</div></details>';
         return '<div class="sbx-acc">'+sec(ds.businessTitle||'Where you are <em>now</em>','<p>'+esc(pain)+'</p>',true)+
-          sec(ds.strategyTitle||'How I\'d <em>approach it</em>','<p>'+esc(plan)+'</p>'+(v?'<p>'+esc(v.charAt(0).toUpperCase()+v.slice(1))+'.</p>':''),true)+'</div>'+(items?'<ul class="sbx-plan sbx-r">'+items+'</ul>':'')};
+          sec(ds.strategyTitle||'How I\'d <em>approach it</em>','<p>'+esc(plan)+'</p>'+(v?'<p>'+esc(v.charAt(0).toUpperCase()+v.slice(1))+'.</p>':''),true)+'</div>'+(items?'<ul class="sbx-plan sbx-r" style="--n:'+Math.min(st.feats.length,4)+';--n2:'+Math.min(st.feats.length,2)+'">'+items+'</ul>':'')};
       P.innerHTML='<div class="sbx"><div class="sbx-glow"></div><div class="sbx-tick"><div>'+picks.repeat(6)+'</div></div><div class="sbx-in sqs-html-content">'+
         '<div class="sbx-top sbx-r"><small>'+(ds.profileCardKicker||'Website direction')+' · No. '+no+'</small><small>'+(ds.profileKicker||'Prepared by Kill Vanilla Studio')+'</small></div>'+
         '<h1 class="sbx-title">'+title+'</h1>'+
