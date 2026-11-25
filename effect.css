@@ -434,3 +434,19 @@
 .sbq-ok{font-size:1.05rem;margin-top:1em}
 @media (max-width:767px){.sbq-mail{flex-direction:column;border-bottom:0}.sbq-mail input{border-bottom:2px solid var(--sb-ink);text-align:center}.sbq-mail button{padding:1.1em 0 0}}
 .sbq-mail input{user-select:text;-webkit-user-select:text}
+
+/* email paper pinned on the moodboard after the style pick */
+.sb-pmail{width:44%;background:#fbfaf7;padding:2.2em 1.4em 1.3em;box-shadow:0 10px 24px rgba(0,0,0,.14),0 1px 3px rgba(0,0,0,.1);box-sizing:border-box;font-family:"SB Board",ui-monospace,monospace;color:var(--sb-ink);user-select:text;-webkit-user-select:text;background-image:repeating-linear-gradient(transparent 0 1.55em,rgba(56,56,56,.09) 1.55em calc(1.55em + 1px))}
+.sb-pmail::before{display:none}
+.sb-pmail::after{content:"";position:absolute;top:-9%;left:46%;width:16%;aspect-ratio:1;background:var(--sb-notepin) center/contain no-repeat;pointer-events:none}
+.sb-mail-in b{display:block;font-size:1.05em;font-weight:700;text-transform:uppercase;letter-spacing:.04em;min-height:1.3em}
+.sb-mail-in p{margin:.35em 0 1em;font-size:.82em;line-height:1.45}
+.sb-mail-f{display:flex;border-bottom:1.5px solid var(--sb-ink)}
+.sb-mail-f input{flex:1;min-width:0;border:0;background:transparent;padding:.5em 0;font:inherit;font-size:.82em;color:var(--sb-ink);outline:none;user-select:text;-webkit-user-select:text}
+.sb-mail-f input::placeholder{color:color-mix(in srgb,var(--sb-ink) 40%,transparent)}
+.sb-mail-f button,.sb-mail-skip{border:0;background:none;font:inherit;color:var(--sb-ink);cursor:pointer}
+.sb-mail-f button{font-size:.8em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding-left:.6em}
+.sb-mail-skip{display:block;margin-top:.9em;font-size:.72em;opacity:.65;padding:0}
+.sb-mail-skip:hover{opacity:1}
+.sb-binder.sb-book .sb-pmail{font-size:clamp(.78rem,1.05vw,1rem)}
+@media (max-width:767px){.sb-pmail{width:52%;font-size:.62rem;padding:1.8em 1em 1em}}
