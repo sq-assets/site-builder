@@ -479,7 +479,7 @@
 .sb-mail-x button:hover{background:color-mix(in srgb,var(--sb-hover,#E8A6D6) 45%,transparent)}
 .sb-pmail:not(.sb-mimg) .sb-mail-x{height:auto;margin-top:.7em;gap:.4em}
 .sb-pmail:not(.sb-mimg) .sb-mail-x button,.sb-pmail:not(.sb-mimg) .sb-mail-x input{height:2.2em;font-size:.7em}
-@media (max-width:767px){.sb-board-in.sb-tall{aspect-ratio:4/7.6!important}}
+@media (max-width:767px){.sb-board-in.sb-tall{aspect-ratio:4/9.4!important}}
 
 /* reveal: Your business / My strategy drop-downs */
 .sbx-acc{margin-top:clamp(30px,4vw,60px);border-top:1px solid currentColor}
@@ -537,3 +537,4 @@
 @media (max-width:767px){.sb-pii{width:30%}}
 @media (min-width:768px){.sb-binder.sb-book .sb-pii{width:25%}}
 @media (min-width:768px){.sb-binder.sb-book .sb-pii{width:27%}}
+@media (max-width:767px){.sb-pmail.sb-mimg{width:134%!important}}
