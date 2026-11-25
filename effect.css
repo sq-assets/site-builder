@@ -448,5 +448,5 @@
 .sb-mail-f button{font-size:.8em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding-left:.6em}
 .sb-mail-skip{display:block;margin-top:.9em;font-size:.72em;opacity:.65;padding:0}
 .sb-mail-skip:hover{opacity:1}
-.sb-binder.sb-book .sb-pmail{font-size:clamp(.78rem,1.05vw,1rem)}
+.sb-binder.sb-book .sb-pmail{width:52%;font-size:clamp(.85rem,1.2vw,1.12rem)}
 @media (max-width:767px){.sb-pmail{width:52%;font-size:.62rem;padding:1.8em 1em 1em}}
