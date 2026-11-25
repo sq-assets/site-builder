@@ -533,3 +533,5 @@
 .sbx-plan{grid-template-columns:repeat(var(--n,4),minmax(0,1fr))}
 @media (max-width:1000px){.sbx-plan{grid-template-columns:repeat(var(--n2,2),minmax(0,1fr))}}
 @media (max-width:560px){.sbx-plan{grid-template-columns:1fr}}
+@media (min-width:768px){.sb-binder.sb-book .sb-pii{width:27%}}
+@media (max-width:767px){.sb-pii{width:30%}}
