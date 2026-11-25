@@ -538,3 +538,4 @@
 @media (min-width:768px){.sb-binder.sb-book .sb-pii{width:25%}}
 @media (min-width:768px){.sb-binder.sb-book .sb-pii{width:27%}}
 @media (max-width:767px){.sb-pmail.sb-mimg{width:134%!important}}
+@media (max-width:767px){.sb-mimg .sb-mail-in{right:14%!important}}
