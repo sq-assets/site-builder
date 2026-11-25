@@ -465,7 +465,7 @@
 .sb-mimg .sb-mail-f button{font-size:calc(var(--u,3.8px)*3);line-height:calc(var(--u,3.8px)*6.43)}
 .sb-mimg .sb-mail-skip{margin:0;font-size:calc(var(--u,3.8px)*2.7);line-height:calc(var(--u,3.8px)*6.43)}
 @media (max-width:767px){.sb-pmail.sb-mimg{width:112%;padding:0;font-size:inherit}.sb-mimg .sb-mail-in{right:10%!important}.sb-mimg .sb-mail-x{gap:calc(var(--u,3.8px)*.8)}.sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*2.3);padding:0 calc(var(--u,3.8px)*.8);letter-spacing:-.02em}}
-.sb-binder.sb-book .sb-pmail.sb-mimg{width:126%;font-size:inherit}
+.sb-binder.sb-book .sb-pmail.sb-mimg{width:136%;font-size:inherit}
 .sb-binder .sb-steps{display:none!important}
 
 /* paper image layout v2: heading one line higher, pink email bubble, pinterest / website extras */
@@ -480,3 +480,19 @@
 .sb-pmail:not(.sb-mimg) .sb-mail-x{height:auto;margin-top:.7em;gap:.4em}
 .sb-pmail:not(.sb-mimg) .sb-mail-x button,.sb-pmail:not(.sb-mimg) .sb-mail-x input{height:2.2em;font-size:.7em}
 @media (max-width:767px){.sb-board-in.sb-tall{aspect-ratio:4/7.6!important}}
+
+/* reveal: Your business / My strategy drop-downs */
+.sbx-acc{margin-top:clamp(30px,4vw,60px);border-top:1px solid currentColor}
+.sbx-acc-i{border-bottom:1px solid currentColor}
+.sbx-acc-i summary{list-style:none;display:flex;align-items:center;gap:clamp(12px,2vw,28px);padding:clamp(18px,2.4vw,30px) 0;cursor:pointer}
+.sbx-acc-i summary::-webkit-details-marker{display:none}
+.sbx-acc-i summary h3{margin:0;flex:1}
+.sbx-acc-i summary i{flex:none;width:clamp(14px,1.3vw,20px);aspect-ratio:1;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-30%) rotate(45deg);transition:transform .35s}
+.sbx-acc-i[open] summary i{transform:translateY(20%) rotate(-135deg)}
+.sbx-acc-b{padding:0 0 clamp(24px,3vw,44px) calc(clamp(12px,2vw,28px) + 2.2em);max-width:48em}
+.sbx-acc-b>p{margin:0 0 1em}
+.sbx-plan{list-style:none;margin:1.4em 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(16px,2vw,28px) clamp(20px,3vw,44px)}
+.sbx-plan li{border-top:1px solid color-mix(in srgb,currentColor 30%,transparent);padding-top:.8em}
+.sbx-plan h4{margin:0 0 .35em}
+.sbx-plan p{margin:0;font-size:.92em}
+@media (max-width:767px){.sbx-acc-b{padding-left:0}}
