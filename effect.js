@@ -175,7 +175,7 @@
     const typeOut=(li,t)=>{let i=0;li.classList.add('sb-typing');const tick=()=>{if(!li.isConnected)return;li.textContent=t.slice(0,++i);if(i<t.length)setTimeout(tick,40+Math.random()*60);else li.classList.remove('sb-typing')};tick()};
     let lastII='';
     const boardSync=()=>{if(!bd)return;const E=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),img=u=>'<img src="'+u+'" alt="" draggable="false">';
-      if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',[3,8,-5]):unpin(bd.querySelector('[data-k="ind"]'))}
+      if(st.ind!==lastInd){lastInd=st.ind;st.ind?pin('ind','sb-pind','<span>'+E(st.ind.t)+'</span>',innerWidth>=768&&el.querySelector('.sb-book')?[2,-17,-4]:[3,8,-5]):unpin(bd.querySelector('[data-k="ind"]'))}
       if(st.sty!==lastSty){lastSty=st.sty;el.querySelectorAll('.sb-pfx').forEach(unpin);
         if(st.sty){const w=(st.sty.w||'').trim();if(pics||ds.styleSticker==='on')pin('sty','sb-psty',pics?'<span>'+(ds.vibeLabel||'Your vibe')+'</span><em>'+E(w&&w.length<22?w:st.sty.t)+'</em>':'<span>'+E(st.sty.t)+'</span>'+(w&&w.length<22?'<em>'+E(w)+'</em>':''),[5,68,-6]);
           if(!pics){const fx=fxFor(st.sty).slice(0,+(ds.styleEffects||3)),fh=fxHost(),sl=fh===bd?SLF:jit(SLF2);fx.forEach((e,i)=>pin('x'+i+Math.random(),'sb-pimg sb-pfx',img(e.img),sl[i],250+i*160,fh).style.zIndex=10+i);
