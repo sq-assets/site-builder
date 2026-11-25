@@ -116,8 +116,9 @@
       (board?'<div class="sb-laptop sb-board"><div class="sb-board-in"><small class="sb-board-t">'+(ds.boardTitle||'')+'</small><p class="sb-board-hint">'+(innerWidth<768?(ds.boardHintMobile||'Drag and drop to reposition elements on your moodboard'):(ds.boardHint||'Drag and drop to reposition elements on your moodboard'))+'</p></div><div class="sb-site" hidden><div class="sb-secs"></div></div></div>':
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>');
     if(board&&ds.quote==='on')el.insertAdjacentHTML('beforeend','<div class="sb-quote" hidden><div class="sbq-in sqs-html-content"><h2>'+(ds.quoteTitle||'Get a <em>hassle-free</em> quote')+'</h2><p>'+(ds.quoteText||"Pop your email in and I'll send you a quote and ideas based on your moodboard. No calls, no pressure.")+'</p><form class="sbq-mail" novalidate><input type="email" required placeholder="you@yourbusiness.com" aria-label="Email address"><button type="submit">'+(ds.quoteButton||'Get my quote')+' <b>→</b></button></form><p class="sbq-ok" hidden>'+(ds.quoteThanks||"Lovely, your quote is on its way. Here are some ideas to get you started.")+'</p><button class="sbq-unlock" type="button">'+(ds.unlockText||'Or unlock your ideas now')+' <b>↓</b></button><div class="sb-form" hidden></div></div></div>');
+    if(board&&ds.teaser!=='off')el.insertAdjacentHTML('beforeend','<div class="sb-teaser" hidden><h2>'+(ds.teaserTitle||'Want some ideas <em>straight away?</em>')+'</h2><p>'+(ds.teaserText||'Keep scrolling')+' <b>↓</b></p></div>');
     el.insertAdjacentHTML('beforeend','<div class="sb-profile" hidden></div>');
-    const qb=el.querySelector('.sb-quote');let sent=false;const mailOn=board&&!pics&&ds.mailNote!=='off';let mailT=0;if(qb&&ds.paper)qb.style.setProperty('--sb-qbg',ds.paper);
+    const qb=el.querySelector('.sb-quote'),tz=el.querySelector('.sb-teaser');let sent=false;const mailOn=board&&!pics&&ds.mailNote!=='off';let mailT=0;if(qb&&ds.paper)qb.style.setProperty('--sb-qbg',ds.paper);
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back'),unl=$('.sb-unlock');
     if(ds.laptop!=='build')site.classList.add('sb-show','sb-has-hero');
     if(board&&ds.boardImage){lap.classList.add('sb-folder');const set=(k,u)=>{lap.style.setProperty('--sb-bimg'+k,'url("'+u+'")');const i=new Image();i.onload=()=>lap.style.setProperty('--sb-bar'+k,i.naturalWidth+'/'+i.naturalHeight);i.src=u};
@@ -156,7 +157,7 @@
       next.disabled=!(st.step===0?st.ind:st.step===1?st.feats.length:(pics?st.saved.length:st.sty));
       next.textContent=st.step===2?(ds.finishText||'See my profile'):'Next';
       back.hidden=st.step===0;refit();
-      if(board){next.hidden=st.step===0||(st.step===2&&next.disabled);next.textContent=st.step===1?(ds.nextText||'Next: pick your style →'):(ds.finishText||'Get a quote →');unl.hidden=true;if(qb||mailOn){next.hidden=st.step!==1;const on=qb&&st.step===2&&!!st.sty;if(!qb);else if(on&&qb.hidden){qb.hidden=false;qb.classList.remove('in');setTimeout(()=>qb.classList.add('in'),900)}else if(!on)qb.hidden=true}else unl.hidden=next.hidden||st.step!==2;next.classList.toggle('sb-ready',!next.disabled)}
+      if(board){next.hidden=st.step===0||(st.step===2&&next.disabled);next.textContent=st.step===1?(ds.nextText||'Next: pick your style →'):(ds.finishText||'Get a quote →');unl.hidden=true;if(tz){const on=board&&st.step===2&&!!st.sty;tz.hidden=!on}if(qb||mailOn){next.hidden=st.step!==1;const on=qb&&st.step===2&&!!st.sty;if(!qb);else if(on&&qb.hidden){qb.hidden=false;qb.classList.remove('in');setTimeout(()=>qb.classList.add('in'),900)}else if(!on)qb.hidden=true}else unl.hidden=next.hidden||st.step!==2;next.classList.toggle('sb-ready',!next.disabled)}
     };
     const styKey=()=>st.sty?(st.sty.t.toLowerCase().match(/[a-z]+/)||[''])[0]:'';
     const imgFor=o=>{const k=styKey();const m=k&&o.imgs.find(x=>x.key.includes(k));return m?m.src:(o.img||(o.imgs[0]&&!k?o.imgs[0].src:''))};
@@ -203,7 +204,7 @@
         [...ul.children].forEach(li=>st.feats.some(f=>f.t===li.dataset.t)||li.remove());st.feats.forEach(f=>{if(!have.includes(f.t)){const li=document.createElement('li');li.dataset.t=f.t;ul.append(li);typeOut(li,f.t)}})}
       else if(note)unpin(note);
       if(mailOn){bd.classList.toggle('sb-tall',!!st.sty&&innerWidth<768);let mp=bd.querySelector('.sb-pmail:not(.sb-out)');
-        if(st.sty&&!mp&&!sent&&!mailT){mailT=setTimeout(()=>{mailT=0;if(!st.sty||sent||bd.querySelector('.sb-pmail:not(.sb-out)'))return;const bk=innerWidth>=768&&el.querySelector('.sb-book');mp=pin('mail','sb-pmail'+(ds.mailImage?' sb-mimg':''),(ds.mailImage?'<img class="sb-mbg" alt="" draggable="false" src="'+E(ds.mailImage)+'">':'')+'<div class="sb-mail-in"><b></b><p>'+E(ds.mailText||'and get a tailored quote based on your answers')+'</p><form class="sb-mail-f" novalidate><input type="email" required placeholder="'+E(ds.mailPlaceholder||'your email')+'" aria-label="Email address"><button type="submit">'+E(ds.mailButton||'send')+' →</button></form>'+(ds.mailExtras==='off'?'':'<div class="sb-mail-x"><button type="button" data-x="pinterest" data-ph="'+E(ds.pinterestPlaceholder||'pinterest board link')+'">'+E(ds.pinterestText||'send me your pinterest')+'</button><button type="button" data-x="website" data-ph="'+E(ds.websitePlaceholder||'your website')+'">'+E(ds.websiteText||'got an existing site?')+'</button></div>')+(ds.mailSkip==='on'?'<button type="button" class="sb-mail-skip">'+E(ds.unlockText||'or just show me ideas')+' ↓</button>':'')+'</div>',ds.mailImage?(bk?[-25,69,-2]:[0,37,3]):(bk?[44,56,3]:[47,27,4]),0);const mp2=mp;if(window.ResizeObserver)new ResizeObserver(()=>mp2.style.setProperty('--u',mp2.offsetWidth/100+'px')).observe(mp2);mp2.style.setProperty('--u',mp2.offsetWidth/100+'px');setTimeout(()=>typeOut(mp2.querySelector('b'),ds.mailTitle||'Drop in your email'),500)},+(ds.mailDelay||4200))}
+        if(st.sty&&!mp&&!sent&&!mailT){mailT=setTimeout(()=>{mailT=0;if(!st.sty||sent||bd.querySelector('.sb-pmail:not(.sb-out)'))return;const bk=innerWidth>=768&&el.querySelector('.sb-book');mp=pin('mail','sb-pmail'+(ds.mailImage?' sb-mimg':''),(ds.mailImage?'<img class="sb-mbg" alt="" draggable="false" src="'+E(ds.mailImage)+'">':'')+'<div class="sb-mail-in"><b></b><p>'+E(ds.mailText||'and get a tailored quote based on your answers')+'</p><form class="sb-mail-f" novalidate><input type="email" required placeholder="'+E(ds.mailPlaceholder||'your email')+'" aria-label="Email address"><button type="submit">'+E(ds.mailButton||'send')+' →</button></form>'+(ds.mailExtras==='off'?'':'<div class="sb-mail-x"><button type="button" data-x="pinterest" data-ph="'+E(ds.pinterestPlaceholder||'pinterest board link')+'">'+E(ds.pinterestText||'send me your pinterest')+'</button><button type="button" data-x="website" data-ph="'+E(ds.websitePlaceholder||'your website')+'">'+E(ds.websiteText||'got an existing site?')+'</button></div>')+(ds.mailSkip==='on'?'<button type="button" class="sb-mail-skip">'+E(ds.unlockText||'or just show me ideas')+' ↓</button>':'')+'</div>',ds.mailImage?(bk?[-25,60,-2]:[0,37,3]):(bk?[44,56,3]:[47,27,4]),0);const mp2=mp;if(window.ResizeObserver)new ResizeObserver(()=>mp2.style.setProperty('--u',mp2.offsetWidth/100+'px')).observe(mp2);mp2.style.setProperty('--u',mp2.offsetWidth/100+'px');setTimeout(()=>typeOut(mp2.querySelector('b'),ds.mailTitle||'Drop in your email'),500)},+(ds.mailDelay||4200))}
         else if(!st.sty){mailT&&clearTimeout(mailT);mailT=0;mp&&unpin(mp)}}
       if(pics){const keep=st.saved.map(p=>'m:'+p.img);bd.querySelectorAll('.sb-psave').forEach(p=>keep.includes(p.dataset.k)||unpin(p));
         st.saved.forEach((p,i)=>{if(!bd.querySelector('[data-k="'+CSS.escape('m:'+p.img)+'"]:not(.sb-out)'))pin('m:'+p.img,'sb-pimg sb-psave',img(p.img),SV[i%8]).style.zIndex=2+i})}
@@ -270,13 +271,13 @@
       const step=()=>{if(!el.classList.contains('sb-done'))return;const max=site.scrollHeight-site.clientHeight;if(max<=0)return;y+=dir*.6;if(y>=max){y=max;dir=-1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}if(y<=0){y=0;dir=1;tourT=setTimeout(()=>requestAnimationFrame(step),1500);site.scrollTop=y;return}site.scrollTop=y;requestAnimationFrame(step)};
       tourT=setTimeout(()=>requestAnimationFrame(step),800)};
     const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const finish=()=>{const r=summary(),P=$('.sb-profile');
+    const finish=(quiet)=>{const r=summary(),P=$('.sb-profile');
       const who=st.ind.ex||((pick(st.ind.t,WHO)||'')+' '+(pick(st.ind.t,HELP)||'')).trim();
       const vibe=st.sty.ex||pick(st.sty.t,VIBE)||'';
       const fx=fxFor(st.sty).slice(0,+(ds.effectsMax||4));
       let n=0;const row=(h,t)=>t?'<li class="sbx-row sbx-r"><span class="sbx-n">0'+(++n)+'</span><h5>'+esc(h)+'</h5><p>'+t+'</p></li>':'';
       const chars=w=>[...w].map(c=>'<span class="sbx-c" style="--i:'+(k++)+'">'+esc(c)+'</span>').join('');let k=0;
-      const title=r.t.split(' ').map((w,i)=>'<span class="sbx-w">'+(i===1?'<em>'+chars(w)+'</em>':chars(w))+'</span>').join(' ');
+      const ttl=(ds.profileTitle||'Your brief, *considered.*'),title=ttl.split(' ').map(w=>{const it=/^\*.*\*$/.test(w)||/^\*/.test(w)&&ttl.includes('*');return w}).join(' ').replace(/\*([^*]+)\*/g,(m,x)=>'\u0001'+x+'\u0002').split(' ').map(w=>{const em=w.includes('\u0001');w=w.replace(/[\u0001\u0002]/g,'');return '<span class="sbx-w">'+(em?'<em>'+chars(w)+'</em>':chars(w))+'</span>'}).join(' ');
       const no=String([...r.s].reduce((h,c)=>(h*31+c.charCodeAt(0))%997,7)).padStart(3,'0');
       const picks=[st.ind,...st.feats,st.sty].map(o=>esc(o.t)).join(' <i>✦</i> ')+' <i>✦</i> ';
       const cta=ds.ctaText||'Get a quote';
@@ -289,14 +290,14 @@
         const items=st.feats.map(f=>{const t=f.ex||pick(f.t,NEED);return t?'<li><h4>'+esc(f.t)+'</h4><p>'+esc(t.charAt(0).toUpperCase()+t.slice(1))+'.</p></li>':''}).join('');
         const v=(vibe.split(': ')[1]||vibe).replace(/\.$/,'');
         const sec=(h,b,open)=>'<details class="sbx-acc-i sbx-r"'+(open?' open':'')+'><summary><span class="sbx-n">0'+(++n)+'</span><h3>'+h+'</h3><i aria-hidden="true"></i></summary><div class="sbx-acc-b">'+b+'</div></details>';
-        return '<div class="sbx-acc">'+sec(ds.businessTitle||'Your <em>business</em>','<p>'+esc(pain)+'</p>',true)+
-          sec(ds.strategyTitle||'My <em>strategy</em>','<p>'+esc(plan)+'</p>'+(items?'<ul class="sbx-plan">'+items+'</ul>':'')+(v?'<p>'+esc(v.charAt(0).toUpperCase()+v.slice(1))+'.</p>':''),ds.strategyOpen!=='off')+'</div>'};
+        return '<div class="sbx-acc">'+sec(ds.businessTitle||'Where you are <em>now</em>','<p>'+esc(pain)+'</p>',true)+
+          sec(ds.strategyTitle||'How I\'d <em>approach it</em>','<p>'+esc(plan)+'</p>'+(v?'<p>'+esc(v.charAt(0).toUpperCase()+v.slice(1))+'.</p>':''),true)+'</div>'+(items?'<ul class="sbx-plan sbx-r">'+items+'</ul>':'')};
       P.innerHTML='<div class="sbx"><div class="sbx-glow"></div><div class="sbx-tick"><div>'+picks.repeat(6)+'</div></div><div class="sbx-in sqs-html-content">'+
-        '<div class="sbx-top sbx-r"><small>'+(ds.profileCardKicker||'Your business profile')+' · No. '+no+'</small><small>'+(ds.profileKicker||'Prepared by Kill Vanilla Studio')+'</small></div>'+
+        '<div class="sbx-top sbx-r"><small>'+(ds.profileCardKicker||'Website direction')+' · No. '+no+'</small><small>'+(ds.profileKicker||'Prepared by Kill Vanilla Studio')+'</small></div>'+
         '<h1 class="sbx-title">'+title+'</h1>'+
-        '<p class="sbx-lede sbx-r">'+(ds.profileIntro||'A one-off read on where you are now, and where a <em>bespoke</em> site could take you.')+'</p>'+
+        '<p class="sbx-lede sbx-r">'+(ds.profileIntro||'Based on what you\'ve shared, here\'s how I\'d approach your website.')+'</p>'+
         acc()+
-        (fx.length?'<div class="sbx-fxh sbx-r"><span class="sbx-n">0'+(++n)+'</span><h3>'+(ds.effectsText||'design <em>ideas</em>')+'</h3></div><div class="sbx-fx">'+fx.map((e,i)=>'<a class="sbx-r" style="--d:'+i+'" href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+' <b>→</b></span></a>').join('')+'</div>':'')+
+        (fx.length?'<div class="sbx-fxh sbx-r"><span class="sbx-n">0'+(++n)+'</span><h3>'+(ds.effectsText||'design <em>ideas</em>')+'</h3><p>'+(ds.effectsIntro||'Special effects that could work for you')+'</p></div><div class="sbx-fx">'+fx.map((e,i)=>'<a class="sbx-r" style="--d:'+i+'" href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+' <b>→</b></span></a>').join('')+'</div>':'')+
         '<div class="sbx-cta sbx-r"><div><h2>'+(ds.brainstormTitle||'Every site I design is <em>completely bespoke.</em>')+'</h2><p>'+(ds.brainstormText||'No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
         '<a class="sbx-btn" href="'+(ds.ctaUrl||'/contact')+'">'+cta+' <b>→</b></a></div>'+
         '<a class="sbx-badge" href="'+(ds.ctaUrl||'/contact')+'" aria-label="'+esc(cta)+'"><svg viewBox="0 0 200 200"><defs><path id="sbxc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sbxc" textLength="496">'+(esc(cta).toUpperCase()+' ✦ ').repeat(cta.length<16?3:2)+'</textPath></text></svg><span>→</span></a></div>'+
@@ -316,7 +317,7 @@
       P.querySelector('.sb-again').addEventListener('click',again);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
       el.querySelectorAll('.sb-steps span').forEach(s=>{s.classList.remove('on');s.classList.add('done')});
-      P.hidden=false;el.classList.add('sb-profiled');requestAnimationFrame(()=>P.scrollIntoView({behavior:'smooth',block:'start'}));
+      P.hidden=false;el.classList.add('sb-profiled');if(quiet!==true)requestAnimationFrame(()=>P.scrollIntoView({behavior:'smooth',block:'start'}));
       el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
     next.addEventListener('click',()=>{if(st.step<2){st.step++;render()}else if(board)location.href=ds.quoteUrl||ds.ctaUrl||'/contact';else finish()});unl.addEventListener('click',finish);
     back.addEventListener('click',()=>{if(st.step>0){st.step--;render()}});
@@ -329,6 +330,7 @@
     if(qb){const qf=qb.querySelector('.sbq-mail');qb.querySelector('.sbq-unlock').addEventListener('click',()=>finish());
       qf.addEventListener('submit',e=>{e.preventDefault();const em=qf.querySelector('input');if(!em.checkValidity()){em.reportValidity();return}
         sendQuote(em.value);qf.hidden=true;qb.querySelector('.sbq-unlock').hidden=true;qb.querySelector('.sbq-ok').hidden=false;setTimeout(finish,1400)})}
+    if(tz&&window.IntersectionObserver)new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!tz.hidden&&st.sty&&$('.sb-profile').hidden)finish(true)}),{threshold:.6}).observe(tz);
     const again=()=>{const P=$('.sb-profile');if(qb)qb.hidden=true;if(fb){const h=home.get(fb);h&&h.append(fb);fb=null}P.hidden=true;P.innerHTML='';el.classList.remove('sb-profiled','sb-done');st.step=0;st.ind=st.sty=null;st.feats=[];st.saved=[];render();if(bd){boardSync();ds.starters==='on'&&!bd.querySelector('.sb-pimg:not(.sb-out)')&&starters()}el.scrollIntoView({behavior:'smooth',block:'start'})};
     let starterImgs=[];const starters=()=>pinImgs(starterImgs);
     if(show)Promise.all((ds.showcase||'').split(',').map(u=>u.trim()).filter(Boolean).map(loadFx)).then(x=>{

@@ -503,3 +503,30 @@
 .sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*1.8);padding:0 calc(var(--u,3.8px)*.9);overflow:hidden;text-overflow:ellipsis;letter-spacing:-.03em}
 @media (max-width:767px){.sb-mimg .sb-mail-in{right:10%}.sb-mimg .sb-mail-x button,.sb-mimg .sb-mail-x input{font-size:calc(var(--u,3.8px)*2.2)}}
 .sb-mimg .sb-mail-in{top:calc(var(--u,3.8px)*17.3)}
+
+/* v4.26: tighter email paper text on single ruled lines */
+.sb-mimg .sb-mail-in{top:calc(var(--u,3.8px)*22.5)!important;font-size:calc(var(--u,3.8px)*2.25);line-height:calc(var(--u,3.8px)*3.215)}
+.sb-mimg .sb-mail-in b{font-size:calc(var(--u,3.8px)*2.7);line-height:calc(var(--u,3.8px)*3.215);min-height:calc(var(--u,3.8px)*3.215)}
+.sb-mimg .sb-mail-in p{font-size:calc(var(--u,3.8px)*2.25);line-height:calc(var(--u,3.8px)*3.215)}
+.sb-mimg .sb-mail-f{height:calc(var(--u,3.8px)*4.6);margin:calc(var(--u,3.8px)*.9) 0}
+.sb-mimg .sb-mail-f input{font-size:calc(var(--u,3.8px)*2.3);height:calc(var(--u,3.8px)*4.6);line-height:calc(var(--u,3.8px)*4.6)}
+.sb-mimg .sb-mail-f button{font-size:calc(var(--u,3.8px)*2.2);line-height:calc(var(--u,3.8px)*4.6)}
+.sb-mimg .sb-mail-x{height:calc(var(--u,3.8px)*6.43)}
+@media (max-width:767px){.sb-mimg .sb-mail-in{top:calc(var(--u,3.8px)*19.3)!important;font-size:calc(var(--u,3.8px)*2.6)}.sb-mimg .sb-mail-in b{font-size:calc(var(--u,3.8px)*3)}.sb-mimg .sb-mail-in p{font-size:calc(var(--u,3.8px)*2.6)}}
+/* teaser: ideas straight away */
+.sb-teaser{text-align:center;margin:clamp(50px,7vw,110px) auto clamp(10px,2vw,30px);max-width:900px}
+.sb-teaser[hidden]{display:none}
+.sb-teaser h2{margin:0 0 .3em}
+.sb-teaser h2 em{text-transform:lowercase}
+.sb-teaser p{margin:0;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.sb-teaser b{display:inline-block;font-weight:400;animation:sbBob 1.6s ease-in-out infinite}
+@keyframes sbBob{50%{transform:translateY(5px)}}
+/* columns: where you are now / how I'd approach it */
+@media (min-width:768px){.sbx-acc{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(30px,4vw,70px);border-top:0}.sbx-acc-i{border-top:1px solid currentColor;align-self:start}}
+.sbx-acc-b{padding-left:0}
+/* must-haves: full width, max 4 per row */
+.sbx-plan{grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(30px,4vw,56px) 0 0}
+@media (max-width:1000px){.sbx-plan{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.sbx-plan{grid-template-columns:1fr}}
+.sbx-fxh p{grid-column:2;margin:.3em 0 0;opacity:.8}
+@media (max-width:767px){.sbx-fxh p{grid-column:1}}
