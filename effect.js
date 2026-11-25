@@ -99,7 +99,9 @@
       '<button class="sb-again" type="button">Start again</button></div>'+
       (board?'<div class="sb-laptop sb-board"><div class="sb-board-in"><small class="sb-board-t">'+(ds.boardTitle||'')+'</small><p class="sb-board-hint">'+(innerWidth<768?(ds.boardHintMobile||'Drag and drop to reposition elements on your moodboard'):(ds.boardHint||'Drag and drop to reposition elements on your moodboard'))+'</p></div><div class="sb-site" hidden><div class="sb-secs"></div></div></div>':
       (ds.laptopImage?'<div class="sb-laptop sb-photo-mode"><img class="sb-photo" alt="" src="'+ds.laptopImage+'"><div class="sb-view" style="top:'+sc[0]+'%;right:'+sc[1]+'%;bottom:'+sc[2]+'%;left:'+sc[3]+'%">':'<div class="sb-laptop"><div class="sb-screen"><div class="sb-view">')+'<div class="sb-site"><div class="sb-nav"><b class="sb-logo">'+(ds.logo||'Your Name')+'</b><i></i><i></i><i></i></div><div class="sb-hero"><small class="sb-kicker">Your website</small><h4 class="sb-h">'+(ds.placeholder||'Starts here')+'</h4><span class="sb-btn">'+(ds.heroButton||'Enquire')+'</span></div><div class="sb-secs"></div><div class="sb-foot-site">© '+(ds.logo||'Your Name')+'</div></div><div class="sb-drop">Drop it in</div></div>'+(ds.laptopImage?'</div>':'</div><div class="sb-base"></div></div>')+'</div>');
+    if(board&&ds.quote!=='off')el.insertAdjacentHTML('beforeend','<div class="sb-quote" hidden><div class="sbq-in sqs-html-content"><h2>'+(ds.quoteTitle||'Get a <em>hassle-free</em> quote')+'</h2><p>'+(ds.quoteText||"Pop your email in and I'll send you a quote and ideas based on your moodboard. No calls, no pressure.")+'</p><form class="sbq-mail" novalidate><input type="email" required placeholder="you@yourbusiness.com" aria-label="Email address"><button type="submit">'+(ds.quoteButton||'Get my quote')+' <b>→</b></button></form><p class="sbq-ok" hidden>'+(ds.quoteThanks||"Lovely, your quote is on its way. Here are some ideas to get you started.")+'</p><button class="sbq-unlock" type="button">'+(ds.unlockText||'Or unlock your ideas now')+' <b>↓</b></button><div class="sb-form" hidden></div></div></div>');
     el.insertAdjacentHTML('beforeend','<div class="sb-profile" hidden></div>');
+    const qb=el.querySelector('.sb-quote');let sent=false;
     const $=s=>el.querySelector(s),tray=$('.sb-tray'),site=$('.sb-site'),secs=$('.sb-secs'),lap=$('.sb-laptop'),next=$('.sb-next'),back=$('.sb-back'),unl=$('.sb-unlock');
     if(ds.laptop!=='build')site.classList.add('sb-show','sb-has-hero');
     if(board&&ds.boardImage){lap.classList.add('sb-folder');const set=(k,u)=>{lap.style.setProperty('--sb-bimg'+k,'url("'+u+'")');const i=new Image();i.onload=()=>lap.style.setProperty('--sb-bar'+k,i.naturalWidth+'/'+i.naturalHeight);i.src=u};
@@ -138,7 +140,7 @@
       next.disabled=!(st.step===0?st.ind:st.step===1?st.feats.length:(pics?st.saved.length:st.sty));
       next.textContent=st.step===2?(ds.finishText||'See my profile'):'Next';
       back.hidden=st.step===0;refit();
-      if(board){next.hidden=st.step===0||(st.step===2&&next.disabled);next.textContent=st.step===1?(ds.nextText||'Next: pick your style →'):(ds.finishText||'Get a quote →');unl.hidden=next.hidden||st.step!==2;next.classList.toggle('sb-ready',!next.disabled)}
+      if(board){next.hidden=st.step===0||(st.step===2&&next.disabled);next.textContent=st.step===1?(ds.nextText||'Next: pick your style →'):(ds.finishText||'Get a quote →');unl.hidden=true;if(qb){next.hidden=st.step!==1;const on=st.step===2&&!!st.sty;if(on&&qb.hidden){qb.hidden=false;qb.classList.remove('in');setTimeout(()=>qb.classList.add('in'),900)}else if(!on)qb.hidden=true}else unl.hidden=next.hidden||st.step!==2;next.classList.toggle('sb-ready',!next.disabled)}
     };
     const styKey=()=>st.sty?(st.sty.t.toLowerCase().match(/[a-z]+/)||[''])[0]:'';
     const imgFor=o=>{const k=styKey();const m=k&&o.imgs.find(x=>x.key.includes(k));return m?m.src:(o.img||(o.imgs[0]&&!k?o.imgs[0].src:''))};
@@ -278,7 +280,8 @@
         '<button class="sb-again" type="button">Start again ↺</button></div></div></div>';
       const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
       P.querySelectorAll('.sbx-r').forEach(x=>io.observe(x));setTimeout(()=>P.querySelector('.sbx').classList.add('go'),350);
-      form=P.querySelector('.sb-form');fb=form?grabForm(st.ind):null;if(fb)fill(fb,r.t+' | '+r.s);
+      if(sent){const mb=P.querySelector('.sbx-mailbox');mb&&mb.remove()}else{form=P.querySelector('.sb-form');fb=form?grabForm(st.ind):null;if(fb)fill(fb,r.t+' | '+r.s)}
+      if(qb&&!sent)P.querySelectorAll('.sbx-btn,.sbx-badge').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();qb.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>qb.querySelector('input').focus({preventScroll:true}),600)}));
       const mf=P.querySelector('.sbp-mail');if(mf)mf.addEventListener('submit',e=>{e.preventDefault();const em=mf.querySelector('input');if(!em.checkValidity()){em.reportValidity();return}
         if(fb){const i=fb.querySelector('input[type=email],input[name=email]');if(i){const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;set.call(i,em.value);i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}))}
           const b=fb.querySelector('button[type=submit],input[type=submit],button');b&&b.click()}
@@ -291,7 +294,13 @@
       el.dispatchEvent(new CustomEvent('sitebuilder:done',{bubbles:true,detail:r}))};
     next.addEventListener('click',()=>{if(st.step<2){st.step++;render()}else if(board)location.href=ds.quoteUrl||ds.ctaUrl||'/contact';else finish()});unl.addEventListener('click',finish);
     back.addEventListener('click',()=>{if(st.step>0){st.step--;render()}});
-    const again=()=>{const P=$('.sb-profile');if(fb){const h=home.get(fb);h&&h.append(fb);fb=null}P.hidden=true;P.innerHTML='';el.classList.remove('sb-profiled','sb-done');st.step=0;st.ind=st.sty=null;st.feats=[];st.saved=[];render();if(bd){boardSync();ds.starters==='on'&&!bd.querySelector('.sb-pimg:not(.sb-out)')&&starters()}el.scrollIntoView({behavior:'smooth',block:'start'})};
+    if(qb){const qf=qb.querySelector('.sbq-mail');qb.querySelector('.sbq-unlock').addEventListener('click',()=>finish());
+      qf.addEventListener('submit',e=>{e.preventDefault();const em=qf.querySelector('input');if(!em.checkValidity()){em.reportValidity();return}
+        const r=summary();form=qb.querySelector('.sb-form');fb=grabForm(st.ind);
+        if(fb){fill(fb,r.t+' | '+r.s);const i=fb.querySelector('input[type=email],input[name=email]');if(i){const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;set.call(i,em.value);i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}))}const b=fb.querySelector('button[type=submit],input[type=submit],button');b&&b.click()}
+        el.dispatchEvent(new CustomEvent('sitebuilder:email',{bubbles:true,detail:{email:em.value,profile:r,quote:true}}));
+        sent=true;qf.hidden=true;qb.querySelector('.sbq-unlock').hidden=true;qb.querySelector('.sbq-ok').hidden=false;setTimeout(finish,1400)})}
+    const again=()=>{const P=$('.sb-profile');if(qb)qb.hidden=true;if(fb){const h=home.get(fb);h&&h.append(fb);fb=null}P.hidden=true;P.innerHTML='';el.classList.remove('sb-profiled','sb-done');st.step=0;st.ind=st.sty=null;st.feats=[];st.saved=[];render();if(bd){boardSync();ds.starters==='on'&&!bd.querySelector('.sb-pimg:not(.sb-out)')&&starters()}el.scrollIntoView({behavior:'smooth',block:'start'})};
     let starterImgs=[];const starters=()=>pinImgs(starterImgs);
     if(show)Promise.all((ds.showcase||'').split(',').map(u=>u.trim()).filter(Boolean).map(loadFx)).then(x=>{
       const imgs=(ds.effects==='off'?[]:FX.map(e=>e.img)).concat(...x.map(a=>a.map(e=>e.img)));

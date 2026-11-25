@@ -415,3 +415,22 @@
   .sb-binder.sb-book .sb-fxboard .sb-ptext{width:auto;font-family:"SB Board",ui-monospace,monospace}
 }
 .sb-has-bfont .sb-fxboard,.sb-has-bfont .sb-fxboard *{font-family:"SB Board",ui-monospace,monospace!important}
+
+/* hassle-free quote block (appears under the notebook once a style is picked) */
+.sb-quote{margin:clamp(40px,6vw,90px) auto 0;max-width:820px;text-align:center;opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.sb-quote.in{opacity:1;transform:none}
+.sb-quote[hidden],.sb-quote [hidden]{display:none!important}
+.sbq-in h2{margin:0 0 .35em}
+.sbq-in h2 em{text-transform:lowercase}
+.sbq-in>p{margin:0 auto 1.6em;max-width:560px}
+.sbq-mail{display:flex;align-items:stretch;border-bottom:2px solid var(--sb-ink);max-width:680px;margin:0 auto}
+.sbq-mail input{flex:1;min-width:0;padding:.6em 0;border:0;background:transparent;color:var(--sb-ink);font:inherit;font-size:clamp(1.1rem,2.2vw,1.8rem);letter-spacing:-.01em;outline:none}
+.sbq-mail input::placeholder{color:color-mix(in srgb,var(--sb-ink) 35%,transparent)}
+.sbq-mail button{flex:none;border:0;background:none;color:var(--sb-ink);font:inherit;font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;padding-left:1em}
+.sbq-mail b,.sbq-unlock b{font-weight:400;display:inline-block;transition:transform .3s}
+.sbq-mail button:hover b{transform:translateX(6px)}
+.sbq-unlock{margin-top:1.6em;border:0;background:none;color:var(--sb-ink);font:inherit;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;opacity:.7;transition:opacity .25s}
+.sbq-unlock:hover{opacity:1}.sbq-unlock:hover b{transform:translateY(4px)}
+.sbq-ok{font-size:1.05rem;margin-top:1em}
+@media (max-width:767px){.sbq-mail{flex-direction:column;border-bottom:0}.sbq-mail input{border-bottom:2px solid var(--sb-ink);text-align:center}.sbq-mail button{padding:1.1em 0 0}}
+.sbq-mail input{user-select:text;-webkit-user-select:text}
