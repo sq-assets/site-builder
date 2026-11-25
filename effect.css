@@ -450,3 +450,4 @@
 .sb-mail-skip:hover{opacity:1}
 .sb-binder.sb-book .sb-pmail{width:52%;font-size:clamp(.85rem,1.2vw,1.12rem)}
 @media (max-width:767px){.sb-pmail{width:52%;font-size:.66rem;padding:1.8em 1em 1em;z-index:60!important}}
+.sb-pmail *{font-family:inherit!important}
