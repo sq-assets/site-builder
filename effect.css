@@ -539,3 +539,13 @@
 @media (min-width:768px){.sb-binder.sb-book .sb-pii{width:27%}}
 @media (max-width:767px){.sb-pmail.sb-mimg{width:134%!important}}
 @media (max-width:767px){.sb-mimg .sb-mail-in{right:14%!important}}
+
+/* coloured pills per step (data-pill-colors="#E8A6D6,#F8B9E5,#E8A6D6"), white + glow + jiggle when selected */
+.site-builder .sb-tray[data-step="0"]{--sb-pill:var(--sb-pill1,#E8A6D6)}
+.site-builder .sb-tray[data-step="1"]{--sb-pill:var(--sb-pill2,#F8B9E5)}
+.site-builder .sb-tray[data-step="2"]{--sb-pill:var(--sb-pill3,#E8A6D6)}
+.site-builder .sb-tray .sb-chip:not(.sb-tile){background:var(--sb-pill);color:var(--sb-ink);transition:transform .25s,background .25s,box-shadow .35s}
+.site-builder .sb-tray .sb-chip:not(.sb-tile):hover{background:var(--sb-pill);transform:translateY(-2px) rotate(-1.5deg);box-shadow:0 0 14px 1px color-mix(in srgb,var(--sb-glow,#ED6A5E) 35%,transparent)}
+.site-builder .sb-tray .sb-chip.sel:not(.sb-tile){background:#fff;box-shadow:0 0 20px 4px color-mix(in srgb,var(--sb-glow,#ED6A5E) 60%,transparent)}
+.site-builder .sb-tray .sb-chip.sb-jig{animation:sbJig .65s cubic-bezier(.3,1.6,.5,1)}
+@keyframes sbJig{0%{transform:scale(1)}20%{transform:scale(1.12) rotate(-7deg)}40%{transform:scale(1.08) rotate(6deg)}60%{transform:scale(1.05) rotate(-4deg)}80%{transform:scale(1.02) rotate(2deg)}100%{transform:scale(1) rotate(0)}}
