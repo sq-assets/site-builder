@@ -542,8 +542,8 @@
 
 /* coloured pills per step (data-pill-colors="#E8A6D6,#F8B9E5,#E8A6D6"), white + glow + jiggle when selected */
 .site-builder .sb-tray[data-step="0"]{--sb-pill:var(--sb-pill1,#E8A6D6)}
-.site-builder .sb-tray[data-step="1"]{--sb-pill:var(--sb-pill2,#F8B9E5)}
-.site-builder .sb-tray[data-step="2"]{--sb-pill:var(--sb-pill3,#E8A6D6)}
+.site-builder .sb-tray[data-step="1"]{--sb-pill:var(--sb-pill2,#ED6A5E)}
+.site-builder .sb-tray[data-step="2"]{--sb-pill:var(--sb-pill3,#F8B9E5)}
 .site-builder .sb-tray .sb-chip:not(.sb-tile){background:var(--sb-pill);color:var(--sb-ink);transition:transform .25s,background .25s,box-shadow .35s}
 .site-builder .sb-tray .sb-chip:not(.sb-tile):hover{background:var(--sb-pill);transform:translateY(-2px) rotate(-1.5deg);box-shadow:0 0 14px 1px color-mix(in srgb,var(--sb-glow,#ED6A5E) 35%,transparent)}
 .site-builder .sb-tray .sb-chip.sel:not(.sb-tile){background:#fff;box-shadow:0 0 20px 4px color-mix(in srgb,var(--sb-glow,#ED6A5E) 60%,transparent)}
