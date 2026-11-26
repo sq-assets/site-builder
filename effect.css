@@ -549,3 +549,8 @@
 .site-builder .sb-tray .sb-chip.sel:not(.sb-tile){background:#fff;box-shadow:0 0 20px 4px color-mix(in srgb,var(--sb-glow,#ED6A5E) 60%,transparent)}
 .site-builder .sb-tray .sb-chip.sb-jig{animation:sbJig .65s cubic-bezier(.3,1.6,.5,1)}
 @keyframes sbJig{0%{transform:scale(1)}20%{transform:scale(1.12) rotate(-7deg)}40%{transform:scale(1.08) rotate(6deg)}60%{transform:scale(1.05) rotate(-4deg)}80%{transform:scale(1.02) rotate(2deg)}100%{transform:scale(1) rotate(0)}}
+
+/* v4.35: headings uppercase + bold; marquee in paragraph font, small, half speed */
+.sbx .sbx-acc-i summary h3,.sbx .sbx-fxh h3{text-transform:uppercase!important;font-weight:700!important}
+.sbx-tick div{font-family:var(--body-font-font-family,inherit)!important;font-weight:var(--body-font-font-weight,400)!important;font-size:.72rem!important;letter-spacing:.16em!important;text-transform:uppercase!important;animation-duration:80s!important}
+.sbx-fxh p{max-width:46em}
