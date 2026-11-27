@@ -554,3 +554,26 @@
 .sbx .sbx-acc-i summary h3,.sbx .sbx-fxh h3{text-transform:uppercase!important;font-weight:700!important}
 .sbx-tick div{font-family:var(--body-font-font-family,inherit)!important;font-weight:var(--body-font-font-weight,400)!important;font-size:.72rem!important;letter-spacing:.16em!important;text-transform:uppercase!important;animation-duration:80s!important}
 .sbx-fxh p{max-width:46em}
+
+/* v4.36: quote form bubble (styles the page's own Squarespace Form Block) */
+.sbx-quote{margin:3rem 0 1rem;background:var(--sb-quote-bg,#F8B9E5);border-radius:40px;padding:clamp(28px,5vw,64px);color:#383838}
+.sbx-quote[hidden]{display:none!important}
+.sbx-quote>h3{font-family:var(--heading-font-font-family);font-weight:700;text-transform:uppercase;font-size:clamp(1.5rem,2.6vw,2.4rem);line-height:1.05;margin:0 0 .4em;max-width:20em}
+.sbx-quote>h3 span{font-weight:400}
+.sbx-quote>p{font-family:var(--body-font-font-family);margin:0 0 2rem;max-width:38em}
+.sbx-quote .sqs-block{padding:0!important}
+.sbx-quote .field-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.sbx-quote .form-item{margin:0!important;width:auto!important}
+.sbx-quote .form-item.fields{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px;border:0;padding:0}
+.sbx-quote .form-item.fields>legend{display:none}
+.sbx-quote .form-item textarea,.sbx-quote .form-item:has(textarea){grid-column:1/-1}
+.sbx-quote label,.sbx-quote .title{font-family:var(--body-font-font-family)!important;font-size:.8rem!important;letter-spacing:.14em;text-transform:uppercase;color:#383838!important}
+.sbx-quote input:not([type=checkbox]):not([type=radio]),.sbx-quote textarea{font-family:var(--body-font-font-family)!important;font-size:1rem!important;padding:16px 22px!important;border:1px solid #383838!important;border-radius:300px!important;background:#F8F7F6!important;color:#383838!important;width:100%;box-sizing:border-box}
+.sbx-quote textarea{border-radius:24px!important;min-height:120px}
+.sbx-quote .form-input-effects{display:none}
+.sbx-quote .form-button-wrapper{margin-top:8px!important;text-align:left!important}
+.sbx-quote button[type=submit],.sbx-quote input[type=submit]{font-family:var(--body-font-font-family)!important;font-weight:600!important;font-size:.85rem!important;letter-spacing:.14em!important;text-transform:uppercase!important;padding:18px 34px!important;border:1px solid #383838!important;border-radius:300px!important;background:#E8A6D6!important;color:#383838!important;cursor:pointer;transition:.25s}
+.sbx-quote button[type=submit]:hover,.sbx-quote input[type=submit]:hover{background:#ED6A5E!important;color:#fff!important;box-shadow:0 0 34px 6px color-mix(in srgb,#ED6A5E 50%,transparent)}
+.sbx-badge{cursor:default}
+@media (max-width:640px){.sbx-quote{border-radius:28px}.sbx-quote .field-list,.sbx-quote .form-item.fields{grid-template-columns:1fr}}
+.sbx-badge:hover span{transform:none;background:var(--sb-glow);box-shadow:none}
