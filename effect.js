@@ -304,9 +304,9 @@
         '<span class="sbx-badge" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="sbxc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sbxc" textLength="496">'+(esc(cta).toUpperCase()+' ✦ ').repeat(cta.length<16?3:2)+'</textPath></text></svg><span>→</span></span></div>'+
         (ds.quoteForm==='off'?'':'<div class="sbx-quote sbx-r" hidden><h3>'+(ds.quoteTitle||'Get a quote <span>and/or</span> a free review of your current website')+'</h3><p>'+(ds.quoteText||'Pop your details in and I\'ll come back to you within 24 hours with a tailored quote, or honest, friendly feedback on the site you have now.')+'</p><div class="sb-form"></div></div>')+
         (ds.ideas!=='on'?'':'<div class="sbx-mailbox sbx-r"><h3>'+(ds.ideasTitle||'Not ready yet? <em>Get design ideas</em> in your inbox.')+'</h3><form class="sbp-mail" novalidate><label><input type="email" required placeholder="you@yourbusiness.com" aria-label="Email address"></label><button type="submit" aria-label="'+(ds.ideasButton||'Send me ideas')+'">'+(ds.ideasButton||'Send me ideas')+' <b>→</b></button><p class="sbp-ok" hidden>'+(ds.ideasThanks||'Lovely, ideas are on their way.')+'</p></form><div class="sb-form" hidden></div></div>')+
-        '<div class="sbx-foot sbx-r">'+(ds.opinion==='off'?'':'<a href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+
+        (ds.foot!=='on'?'':'<div class="sbx-foot sbx-r">'+(ds.opinion==='off'?'':'<a href="'+(ds.opinionUrl||'/contact')+'">'+(ds.opinionText||'Want an opinion on your current site?')+'</a>')+
         (ds.pinterest?'<a href="'+ds.pinterest+'" target="_blank" rel="noopener">Pinterest</a>':'')+(ds.instagram?'<a href="'+ds.instagram+'" target="_blank" rel="noopener">Instagram</a>':'')+
-        '<button class="sb-again" type="button">Start again ↺</button></div></div></div>';
+        '<button class="sb-again" type="button">Start again ↺</button></div>')+'</div></div>';
       const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
       P.querySelectorAll('.sbx-r').forEach(x=>io.observe(x));setTimeout(()=>P.querySelector('.sbx').classList.add('go'),350);
       if(sent){const mb=P.querySelector('.sbx-mailbox');mb&&mb.remove()}form=P.querySelector('.sb-form');fb=form?grabForm(st.ind):null;if(fb){fill(fb,r.t+' | '+r.s);const qp=form.closest('.sbx-quote');qp&&(qp.hidden=false)}
@@ -316,7 +316,7 @@
           const b=fb.querySelector('button[type=submit],input[type=submit],button');b&&b.click()}
         el.dispatchEvent(new CustomEvent('sitebuilder:email',{bubbles:true,detail:{email:em.value,profile:r}}));
         mf.querySelector('label').hidden=true;mf.querySelector('button').hidden=true;mf.querySelector('.sbp-ok').hidden=false});
-      P.querySelector('.sb-again').addEventListener('click',again);
+      P.querySelector('.sb-again')?.addEventListener('click',again);
       try{sessionStorage.setItem('site-builder',JSON.stringify(r))}catch(x){}
       el.querySelectorAll('.sb-steps span').forEach(s=>{s.classList.remove('on');s.classList.add('done')});
       P.hidden=false;el.classList.add('sb-profiled');const cwp=el.closest('.content-wrapper');if(cwp&&ds.profileBleed!=='off')P.style.marginBottom='-'+getComputedStyle(cwp).paddingBottom;if(quiet!==true)requestAnimationFrame(()=>P.scrollIntoView({behavior:'smooth',block:'start'}));
