@@ -577,3 +577,4 @@
 .sbx-badge{cursor:default}
 @media (max-width:640px){.sbx-quote{border-radius:28px}.sbx-quote .field-list,.sbx-quote .form-item.fields{grid-template-columns:1fr}}
 .sbx-badge:hover span{transform:none;background:var(--sb-glow);box-shadow:none}
+.sbx-quote .preSlide,.sbx-quote .sqs-block-content{opacity:1!important;transform:none!important}
