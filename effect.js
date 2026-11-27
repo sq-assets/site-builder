@@ -253,6 +253,11 @@
     if(live&&nextOnly)nextSec.style.display='none';
     const home=new Map(sigs.map(b=>[b,b.parentNode]));
     sigs.forEach(b=>{const fe=b.closest('.fe-block');if(fe)fe.style.display='none';else b.style.display='none'});
+    /* hidden form blocks sitting lower in the grid leave empty rows (a gap under the result): trim the grid to the builder's own rows */
+    const feB=el.closest('.fe-block'),grid=feB&&feB.parentElement;
+    const trim=()=>{if(!grid||!sigs.length)return;grid.style.gridTemplateRows='';const n=parseInt(getComputedStyle(feB).gridRowEnd,10)-1,t=getComputedStyle(grid).gridTemplateRows.split(' ').length;
+      if(n>0&&t>n&&[...grid.children].every(c=>c===feB||getComputedStyle(c).display==='none'||parseInt(getComputedStyle(c).gridRowEnd,10)<=n+1))grid.style.gridTemplateRows='repeat('+n+',minmax(0,auto))'};
+    if(live){trim();addEventListener('resize',trim)}
     const titleOf=b=>((b.querySelector('.newsletter-form-header-title,h1,h2,h3,h4,legend')||{}).textContent||'').trim();
     const norm=t=>t.toLowerCase().replace(/&amp;|&/g,'and').replace(/[^a-z]+/g,' ').trim();
     const grabForm=ind=>{if(!sigs.length)return null;
