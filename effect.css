@@ -578,3 +578,7 @@
 @media (max-width:640px){.sbx-quote{border-radius:28px}.sbx-quote .field-list,.sbx-quote .form-item.fields{grid-template-columns:1fr}}
 .sbx-badge:hover span{transform:none;background:var(--sb-glow);box-shadow:none}
 .sbx-quote .preSlide,.sbx-quote .sqs-block-content{opacity:1!important;transform:none!important}
+.site-builder .sbx-quote .form-wrapper input:not([type=checkbox]):not([type=radio]),.site-builder .sbx-quote .form-wrapper textarea,.site-builder .sbx-quote .form-wrapper select{background:#F8F7F6!important;background-color:#F8F7F6!important}
+.site-builder .sbx-quote .form-wrapper label *,.site-builder .sbx-quote .form-wrapper legend *,.site-builder .sbx-quote .form-wrapper .title{font-family:var(--body-font-font-family)!important;font-size:.8rem!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#383838!important}
+.site-builder .sbx-quote .form-wrapper .form-item.fields{grid-column:1/-1!important;width:100%!important;max-width:none!important}
+.site-builder .sbx-quote .form-wrapper .form-item.fields>.field{width:auto!important;max-width:none!important;margin:0!important;padding:0!important}
