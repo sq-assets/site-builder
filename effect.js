@@ -255,8 +255,10 @@
     sigs.forEach(b=>{const fe=b.closest('.fe-block');if(fe)fe.style.display='none';else b.style.display='none'});
     /* hidden form blocks sitting lower in the grid leave empty rows (a gap under the result): trim the grid to the builder's own rows */
     const feB=el.closest('.fe-block'),grid=feB&&feB.parentElement;
-    const trim=()=>{if(!grid||!sigs.length)return;grid.style.gridTemplateRows='';const n=parseInt(getComputedStyle(feB).gridRowEnd,10)-1,t=getComputedStyle(grid).gridTemplateRows.split(' ').length;
-      if(n>0&&t>n&&[...grid.children].every(c=>c===feB||getComputedStyle(c).display==='none'||parseInt(getComputedStyle(c).gridRowEnd,10)<=n+1))grid.style.gridTemplateRows='repeat('+n+',minmax(0,auto))'};
+    const trim=()=>{if(!grid||!sigs.length)return;grid.style.gridTemplateRows='';feB.style.gridRow='';const cs=getComputedStyle(feB),a=parseInt(cs.gridRowStart,10),b=parseInt(cs.gridRowEnd,10),t=getComputedStyle(grid).gridTemplateRows.split(' ').length;
+      const others=[...grid.children].filter(c=>c!==feB&&getComputedStyle(c).display!=='none');if(!(a>0&&b>a))return;
+      if(!others.length){if(a>1||t>b-1){feB.style.gridRow='1 / '+(b-a+1);grid.style.gridTemplateRows='repeat('+(b-a)+',minmax(0,auto))'}return}
+      if(t>b-1&&others.every(c=>parseInt(getComputedStyle(c).gridRowEnd,10)<=b))grid.style.gridTemplateRows='repeat('+(b-1)+',minmax(0,auto))'};
     if(live){trim();addEventListener('resize',trim)}
     const titleOf=b=>((b.querySelector('.newsletter-form-header-title,h1,h2,h3,h4,legend')||{}).textContent||'').trim();
     const norm=t=>t.toLowerCase().replace(/&amp;|&/g,'and').replace(/[^a-z]+/g,' ').trim();
