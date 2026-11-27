@@ -82,7 +82,7 @@
 
   const fonts=()=>{if(document.getElementById('sb-fonts'))return;const l=document.createElement('link');l.id='sb-fonts';l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;800&family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Shrikhand&family=Space+Mono:wght@400;700&display=swap';document.head.append(l)};
 
-  const loadFx=u=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>(j.items||[]).filter(x=>real(x.assetUrl)).map(x=>({t:dec(x.title),img:fmt(x.assetUrl),url:x.fullUrl,tags:(x.tags||[]).concat(x.categories||[]).map(t=>t.toLowerCase())}))).catch(()=>[]);
+  const loadFx=u=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>(j.items||[]).filter(x=>real(x.assetUrl)).map(x=>({t:dec(x.title),img:fmt(x.assetUrl),url:x.sourceUrl||'',tags:(x.tags||[]).concat(x.categories||[]).map(t=>t.toLowerCase())}))).catch(()=>[]);
   const load=(u,order)=>fetch(u.replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>{const it=(j.items||[]).map(x=>({t:dec(x.title),w:firstP(x.body),img:real(x.assetUrl)?fmt(x.assetUrl):'',ex:firstP(x.excerpt),imgs:bodyImgs(x.body)}));return order==='newest'?it:it.reverse()}).catch(()=>[]);
 
   const init=async el=>{
@@ -93,6 +93,10 @@
     el.innerHTML='<p class="sb-loading">Loading…</p>';
     const [I,F,S,FX]=await Promise.all([load(ds.industries||'/site-builder-industries',order),load(ds.features||'/site-builder-features',order),load(ds.styles||'/site-builder-styles',order),ds.effects==='off'?[]:loadFx(ds.effects||'/effects')]);
     const kw=t=>(t.toLowerCase().match(/[a-z]+/)||[''])[0];
+    /* effect cards link to the portfolio page with the same title (data-effects-links, default /effects-gallery; "off" = no links) */
+    if(FX.length&&ds.effectsLinks!=='off'){const nt=t=>String(t).toLowerCase().replace(/&amp;|&/g,'and').replace(/[^a-z0-9]+/g,'');
+      const L=await fetch((ds.effectsLinks||'/effects-gallery').replace(/\/$/,'')+'?format=json').then(r=>r.json()).then(j=>Object.fromEntries((j.items||[]).map(x=>[nt(dec(x.title)),x.fullUrl]))).catch(()=>({}));
+      FX.forEach(e=>{if(!e.url)e.url=L[nt(e.t)]||''})}
     const MB=ds.stage!=='laptop'&&ds.pinboard==='on'?await loadFx(ds.moodboard||'/site-builder-moodboard'):[];
     const seen=new Set(),PICS=(MB.length?MB:FX.concat(S.flatMap(o=>[o.img].concat(o.imgs.map(x=>x.src)).filter(Boolean).map(u=>({t:'',img:u,tags:[kw(o.t)]})))))
       .filter(x=>x.img&&!seen.has(x.img)&&seen.add(x.img)).sort(()=>Math.random()-.5).slice(0,+(ds.pinboardMax||18)).map(x=>Object.assign({pic:1},x));
@@ -305,7 +309,7 @@
         '<h1 class="sbx-title">'+title+'</h1>'+
         '<p class="sbx-lede sbx-r">'+(ds.profileIntro||'Based on what you\'ve shared, here\'s how I\'d approach your website.')+'</p>'+
         acc()+
-        (fx.length?'<div class="sbx-fxh sbx-r"><span class="sbx-n">0'+(++n)+'</span><h3>'+(ds.effectsText||'Design ideas')+'</h3><p>'+(ds.effectsIntro||'I design custom-coded special effects made exactly for your offering, so your site moves, surprises and feels like nothing else out there. Here are a few examples to spark some inspiration, but your site will always be completely unique to you.')+'</p></div><div class="sbx-fx">'+fx.map((e,i)=>'<a class="sbx-r" style="--d:'+i+'" href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+' <b>→</b></span></a>').join('')+'</div>':'')+
+        (fx.length?'<div class="sbx-fxh sbx-r"><span class="sbx-n">0'+(++n)+'</span><h3>'+(ds.effectsText||'Design ideas')+'</h3><p>'+(ds.effectsIntro||'I design custom-coded special effects made exactly for your offering, so your site moves, surprises and feels like nothing else out there. Here are a few examples to spark some inspiration, but your site will always be completely unique to you.')+'</p></div><div class="sbx-fx">'+fx.map((e,i)=>e.url?'<a class="sbx-r" style="--d:'+i+'" href="'+e.url+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+' <b>→</b></span></a>':'<div class="sbx-r sbx-nolink" style="--d:'+i+'"><img src="'+e.img+'" alt="" loading="lazy"><span>'+esc(e.t)+'</span></div>').join('')+'</div>':'')+
         '<div class="sbx-cta sbx-r"><div><h2>'+(ds.brainstormTitle||'Every site I design is <em>completely bespoke.</em>')+'</h2><p>'+(ds.brainstormText||'No templates, no copy and paste. I use custom effects to showcase your work and help you stand out in a crowded feed, all built around how your clients actually find and book you. This profile is just the starting point.')+'</p>'+
         '</div>'+
         '<span class="sbx-badge" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="sbxc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sbxc" textLength="496">'+(esc(cta).toUpperCase()+' ✦ ').repeat(cta.length<16?3:2)+'</textPath></text></svg><span>→</span></span></div>'+
